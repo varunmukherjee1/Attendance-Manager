@@ -1,3 +1,15 @@
 .dashboard {
     display: flex;
 }
+
+.body {
+    position: absolute;
+    left: 250px;
+    width: calc(100% - 250px);
+    transition: 0.5s;
+}
+
+.body.active {
+    left: 75px;
+    width: calc(100% - 75px);
+}

@@ -2,9 +2,9 @@ import React from 'react'
 
 import classes from "./Navbar.module.css"
 
-function Navbar() {
+function Navbar(props) {
   return (
-    <div className = {`${classes.navigation} ${classes.active}`}>
+    <div className = {`${classes.navigation} ${props.isActive? classes.active: ""}`}>
             <ul>
                 <li>
                     <a href="#">

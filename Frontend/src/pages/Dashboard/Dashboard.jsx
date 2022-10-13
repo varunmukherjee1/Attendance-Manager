@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import Navbar from '../../components/Navbar/Navbar'
 import Header from "../../components/Header/Header"
@@ -6,24 +6,27 @@ import Header from "../../components/Header/Header"
 import classes from "./Dashboard.module.css"
 
 function Dashboard() {
-  return (
-    <div className = {classes.dashboard}>
+
+    const [isActive , setIsActive] = useState(true);
+
+    return (
+        <div className = {classes.dashboard}>
 
         <div className={classes.navbar}>
-            <Navbar/>
+            <Navbar isActive = {isActive}/>
         </div>
 
-        <div className={classes.body}>
+        <div className = {`${classes.body} ${isActive ? classes.active: ""}`}>
             <div className={classes.header}>
-                <Header/>
+                <Header isActive = {isActive} toggle = {setIsActive}/>
             </div>
 
             <div className= {classes.content}>
                 <div>Content</div>
             </div>
         </div>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Dashboard
