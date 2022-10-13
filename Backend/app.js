@@ -385,15 +385,15 @@ app.post('/addClass', upload.array("Files", 2), async (req, res) => {
 //     res.send(classes);
 // })
 
-app.get('/dashboardStudent', (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        res.redirect('login')
-    } else if (req.cookies[COOKIE_NAME].userType == "teacher" || req.cookies[COOKIE_NAME].userType == "admin") {
-        res.redirect('/pageNotFound')
-    } else {
-        res.render('dashboardStudent', req.cookies[COOKIE_NAME])
-    }
-});
+// app.get('/dashboardStudent', (req, res) => {
+//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+//         res.redirect('login')
+//     } else if (req.cookies[COOKIE_NAME].userType == "teacher" || req.cookies[COOKIE_NAME].userType == "admin") {
+//         res.redirect('/pageNotFound')
+//     } else {
+//         res.render('dashboardStudent', req.cookies[COOKIE_NAME])
+//     }
+// });
 
 app.get('/dashboardTeacher', async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
