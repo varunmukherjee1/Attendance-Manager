@@ -13,3 +13,11 @@
     left: 75px;
     width: calc(100% - 75px);
 }
+
+.content {
+    padding: 1rem;
+}
+
+.content h1 {
+    text-align: center;
+}

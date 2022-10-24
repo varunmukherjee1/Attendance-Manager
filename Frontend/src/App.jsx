@@ -2,6 +2,7 @@ import {Routes,Route} from "react-router-dom"
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
 
 function App() {
   return (
@@ -18,6 +19,12 @@ function App() {
           path = "/dashboard"
           element = {
             <Dashboard/>
+          }
+        />
+        <Route
+          path = "/admin"
+          element = {
+            <AdminDashboard/>
           }
         />
         <Route

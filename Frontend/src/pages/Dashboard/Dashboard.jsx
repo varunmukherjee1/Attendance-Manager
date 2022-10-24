@@ -5,7 +5,7 @@ import Header from "../../components/Header/Header"
 
 import classes from "./Dashboard.module.css"
 
-function Dashboard() {
+function Dashboard(props) {
 
     const [isActive , setIsActive] = useState(true);
 
@@ -22,7 +22,7 @@ function Dashboard() {
             </div>
 
             <div className= {classes.content}>
-                <div>Content</div>
+                {props.children}
             </div>
         </div>
         </div>

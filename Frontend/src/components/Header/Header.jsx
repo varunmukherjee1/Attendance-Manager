@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+// import React, {useState} from 'react'
 
+import profile_pic from "../../assets/profile_pic.svg"
 import classes from "./Header.module.css"
 
 function Header(props) {
@@ -15,7 +16,11 @@ function Header(props) {
 
       <div className={classes.icon} onClick = {onClickHandler}>
         {props.isActive && <i className ="fa-solid fa-bars-staggered"></i>}
-        {!props.isActive && <i class="fa-solid fa-xmark"></i>}
+        {!props.isActive && <i className ="fa-solid fa-xmark"></i>}
+      </div>
+
+      <div>
+        <img src={profile_pic} alt = ""/>
       </div>
 
     </div>

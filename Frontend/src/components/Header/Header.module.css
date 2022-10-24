@@ -1,8 +1,23 @@
 .header {
     padding: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .icon {
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.header div:last-child {
+    /* background-color: #dfdfdf; */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.header div:last-child img {
+    height: 50px;
+    width: 50px;
 }
