@@ -1,4 +1,4 @@
-this is about the online attendance
+
 
 # Automated attendance capturing and management system
 ## Problem Statement
