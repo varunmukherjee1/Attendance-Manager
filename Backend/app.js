@@ -38,8 +38,8 @@ app.set("views", __dirname + "/public/views")
 app.use(express.static(STATIC_PATH));
 app.use(cookieParser())
 
-app.use(dataApisRoutes)
 app.use('/admin', adminRoutes)
+app.use(dataApisRoutes)
 
 /**Varun Bansal */
 app.use(bodyParser.json())

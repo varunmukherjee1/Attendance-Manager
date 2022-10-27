@@ -1,15 +1,72 @@
 import React, {useState} from 'react'
+import axios from "axios"
 
-// import Navbar from '../../components/Navbar/Navbar'
-// import Header from "../../components/Header/Header"
 import Card from "../../components/Card/Card"
 import Dashboard from '../Dashboard/Dashboard'
+import Tables from "../../components/Tables/Table"
 
 import classes from "./AdminDashboard.module.css"
 
 function AdminDashboard() {
 
     // const [isActive , setIsActive] = useState(true);
+
+    const [tableData, setTableData] = useState([]);
+    const [columns , setColumns] = useState([]);
+
+    const courseColumns = [
+        {
+            Header: "Name",
+            accessor: "name"
+        },
+        {
+            Header: "Students",
+            accessor: "students",
+            Cell: ({value}) => {
+                let count = value.length;
+                // console.log("students = ",value);
+                // console.log("students = ",count);
+
+                return(
+                    <div>{count}</div>
+                );
+            }
+        },
+        {
+            Header: "Teachers",
+            accessor: "teachers",
+            Cell: ({value}) => {
+                let count = value.length;
+                // console.log("teachers = ",props.data);
+                // console.log("teachers = ",count)
+
+                return(
+                    <div>{count}</div>
+                );
+            }
+        },
+        {
+            Header: "Actions",
+            accessor: "actions",
+            Cell: () => {
+                return (<button>Remove Course</button>);
+            }
+        }
+
+    ]
+
+    const showCoursesHandler = async () => {
+        try {
+            const res = await axios.get("/getClasses")
+            console.log(columns);
+            console.log(res.data)
+            setColumns(courseColumns);
+            setTableData(res.data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div>
@@ -50,13 +107,13 @@ function AdminDashboard() {
                             <label className = {classes["radio_label"]} htmlFor="teachers">Teachers</label>
 
                             <input className = {classes["radio_input"]} type="radio" name="radio" id="Courses" />
-                            <label className = {classes["radio_label"]} htmlFor="Courses">Courses</label>
+                            <label className = {classes["radio_label"]} htmlFor="Courses" onClick = {showCoursesHandler}>Courses</label>
 
                             <input className = {classes["radio_input"]} type="radio" name="radio" id="admins" />
                             <label className = {classes["radio_label"]} htmlFor="admins">Admins</label>
                         </div>
                         <div className={classes["content"]}>
-                            <h1>content</h1>
+                            {(columns !== [])? <Tables data = {tableData} columns = {columns}/>: <h2>Loading...</h2>}
                         </div>
                     </div>
                 </Card>
