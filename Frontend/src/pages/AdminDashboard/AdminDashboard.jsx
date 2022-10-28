@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from "axios"
 
 import Card from "../../components/Card/Card"
@@ -13,6 +13,18 @@ function AdminDashboard() {
 
     const [tableData, setTableData] = useState([]);
     const [columns , setColumns] = useState([]);
+    const students = [];
+    const teachers = [];
+    const admins = [];
+    const courses = [];
+
+    useEffect(() => {
+        try {
+            
+        } catch (error) {
+            
+        }
+    },[]);
 
     const courseColumns = [
         {
@@ -55,6 +67,64 @@ function AdminDashboard() {
 
     ]
 
+    const studentColumns = [
+        {
+            Header: "Name",
+            accessor: "name"
+        },
+        {
+            Header: "Roll No.",
+            accessor: "roll_number"
+        },
+        {
+            Header: "Email",
+            accessor: "email"
+        },
+        {
+            Header: "Actions",
+            accessor: "actions",
+            Cell: () => {
+                return(<button>Remove Student</button>);
+            }
+        }
+    ]
+
+    const teacherColumns = [
+        {
+            Header: "Name",
+            accessor: "name"
+        },
+        {
+            Header: "Email",
+            accessor: "email"
+        },
+        {
+            Header: "Actions",
+            accessor: "actions",
+            Cell: () => {
+                return(<button>Remove Teacher</button>);
+            }
+        }
+    ]
+
+    const adminColumns = [
+        {
+            Header: "Name",
+            accessor: "name"
+        },
+        {
+            Header: "Email",
+            accessor: "email"
+        },
+        {
+            Header: "Actions",
+            accessor: "actions",
+            Cell: () => {
+                return(<button>Remove Admin</button>);
+            }
+        }
+    ]
+
     const showCoursesHandler = async () => {
         try {
             const res = await axios.get("/getClasses")
@@ -63,6 +133,43 @@ function AdminDashboard() {
             setColumns(courseColumns);
             setTableData(res.data);
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const showStudentsHandler = async () => {
+        try {
+
+            const res = await axios.get('/getStudents')
+            // console.log(columns)
+            // console.log(res.data);
+            setColumns(studentColumns)
+            setTableData(res.data)
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const showTeachersHandler = async () => {
+        try {
+            const res = await axios.get('/getTeachers')
+            // console.log(res.data);
+            setColumns(teacherColumns)
+            setTableData(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const showAdminsHandler = async () => {
+        try {
+            const res = await axios.get('/getAdmins')
+            // console.log(res.data)
+            setColumns(adminColumns)
+            setTableData(res.data)
+            
         } catch (error) {
             console.log(error);
         }
@@ -101,16 +208,16 @@ function AdminDashboard() {
                     <div className={classes["tabs"]}>
                         <div className={classes["menu"]}>
                             <input className = {classes["radio_input"]} type="radio" name="radio" id="student" />
-                            <label className = {classes["radio_label"]} htmlFor="student">Students</label>
+                            <label className = {classes["radio_label"]} htmlFor="student" onClick = {showStudentsHandler}>Students</label>
 
                             <input className = {classes["radio_input"]} type="radio" name="radio" id="teachers" />
-                            <label className = {classes["radio_label"]} htmlFor="teachers">Teachers</label>
+                            <label className = {classes["radio_label"]} htmlFor="teachers" onClick = {showTeachersHandler}>Teachers</label>
 
                             <input className = {classes["radio_input"]} type="radio" name="radio" id="Courses" />
                             <label className = {classes["radio_label"]} htmlFor="Courses" onClick = {showCoursesHandler}>Courses</label>
 
                             <input className = {classes["radio_input"]} type="radio" name="radio" id="admins" />
-                            <label className = {classes["radio_label"]} htmlFor="admins">Admins</label>
+                            <label className = {classes["radio_label"]} htmlFor="admins" onClick = {showAdminsHandler}>Admins</label>
                         </div>
                         <div className={classes["content"]}>
                             {(columns !== [])? <Tables data = {tableData} columns = {columns}/>: <h2>Loading...</h2>}
