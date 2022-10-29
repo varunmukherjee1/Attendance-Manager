@@ -1,4 +1,8 @@
 import React,{useRef,useState} from "react";
+import {Link, useNavigate} from 'react-router-dom'
+import axios from "axios"
+import toast from "react-hot-toast"
+
 import classes from "./Register.module.css"
 
 const Register=(props)=>{
@@ -75,7 +79,7 @@ const Register=(props)=>{
             type:type_ref.current.value
         })
         let currVal=type_ref.current.value
-        if(currVal=="Teacher"){
+        if(currVal==="Teacher"){
             setInpValid({
                 ...inpValid,
                 type:false
@@ -95,7 +99,7 @@ const Register=(props)=>{
             roll:roll_ref.current.value
         })
         let currVal=roll_ref.current.value
-        if(currVal.length==0){
+        if(currVal.length===0){
             setInpValid({
                 ...inpValid,
                 roll:false
@@ -136,7 +140,7 @@ const Register=(props)=>{
         })
         let currVal=c_pass_ref.current.value
         let currPassVal=pass_ref.current.value
-        if( currVal!=currPassVal){
+        if( currVal!==currPassVal){
             setInpValid({
                 ...inpValid,
                 c_pass:false
@@ -150,30 +154,50 @@ const Register=(props)=>{
         }
     }
     
-    const submitHandler=(e)=>{
-        e.preventDefault();
-        // const full_name=full_name_ref.current.value;
-        // const email=email_ref.current.value;
-        // const type=type_ref.current.value;
-        // const roll=roll_ref.current.value;
-        // const pass=pass_ref.current.value;
-        // const c_pass=c_pass_ref.current.value;
-
-        // const user={
-        //     full_name,
-        //     email,
-        //     type,
-        //     roll,
-        //     pass,
-        //     c_pass
-        // }
-
+    const submitHandler= async (e)=>{
         
+        try{
+            e.preventDefault();
+            // console.log(inpValid);
 
+            if(!inpValid.name || (inpVal.type === "Student" && !inpValid.roll) || !inpValid.email || !inpValid.pass || !inpValid.c_pass){
+
+                toast("Please fill the form correctly")
+                return;
+            }
+
+            const full_name = inpVal.name;
+            const roll_number = inpVal.roll;
+            const email = inpVal.email;
+            const password = inpVal.pass;
+            const user_type = inpVal.type;
+
+            const res = await axios.post("user/register",{
+                full_name,
+                roll_number,
+                email,
+                password,
+                user_type
+            });
+
+            
+
+            if(res.data.success){
+                toast.success(res.data.message)
+            }
+            else{
+                toast.error(res.data.message)
+            }
+        }
+        catch(err){
+            console.log("Error = " + err)
+            toast.error("Something went wrong!")
+        }        
+        
     }
     
     let fullnameerr=()=>{
-        if(inpVal.name.length==0){
+        if(inpVal.name.length===0){
             return (<p>*Mandatory Field</p>)
         }
     }
@@ -191,13 +215,13 @@ const Register=(props)=>{
     }
 
     let rollerr=()=>{
-        if(inpVal.roll.length==0){
+        if(inpVal.roll.length===0){
             return (<p>*Mandatory Field</p>)
         }
     }
     
     let passerr=()=>{
-        if(inpVal.pass.length==0){
+        if(inpVal.pass.length===0){
             return (<p>*Mandatory Field</p>)
         }
         else if(inpVal.pass.length<4 || inpVal.pass.length>10){
@@ -206,7 +230,7 @@ const Register=(props)=>{
     }
 
     let confpasserr=()=>{
-        if(inpVal.c_pass!=inpVal.pass){
+        if(inpVal.c_pass!==inpVal.pass){
             return (<p>Password Not Matched</p>)
         }
     }
@@ -227,7 +251,7 @@ const Register=(props)=>{
                     {emailerr()}
                 </div>
                 <div  className={`${classes.text_field} `}>
-                <label for="Type">Type : </label>
+                <label htmlFor="Type">Type : </label>
                 <select ref={type_ref} onChange={checkType} onInput={checkType} value={inpVal.type} className={`${inpValid.type?"text_field":""}`} id="usrType" name="user_type">
                     <option value="Student" selected> Student</option>
                     <option value="Teacher"> Teacher</option>
@@ -252,7 +276,7 @@ const Register=(props)=>{
                 </div>
                 <div className={classes.pass}>Forgot Password</div>
                 <input type="submit" value="Register" />   
-                <div class={classes.signup_link}>
+                <div className={classes.signup_link}>
                 Already Registered? <a href="/login">Login</a>
                 </div>
             </form>

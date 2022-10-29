@@ -1,4 +1,5 @@
 import {Routes,Route} from "react-router-dom"
+import {Toaster} from "react-hot-toast"
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
       {/* <h1>Home</h1> */}
+      <Toaster position="top-center"/>
       <Routes>
         <Route
           path = "/"

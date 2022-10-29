@@ -4,11 +4,13 @@ const Teachers = require("../Models/teacher")
 const Admins = require("../Models/admin")
 
 const sendClasses = async (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
-        return res.redirect('login')
-    }
+    // if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
+    //     return res.redirect('login')
+    // }
+
     const classes = await Class.find()
-    // console.log(classes);c
+    console.log(classes)
+
     res.send(classes);
 }
 

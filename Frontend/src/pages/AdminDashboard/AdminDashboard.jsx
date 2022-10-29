@@ -13,18 +13,18 @@ function AdminDashboard() {
 
     const [tableData, setTableData] = useState([]);
     const [columns , setColumns] = useState([]);
-    const students = [];
-    const teachers = [];
-    const admins = [];
-    const courses = [];
+    // const students = [];
+    // const teachers = [];
+    // const admins = [];
+    // const courses = [];
 
-    useEffect(() => {
-        try {
+    // useEffect(() => {
+    //     try {
             
-        } catch (error) {
+    //     } catch (error) {
             
-        }
-    },[]);
+    //     }
+    // },[]);
 
     const courseColumns = [
         {
@@ -127,23 +127,21 @@ function AdminDashboard() {
 
     const showCoursesHandler = async () => {
         try {
-            const res = await axios.get("/getClasses")
-            console.log(columns);
-            console.log(res.data)
+            const res = await axios.get("api/getClasses")
             setColumns(courseColumns);
             setTableData(res.data);
 
         } catch (error) {
-            console.log(error);
+            console.log("Error = " + error);
         }
     }
 
     const showStudentsHandler = async () => {
         try {
 
-            const res = await axios.get('/getStudents')
-            // console.log(columns)
-            // console.log(res.data);
+            const res = await axios.get('api/getStudents')
+            console.log(columns)
+            console.log(res.data);
             setColumns(studentColumns)
             setTableData(res.data)
             
@@ -154,8 +152,8 @@ function AdminDashboard() {
 
     const showTeachersHandler = async () => {
         try {
-            const res = await axios.get('/getTeachers')
-            // console.log(res.data);
+            const res = await axios.get('api/getTeachers')
+            console.log(res.data);
             setColumns(teacherColumns)
             setTableData(res.data)
         } catch (error) {
@@ -165,8 +163,8 @@ function AdminDashboard() {
 
     const showAdminsHandler = async () => {
         try {
-            const res = await axios.get('/getAdmins')
-            // console.log(res.data)
+            const res = await axios.get('api/getAdmins')
+            console.log(res.data)
             setColumns(adminColumns)
             setTableData(res.data)
             

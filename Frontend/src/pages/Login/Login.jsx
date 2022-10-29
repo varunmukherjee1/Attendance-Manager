@@ -1,4 +1,7 @@
 import React,{useState,useRef} from "react";
+import axios from "axios"
+import toast from "react-hot-toast"
+
 import classes from "./Login.module.css"
 
 const Login=()=>{
@@ -55,16 +58,36 @@ const Login=()=>{
         }
     }
 
-    const submitHandler=(e)=>{
-        e.preventDefault();
-        // const email=email_ref.current.value;
-        // const pass=pass_ref.current.value;
+    const submitHandler= async (e)=>{
+        try{
+            e.preventDefault();
 
-        // const user={
-        //     email,
-        //     pass
-        // }      
-        
+            if(!inpValid.email || !inpValid.pass){
+
+                toast("Please fill the form correctly")
+                return;
+            }
+
+            const email = inpVal.email;
+            const password = inpVal.pass;
+
+            const res = await axios.post("user/login",{
+                email,
+                password,
+            });
+   
+
+            if(res.data.success){
+                toast.success(res.data.message)
+            }
+            else{
+                toast.error(res.data.message)
+            }
+        }
+        catch(err){
+            console.log("Error = " + err)
+            toast.error("Something went wrong!")
+        }        
     }
 
     let emailErr = ()=>{
