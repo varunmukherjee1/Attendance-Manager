@@ -18,6 +18,7 @@ require('./public/db/conn')
 const encryption = require('./public/scripts/encryption')
 const adminRoutes = require('./routes/admin')
 const dataApisRoutes = require('./routes/dataApis')
+const userRoutes = require("./routes/user")
 
 /**Saket Ranjan */
 const multer = require('multer');
@@ -32,83 +33,85 @@ const fileStorageEngine = multer.diskStorage({
 })
 const upload = multer({ storage: fileStorageEngine })
 
-app.set("view engine", "ejs")
-app.set("views", __dirname + "/public/views")
+// app.set("view engine", "ejs")
+// app.set("views", __dirname + "/public/views")
 
 app.use(express.static(STATIC_PATH));
 app.use(cookieParser())
+app.use(express.json())
 
 app.use('/admin', adminRoutes)
-app.use(dataApisRoutes)
+app.use("/api",dataApisRoutes)
+app.use("/user",userRoutes)
 
 /**Varun Bansal */
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: false }))
 
 app.listen(PORT, (req, res) => {
     console.log(`Server started at http://localhost:${PORT}`);
 });
 
-app.get('/', (req, res) => {
-    res.render('index')
-});
+// app.get('/', (req, res) => {
+//     res.render('index')
+// });
 
-app.get('/register', (req, res) => {
-    res.render('register')
-});
+// app.get('/register', (req, res) => {
+//     res.render('register')
+// });
 
-app.post('/register', async (req, res) => {
-    const {
-        full_name,
-        roll_number,
-        email,
-        password,
-        user_type,
-    } = req.body
+// app.post('/register', async (req, res) => {
+//     const {
+//         full_name,
+//         roll_number,
+//         email,
+//         password,
+//         user_type,
+//     } = req.body
 
-    let encryptedPassword = String(await encryption.encrypt(password))
-    // console.log(encrypt(password));
+//     let encryptedPassword = String(await encryption.encrypt(password))
+//     // console.log(encrypt(password));
 
-    let student = await Student.findOne({ email })
-    let teacher = await Teacher.findOne({ email })
-    if (student || teacher) {
-        return res.redirect('/register') //if student already exist then redirect to register
-    }
+//     let student = await Student.findOne({ email })
+//     let teacher = await Teacher.findOne({ email })
+//     if (student || teacher) {
+//         return res.redirect('/register') //if student already exist then redirect to register
+//     }
 
-    if (user_type == 'Student') {
-        try {
-            const registerStudent = new Student({
-                name: full_name,
-                roll_number: roll_number,
-                email: email,
-                password: encryptedPassword
-            })
-            let registeredStudent = await registerStudent.save()
-            registeredStudent.userType = "student"
-            res.cookie(COOKIE_NAME, registeredStudent)
+//     if (user_type == 'Student') {
+//         try {
+//             const registerStudent = new Student({
+//                 name: full_name,
+//                 roll_number: roll_number,
+//                 email: email,
+//                 password: encryptedPassword
+//             })
+//             let registeredStudent = await registerStudent.save()
+//             registeredStudent.userType = "student"
+//             res.cookie(COOKIE_NAME, registeredStudent)
 
-            res.redirect('/login')
-        } catch (error) {
-            console.log(error);
-        }
-    } else if (user_type == 'Teacher') {
-        try {
-            const registerTeacher = new Teacher({
-                name: full_name,
-                email: email,
-                password: encryptedPassword,
-            })
-            let registeredTeacher = await registerTeacher.save()
-            registeredTeacher.userType = "teacher"
-            res.cookie(COOKIE_NAME, registeredTeacher)
-            res.redirect('/login')
-        } catch (error) {
-            console.log(error);
-        }
-    } else {
-        // alert('User type is not correct');
-    }
-});
+//             res.redirect('/login')
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     } else if (user_type == 'Teacher') {
+//         try {
+//             const registerTeacher = new Teacher({
+//                 name: full_name,
+//                 email: email,
+//                 password: encryptedPassword,
+//             })
+//             let registeredTeacher = await registerTeacher.save()
+//             registeredTeacher.userType = "teacher"
+//             res.cookie(COOKIE_NAME, registeredTeacher)
+//             res.redirect('/login')
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     } else {
+//         // alert('User type is not correct');
+//     }
+// });
 
 
 app.post('/update', async (req, res) => {
@@ -177,85 +180,85 @@ app.post('/update', async (req, res) => {
 })
 
 
-app.get('/login', async (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.render('login')
-    }
+// app.get('/login', async (req, res) => {
+//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+//         return res.render('login')
+//     }
 
-    const email = req.cookies[COOKIE_NAME].email;
-    let student = await Student.findOne({ email })
-    let teacher = await Teacher.findOne({ email })
-    let admin = await Admin.findOne({ email })
+//     const email = req.cookies[COOKIE_NAME].email;
+//     let student = await Student.findOne({ email })
+//     let teacher = await Teacher.findOne({ email })
+//     let admin = await Admin.findOne({ email })
 
-    if (student != null) {
-        res.redirect('/dashboardStudent');
-    } else if (teacher != null) {
-        res.redirect('/dashboardTeacher')
-    } else if (admin != null) {
-        res.redirect('/admin')
-    } else {
-        res.render('login')
-    }
-})
+//     if (student != null) {
+//         res.redirect('/dashboardStudent');
+//     } else if (teacher != null) {
+//         res.redirect('/dashboardTeacher')
+//     } else if (admin != null) {
+//         res.redirect('/admin')
+//     } else {
+//         res.render('login')
+//     }
+// })
 
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body
+// app.post('/login', async (req, res) => {
+//     const { email, password } = req.body
 
-    let student = await Student.findOne({ email })
-    let teacher = await Teacher.findOne({ email })
-    let admin = await Admin.findOne({ email })
+//     let student = await Student.findOne({ email })
+//     let teacher = await Teacher.findOne({ email })
+//     let admin = await Admin.findOne({ email })
 
-    if (student != null) {
-        let isValid = await encryption.comparePasswords(student.password, password)
-        if (isValid) {
-            let studentCookie = {
-                name: student.name,
-                email: student.email,
-                roll_number: student.roll_number,
-                password: student.password,
-                userType: "student",
-                __v: student.__v
-            }
-            res.cookie(COOKIE_NAME, studentCookie)
-            return res.redirect('/dashboardStudent')
-        } else {
-            return res.redirect('/login')
-        }
-    } else if (teacher != null) {
-        let isValid = await encryption.comparePasswords(teacher.password, password)
-        if (isValid) {
-            let teacherCookie = {
-                name: teacher.name,
-                email: teacher.email,
-                password: teacher.password,
-                userType: "teacher",
-                __v: teacher.__v
-            }
-            res.cookie(COOKIE_NAME, teacherCookie)
-            return res.redirect('/dashboardTeacher')
-        } else {
-            return res.redirect('/login')
-        }
-    } else if (admin != null) {
-        let isValid = await encryption.comparePasswords(admin.password, password)
-        if (isValid) {
-            let adminCookie = {
-                name: admin.name,
-                email: admin.email,
-                roll_number: admin.roll_number,
-                password: admin.password,
-                userType: "admin",
-                __v: admin.__v
-            }
-            res.cookie(COOKIE_NAME, adminCookie)
-            return res.redirect('/admin')
-        } else {
-            return res.redirect('/login')
-        }
-    } else {
-        return res.redirect('/login')
-    }
-})
+//     if (student != null) {
+//         let isValid = await encryption.comparePasswords(student.password, password)
+//         if (isValid) {
+//             let studentCookie = {
+//                 name: student.name,
+//                 email: student.email,
+//                 roll_number: student.roll_number,
+//                 password: student.password,
+//                 userType: "student",
+//                 __v: student.__v
+//             }
+//             res.cookie(COOKIE_NAME, studentCookie)
+//             return res.redirect('/dashboardStudent')
+//         } else {
+//             return res.redirect('/login')
+//         }
+//     } else if (teacher != null) {
+//         let isValid = await encryption.comparePasswords(teacher.password, password)
+//         if (isValid) {
+//             let teacherCookie = {
+//                 name: teacher.name,
+//                 email: teacher.email,
+//                 password: teacher.password,
+//                 userType: "teacher",
+//                 __v: teacher.__v
+//             }
+//             res.cookie(COOKIE_NAME, teacherCookie)
+//             return res.redirect('/dashboardTeacher')
+//         } else {
+//             return res.redirect('/login')
+//         }
+//     } else if (admin != null) {
+//         let isValid = await encryption.comparePasswords(admin.password, password)
+//         if (isValid) {
+//             let adminCookie = {
+//                 name: admin.name,
+//                 email: admin.email,
+//                 roll_number: admin.roll_number,
+//                 password: admin.password,
+//                 userType: "admin",
+//                 __v: admin.__v
+//             }
+//             res.cookie(COOKIE_NAME, adminCookie)
+//             return res.redirect('/admin')
+//         } else {
+//             return res.redirect('/login')
+//         }
+//     } else {
+//         return res.redirect('/login')
+//     }
+// })
 
 app.get('/aboutus', (req, res) => {
     res.render('aboutus')
