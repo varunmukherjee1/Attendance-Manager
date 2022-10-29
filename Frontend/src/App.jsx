@@ -3,6 +3,7 @@ import {Routes,Route} from "react-router-dom"
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
+import StudentDashboard from "./pages/StudentDashboard/StudentDashboard";
 
 function App() {
   return (
@@ -19,6 +20,12 @@ function App() {
           path = "/dashboard"
           element = {
             <Dashboard/>
+          }
+        />
+        <Route
+          path = "/student"
+          element = {
+            <StudentDashboard/>
           }
         />
         <Route

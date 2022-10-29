@@ -11,20 +11,21 @@ function Dashboard(props) {
 
     return (
         <div className = {classes.dashboard}>
-
-        <div className={classes.navbar}>
-            <Navbar isActive = {isActive}/>
-        </div>
-
-        <div className = {`${classes.body} ${isActive ? classes.active: ""}`}>
-            <div className={classes.header}>
-                <Header isActive = {isActive} toggle = {setIsActive}/>
+            <div className={classes.navbar}>
+                <Navbar isActive = {isActive}/>
             </div>
 
-            <div className= {classes.content}>
-                {props.children}
+            <div className = {`${classes.body} ${isActive ? classes.active: ""}`}>
+                <div className={classes.header}>
+                    <Header isActive = {isActive} toggle = {setIsActive}>
+                        Student Dashboard
+                    </Header>
+                </div>
+
+                <div className= {classes.content}>
+                    {props.children}
+                </div>
             </div>
-        </div>
         </div>
     )
 }
