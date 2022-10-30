@@ -7,6 +7,8 @@ import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
 import StudentDashboard from "./pages/StudentDashboard/StudentDashboard";
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
+import Info from "./pages/AboutUs/Info"
+import AboutUs from "./pages/AboutUs/AboutUs"
 
 function App() {
   return (
@@ -41,9 +43,17 @@ function App() {
         <Route
           path = "/info"
           element = {
-            <div>Info</div>
+            <Info/>
           }
         />
+
+        <Route
+        
+        path = "/AboutUs"
+        element ={
+          <AboutUs/>
+        }/>
+
         <Route
           path = "/login"
           element = {

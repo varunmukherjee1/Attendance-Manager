@@ -1,3 +1,5 @@
+
+
 # Automated attendance capturing and management system
 ## Problem Statement
 At present, as we can see that in offline classes we use the traditional method of taking attendance (by using pen-paper) because there is no such options available which can handle this task. So, we have focussed more on created an integrated web application which can capture the attendance of the students and stores it in the database under a single roof which is under the admin supervision.
