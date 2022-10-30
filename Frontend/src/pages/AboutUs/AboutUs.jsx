@@ -7,32 +7,31 @@ import varunmukj from '../../assets/varun_mkh.jpg'
 import saket from '../../assets/saket.jpeg'
 import iogo from '../../assets/logo.png'
 import { Link } from 'react-router-dom'
-import Info from './Info'
+import Info from '../AboutUs/Info'
 
 const AboutUs = () => {
     return (
         <div className={classes["aboutUs"]}>
-            <div className='flex'>
+            <div className = {classes.header}>
                 <div className={classes["brand--logo"]}>
-                    <div>
                         <a href="/">
                             <img src={iogo} alt="" />
                         </a>
-
+            
                         <a href="/">Group - 27</a>
-                    </div>
                 </div>
-
-               
-            </div>
+                
+                
+                
+                <div className={classes["main-nav"]}>
+                    <nav >
+                        
+                        <a href="/login" id="login">Login</a>
+                        <a href="/register" id="register">Register</a>
         
-            <div className={classes["main-nav"]}>
-                        <nav >
-                            <a href="/register" id="register">Register</a>
-                            <a href="/login" id="login">Login</a>
-
-
-                        </nav>
+        
+                    </nav>
+                </div>
             </div>
 
             <div className={classes["heading"]}>
@@ -51,7 +50,7 @@ const AboutUs = () => {
                     <h1 >Our Team</h1>
                 </div>
 
-                <h3 className={classes["h3"]}>Back ground</h3>
+                <h3 className={classes["h3"]}>Background</h3>
 
                 <p>
                     We all are the sophomores at Indian Institute of Information Technology,

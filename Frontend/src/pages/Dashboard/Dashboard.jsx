@@ -18,7 +18,7 @@ function Dashboard(props) {
             <div className = {`${classes.body} ${isActive ? classes.active: ""}`}>
                 <div className={classes.header}>
                     <Header isActive = {isActive} toggle = {setIsActive}>
-                        Student Dashboard
+                        Dashboard
                     </Header>
                 </div>
 
