@@ -10,6 +10,7 @@ import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Info from "./pages/AboutUs/Info"
 import AboutUs from "./pages/AboutUs/AboutUs"
+import ContactUs from "./pages/Contactus/ContactUs"
 
 function App() {
   return (
@@ -71,6 +72,13 @@ function App() {
           path = "/register"
           element = {
             <Register/>
+          }
+        />
+
+        <Route
+          path = "/contactus"
+          element = {
+            <ContactUs/>
           }
         />
       </Routes>
