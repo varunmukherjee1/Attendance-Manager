@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
 import StudentDashboard from "./pages/StudentDashboard/StudentDashboard";
+import TeacherDashboard from "./pages/TeacherDashboard/TeacherDashboard";
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Info from "./pages/AboutUs/Info"
@@ -32,6 +33,12 @@ function App() {
           path = "/student"
           element = {
             <StudentDashboard/>
+          }
+        />
+        <Route
+          path = "/teacher"
+          element = {
+            <TeacherDashboard/>
           }
         />
         <Route
