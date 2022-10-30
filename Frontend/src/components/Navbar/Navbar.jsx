@@ -10,7 +10,7 @@ function Navbar(props) {
                     <a href="#">
 
                         <i className ="fa-brands fa-sketch"></i>
-                        <h2>Group 27</h2>
+                        {/* <h2>Group 27</h2> */}
                     </a>
                 </li>
                 <li>
@@ -18,7 +18,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-house"></i>
                         </span>
-                        <span className = {classes.title}>Dashboard</span>
+                        {/* <span className = {classes.title}>Dashboard</span> */}
                     </a>
                 </li>
 
@@ -27,7 +27,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-user"></i>
                         </span>
-                        <span className = {classes.title}>Profile</span>
+                        {/* <span className = {classes.title}>Profile</span> */}
                     </a>
                 </li>
                 <li>
@@ -35,7 +35,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-gear"></i>
                         </span>
-                        <span className = {classes.title}>Settings</span>
+                        {/* <span className = {classes.title}>Settings</span> */}
                     </a>
                 </li>
                 <li>
@@ -43,7 +43,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-question"></i>
                         </span>
-                        <span className = {classes.title}>help</span>
+                        {/* <span className = {classes.title}>help</span> */}
                     </a>
                 </li>
                 <li>
@@ -51,7 +51,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className="fa-solid fa-circle-info"></i>
                         </span>
-                        <span className = {classes.title}>About us</span>
+                        {/* <span className = {classes.title}>About us</span> */}
                     </a>
                 </li>
                 <li>
@@ -59,7 +59,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-right-from-bracket"></i>
                         </span>
-                        <span className = {classes.title}>Sign Out</span>
+                        {/* <span className = {classes.title}>Sign Out</span> */}
                     </a>
                 </li>
 
