@@ -25,6 +25,57 @@
     
 }
 
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.brand--logo a:first-of-type{
+
+    
+}
+.main-nav{
+    margin-top: 0px;
+}
+.main-nav nav{
+    display: flex;
+    float: right;
+    /* margin-top: 10px; */
+}
+.brand--logo a:last-of-type{
+      font-family:"Brush Script MT" ;
+      font-size: 35px;
+     
+}
+
+
+.main-nav nav a:first-of-type{
+    background-color: var(--red-pink);
+    color: #fafafa;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    font-weight: bold;
+    float:right;
+    
+}
+
+.main-nav nav a:last-of-type{
+    
+    color: #ff0000;
+    padding: 0.4rem 0.7rem 0rem 0.2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    float:right;
+    margin: 0rem 1rem;
+}
+
+
+.images{
+        
+    height: 1rem;
+    width: 1rem;
+}
 .heading {
     display: flex;
     justify-content: center;
@@ -34,8 +85,10 @@
 
 .heading h1 {
     /* text-decoration: underline dashed; */
-    margin: 0;
-    padding-bottom: 1rem;
+    
+    margin: 0rem;
+    padding: 3rem 3rem 1rem 3rem;
+    
     border-bottom: 3px solid rgb(92, 92, 92)
 
 }
@@ -62,11 +115,16 @@
 .team h3 {
     text-align: center;
     /* text-decoration: underline dashed; */
+    font-family: "Baskerville Old Face";
+    font-size: 1.5rem;
+    font: weight 100px ;
+    padding-bottom: 2rem;
 }
 
 .team p {
     text-align: center;
     margin-bottom: 4rem;
+
 }
 
 .members {
@@ -100,6 +158,8 @@
 
 .member h4{
     margin-bottom: 1rem;
+    font-family:"Lucida Bright";
+    font-weight:30px;
 }
 
 .more_info {
@@ -115,4 +175,8 @@
     padding: 0.8rem 1rem;
     border-radius: 10px;
     font-weight: bold;
+}
+
+.brand--logo a img {
+    width: 6rem;
 }

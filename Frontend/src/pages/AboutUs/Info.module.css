@@ -1,28 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     display: none
 
 }
 
 * {
     box-sizing: border-box;
-}
-
-body {
-    padding: 1rem;
-    font-family: "Roboto",sans-serif;
-}
+} */
 
 
-h2{
+
+
+.h2{
     
     margin: 0;
     font-family:"Roboto",sans-serif;
     font-size: 2rem;
     text-transform: capitalize;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    
     padding-top:2rem;
     -ms-flex-align: start;
     padding-bottom: 3rem;
@@ -30,7 +26,7 @@ h2{
     
 }
 
-h3{
+.h3{
     
     font-family: "Roboto",sans-serif;
     font-size: 1.7rem;
@@ -60,8 +56,16 @@ h3{
     
 }
 
-li{
-    margin-bottom: 1.1rem;
+ul{
+    padding-left: 4rem;
+    font-size:1.5rem;
+    padding-bottom: 2rem;
+}
+
+ol{
+    padding-left: 4rem;
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
 
 }
 
@@ -88,15 +92,15 @@ li{
 }
 
 
-h4{
+.h4{
        font-size: 1.5rem;
        font-family:"Roboto",sans-serif ;
        padding-left: 1rem;
        text-transform: capitalize;
-       padding-bottom: 0.5rem;
+       padding-bottom: 2rem;
        
 }
-h5{
+.h5{
     font-size: 1.5rem;
     font-family:"Roboto",sans-serif ;
     padding-left: 1rem;
@@ -104,7 +108,7 @@ h5{
     padding-top: 1.5rem;
 }
 
-h6{
+.h6{
     font-size: 1.3rem;
     font-family:"Roboto",sans-serif ;
     padding-left: 1rem;
@@ -113,7 +117,9 @@ h6{
 
 }
 
-p{
+.p{
     font-size:1.4rem;
     padding-left: 1rem;
+    
+    
 }

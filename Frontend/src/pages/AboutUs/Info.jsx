@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './Info.module.css'
 const Info = () => {
   return (
-    <div>
+    <div className={classes.infor}>
     <h2 className= {classes.h2}>problems with current system and why do we need to choose this application?</h2>
     <div className = {classes.paragraph}>
     <p  className={classes.p}>we choose to make this application, because we ensure to have a fair and smooth
@@ -10,7 +10,7 @@ const Info = () => {
         who are not attending the classes, so that the remaining time a teacher can use for his teaching purpose
     </p></div>
     <div className={classes.ordering}>
-        <ul>
+        <ul className={classes.ul}>
             <li>Taking attendance manually in an offline mode is a cumbersome
             process.</li>
         <li> Effectiveness is always a question.</li>
@@ -31,8 +31,8 @@ const Info = () => {
         site through a password protection scheme</p><br/>
         <h2 className={classes.h2}>primary responsibilities of this newsytem?</h2>
         
-        <div className= {classes.paragraph}>
-                <ul>
+        
+        <ul className={classes.ul}>
           <li>Make the attendance taking process completely automated by using
                 uniquely generated QR code assigned to each and every student.</li>
           <li>  Provide teachers with a handful of tools so that the teachers can just
@@ -41,7 +41,7 @@ const Info = () => {
                 to attendance.</li>
             <li> Help teachers to know who are the class bunkers and class defaulters.</li>
            </ul>
-           </div><br/>
+           
            <h2 className={classes.h2}>how is this application useful for the teachers?</h2>
         
         <div className= {classes.paragraph}>
