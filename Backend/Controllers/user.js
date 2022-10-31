@@ -55,8 +55,8 @@ const register = async (req, res) => {
             })
 
             let registeredStudent = await registerStudent.save()
-            registeredStudent.userType = "student"
-            res.cookie(COOKIE_NAME, registeredStudent)
+            // registeredStudent.userType = "student"
+            // res.cookie(COOKIE_NAME, registeredStudent)
 
             return res
                 .status(200)

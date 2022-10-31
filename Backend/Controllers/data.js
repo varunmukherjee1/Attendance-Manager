@@ -9,7 +9,7 @@ const sendClasses = async (req, res) => {
     // }
 
     const classes = await Class.find()
-    console.log(classes)
+    // console.log(classes)
 
     res.send(classes);
 }

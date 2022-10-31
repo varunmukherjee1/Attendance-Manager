@@ -1,6 +1,7 @@
 import React,{useState,useRef} from "react";
 import axios from "axios"
 import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom";
 
 import classes from "./Login.module.css"
 
@@ -8,6 +9,7 @@ const Login=()=>{
 
     const email_ref=useRef();
     const pass_ref=useRef();
+    const navigate = useNavigate();
     
     const [inpVal,setVal]=useState({
         email:"",
@@ -75,10 +77,26 @@ const Login=()=>{
                 email,
                 password,
             });
-   
 
+            
+            
+            
             if(res.data.success){
                 toast.success(res.data.message)
+
+                const cookie = await axios.get("api/getCookieDetails")
+                console.log(cookie.data);
+
+                console.log(cookie.data.user.userType)
+
+                if(cookie.data.user.userType === "admin"){
+                    navigate("/admin")
+                }
+                else{
+                    navigate("/student")
+                }
+                
+                
             }
             else{
                 toast.error(res.data.message)
