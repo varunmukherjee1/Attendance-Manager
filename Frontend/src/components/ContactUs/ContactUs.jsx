@@ -65,48 +65,26 @@ function ContactUs(){
 
     
 
-    const submitHandler= async (e)=>{
+    const submitHandler= (e)=>{
         e.preventDefault();
-        
-        // try{
-        //     if(!inpValid.email || !inpValid.msg || !inpValid.name){
-
-        //         toast("Please fill the form correctly")
-        //         return;
-        //     }
-
-        //     const email = inpVal.email;
-        //     const name = inpVal.name;
-        //     const message = inpVal.msg;
-
-        //     const res = await axios.post("user/login",{
-        //         name,
-        //         email,
-        //         message,
-        //     });
-   
-
-        //     if(res.data.success){
-        //         toast.success(res.data.message)
-        //     }
-        //     else{
-        //         toast.error(res.data.message)
-        //     }
-        // }
-        // catch(err){
-        //     console.log("Error = " + err)
-        //     toast.error("Something went wrong!")
-        // }       
         
         emailjs.sendForm('service_6jfle0d'
                         ,'template_kwwcd26'
                         ,e.target
                         ,'y0QX3dxR2aK11i4v4'
-                        ).then(res=>{
-                            console.log(res)
-                            }).catch(err=>{
-                                console.log(err)
-                            });
+                        )
+                        .then(res =>{
+                            name_ref.current.value = "";
+                            email_ref.current.value = "";
+                            msg_ref.current.value = "";
+
+                            toast.success("We will contact you soon")
+                        })
+                        .catch(err=>{
+                            console.log(err)
+
+                            toast.error("Something went wrong !")
+                        });
 
         setVal({name: "", email: "", pass: ""})
     }
