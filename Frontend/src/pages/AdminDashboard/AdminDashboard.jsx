@@ -192,11 +192,11 @@ function AdminDashboard() {
                             <p>8</p>
                         </div>
                         <div className={classes["card"]}>
-                            <p>Number of Students</p>
+                            <p>Number of Teachers</p>
                             <p>8</p>
                         </div>
                         <div className={classes["card"]}>
-                            <p>Number of Students</p>
+                            <p>Number of Courses</p>
                             <p>8</p>
                         </div>
                     </div>

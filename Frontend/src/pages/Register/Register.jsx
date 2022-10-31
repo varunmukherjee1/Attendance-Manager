@@ -14,6 +14,8 @@ const Register=(props)=>{
     const pass_ref=useRef();
     const c_pass_ref=useRef();
 
+    const navigate = useNavigate();
+
     const [inpVal,setval]=useState({
         name:"",
         email:"",
@@ -184,6 +186,7 @@ const Register=(props)=>{
 
             if(res.data.success){
                 toast.success(res.data.message)
+                navigate("/login")
             }
             else{
                 toast.error(res.data.message)
