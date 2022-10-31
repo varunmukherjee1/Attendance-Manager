@@ -108,6 +108,7 @@ function ContactUs(){
                                 console.log(err)
                             });
 
+        setVal({name: "", email: "", pass: ""})
     }
 
     
@@ -139,7 +140,8 @@ function ContactUs(){
                     <textarea ref={msg_ref} name="message" value={inpVal.pass} className={`${classes.txt_field}`} type="text" rows='2'  required/>
                 </div>
                 
-                <input type="submit" value="Send" />
+                <input type="submit" value="Send"/>
+                
             </form>
         </div>
     )
