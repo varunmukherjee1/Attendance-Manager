@@ -16,7 +16,7 @@ function Table(props) {
   const tableInstance = useTable({
     columns,
     data,
-    initialState: {pageSize: 4}
+    initialState: {pageSize: 6}
   },
   usePagination)
 
