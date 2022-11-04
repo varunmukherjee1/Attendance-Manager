@@ -2,29 +2,61 @@ import React, {useState, useEffect} from 'react'
 import axios from "axios"
 
 import Card from "../../components/Card/Card"
-import Dashboard from '../Dashboard/Dashboard'
+import Dashboard from '../../components/Dashboard/Dashboard'
 import Tables from "../../components/Tables/Table"
 
 import classes from "./AdminDashboard.module.css"
 
 function AdminDashboard() {
 
-    // const [isActive , setIsActive] = useState(true);
-
     const [tableData, setTableData] = useState([]);
     const [columns , setColumns] = useState([]);
-    // const students = [];
-    // const teachers = [];
-    // const admins = [];
-    // const courses = [];
 
-    // useEffect(() => {
-    //     try {
-            
-    //     } catch (error) {
-            
-    //     }
-    // },[]);
+    let [students,setStudents] = useState([]);
+    let [courses,setCourses] = useState([]);
+    let [teachers,setTeachers] = useState([]);
+    let [admins, setAdmins] = useState([]);
+
+    const getData = async () => {
+
+        try{
+
+            const crs = await axios.get("api/getClasses")
+            const stds = await axios.get("api/getStudents")
+            const teach = await axios.get("api/getTeachers")
+            const adm = await axios.get("api/getAdmins")
+
+            if(stds.data.success){
+                setStudents(stds.data.data);
+            }
+
+            if(crs.data.success){
+                console.log("success");
+                setCourses(crs.data.data);
+            }
+
+            if(teach.data.success){
+                setTeachers(teach.data.data);
+            }
+
+            if(adm.data.success){
+                admins = adm.data.data;
+            }
+
+            console.log(students)
+            console.log(teachers)
+            console.log(courses)
+            console.log(admins)
+
+        }catch(err){
+
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    },[]);
 
     const courseColumns = [
         {
@@ -36,8 +68,6 @@ function AdminDashboard() {
             accessor: "students",
             Cell: ({value}) => {
                 let count = value.length;
-                // console.log("students = ",value);
-                // console.log("students = ",count);
 
                 return(
                     <div>{count}</div>
@@ -49,8 +79,6 @@ function AdminDashboard() {
             accessor: "teachers",
             Cell: ({value}) => {
                 let count = value.length;
-                // console.log("teachers = ",props.data);
-                // console.log("teachers = ",count)
 
                 return(
                     <div>{count}</div>
@@ -127,9 +155,9 @@ function AdminDashboard() {
 
     const showCoursesHandler = async () => {
         try {
-            const res = await axios.get("api/getClasses")
+            // const res = await axios.get("api/getClasses")
             setColumns(courseColumns);
-            setTableData(res.data);
+            setTableData(courses);
 
         } catch (error) {
             console.log("Error = " + error);
@@ -139,11 +167,11 @@ function AdminDashboard() {
     const showStudentsHandler = async () => {
         try {
 
-            const res = await axios.get('api/getStudents')
-            console.log(columns)
-            console.log(res.data);
+            // const res = await axios.get('api/getStudents')
+            // console.log(columns)
+            // console.log(res.data);
             setColumns(studentColumns)
-            setTableData(res.data)
+            setTableData(students)
             
         } catch (error) {
             console.log(error)
@@ -152,10 +180,10 @@ function AdminDashboard() {
 
     const showTeachersHandler = async () => {
         try {
-            const res = await axios.get('api/getTeachers')
-            console.log(res.data);
+            // const res = await axios.get('api/getTeachers')
+            // console.log(res.data);
             setColumns(teacherColumns)
-            setTableData(res.data)
+            setTableData(teachers)
         } catch (error) {
             console.log(error)
         }
@@ -163,10 +191,10 @@ function AdminDashboard() {
 
     const showAdminsHandler = async () => {
         try {
-            const res = await axios.get('api/getAdmins')
-            console.log(res.data)
+            // const res = await axios.get('api/getAdmins')
+            // console.log(res.data)
             setColumns(adminColumns)
-            setTableData(res.data)
+            setTableData(admins)
             
         } catch (error) {
             console.log(error);

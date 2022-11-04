@@ -4,44 +4,60 @@ const Teachers = require("../Models/teacher")
 const Admins = require("../Models/admin")
 
 const sendClasses = async (req, res) => {
-    // if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
-    //     return res.redirect('login')
-    // }
+    if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
+        return res
+            .status(200)
+            .send({success: false})
+    }
 
     const classes = await Class.find()
-    // console.log(classes)
+    console.log("classes = " + classes)
 
-    res.send(classes);
+    return res
+        .status(200)
+        .send({success: true,data: classes});
 }
 
 const sendStudents = async (req,res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies['user' == null]){
-        return res.redirect('login')
+        return res
+            .status(200)
+            .send({success: false})
     }
 
     const students = await Students.find()
 
-    res.send(students)
+    return res
+        .status(200)
+        .send({success: true,data: students});
 }
 
 const sendTeachers = async (req,res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies['user' == null]){
-        return res.redirect('login')
+        return res
+            .status(200)
+            .send({success: false})
     }
 
     const teachers = await Teachers.find()
 
-    res.send(teachers)
+    return res
+        .status(200)
+        .send({success: true,data: teachers});
 }
 
 const sendAdmins = async (req,res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies['user' == null]){
-        return res.redirect('login')
+        return res
+            .status(200)
+            .send({success: false})
     }
 
     const admins = await Admins.find()
 
-    res.send(admins)
+    return res
+        .status(200)
+        .send({success: true,data: admins});
 }
 
 

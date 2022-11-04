@@ -2,7 +2,6 @@ import {Routes,Route} from "react-router-dom"
 import {Toaster} from "react-hot-toast"
 
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
 import StudentDashboard from "./pages/StudentDashboard/StudentDashboard";
 import TeacherDashboard from "./pages/TeacherDashboard/TeacherDashboard";
@@ -22,12 +21,6 @@ function App() {
           path = "/"
           element = {
             <Home/>
-          }
-        />
-        <Route
-          path = "/dashboard"
-          element = {
-            <Dashboard/>
           }
         />
         <Route

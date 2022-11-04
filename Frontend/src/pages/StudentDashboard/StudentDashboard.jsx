@@ -1,4 +1,4 @@
-import Dashboard from "../Dashboard/Dashboard";
+import Dashboard from '../../components/Dashboard/Dashboard'
 import Card from "../../components/StudentCard/StudentCard";
 import student from "./StudentDashboard.module.css";
 import {studentsClasses} from "../../constants/StudentClasses"
