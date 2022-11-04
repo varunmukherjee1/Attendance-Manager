@@ -1,5 +1,6 @@
 import {Routes,Route} from "react-router-dom"
 import {Toaster} from "react-hot-toast"
+import { useSelector } from "react-redux";
 
 import Home from "./pages/Home";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
@@ -10,10 +11,15 @@ import Register from "./pages/Register/Register"
 import Info from "./pages/AboutUs/Info"
 import AboutUs from "./pages/AboutUs/AboutUs"
 import ContactUs from "./pages/Contactus/ContactUs"
+import Loader from "./components/Loader/Loader";
 
 function App() {
+
+  const loading = useSelector(state => state.loading.loading)
+
   return (
     <>
+      {loading && <Loader/>}
       {/* <h1>Home</h1> */}
       <Toaster position="top-center"/>
       <Routes>

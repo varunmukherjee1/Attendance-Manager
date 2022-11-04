@@ -31,7 +31,7 @@ function AdminDashboard() {
             }
 
             if(crs.data.success){
-                console.log("success");
+                // console.log("success");
                 setCourses(crs.data.data);
             }
 
@@ -40,7 +40,7 @@ function AdminDashboard() {
             }
 
             if(adm.data.success){
-                admins = adm.data.data;
+                setAdmins(adm.data.data);
             }
 
             console.log(students)
