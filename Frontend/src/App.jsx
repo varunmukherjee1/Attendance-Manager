@@ -33,8 +33,8 @@ function App() {
       const res = await axios.get("/api/getCookieDetails")
       dispatch(loadingActions.hideLoading())
       
-      console.log('App.js')
-      console.log(res.data);
+      // console.log('App.js')
+      // console.log(res.data);
       
       if(res.data.success){
         dispatch(userActions.setUser(res.data.data.user))

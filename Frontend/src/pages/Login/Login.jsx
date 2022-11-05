@@ -124,7 +124,7 @@ const Login=()=>{
                     {emailErr()}
                 </div>
                 <div className={classes.txt_field}>  
-                    <input ref={pass_ref} onChange={checkPass} value={inpVal.pass} className={`${inpValid.pass?classes.right:classes.wrong}`} type="password" onc required/>
+                    <input ref={pass_ref} onChange={checkPass} value={inpVal.pass} className={`${inpValid.pass?classes.right:classes.wrong}`} type="password" required/>
                     <label>Password</label>
                 </div>
                 <div className={classes.pass}>Forgot Password</div>

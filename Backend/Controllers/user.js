@@ -224,8 +224,133 @@ const logout =  (req, res) => {
         .send({success: true, message: "Logged out successfully"})
 }
 
+const updateUser = async (req, res) => {
+
+    try{
+        const { full_name, email, curr_password, new_password, cn_password } = req.body;
+
+        console.log(req.body)
+
+
+        let teacher = await Teacher.findOne({ email })
+        let student = await Student.findOne({ email })
+        let admin = await Admin.findOne({ email })
+
+        if (teacher != null) {
+            if (encryption.comparePasswords(teacher.password, curr_password) && new_password == cn_password) {
+                let encryptedPassword = String(await encryption.encrypt(new_password))
+
+                let result = await Teacher.updateOne({ email: email }, {
+                    $set: { 
+                            password: encryptedPassword,
+                            name: full_name
+                        }
+                })
+
+                let teacherCookie = {
+                    name: full_name,
+                    email: teacher.email,
+                    password: encryptedPassword,
+                    userType: "teacher",
+                    __v: teacher.__v
+                }
+
+                // res.clearCookie(COOKIE_NAME);
+                // res.cookie(COOKIE_NAME, teacherCookie)
+
+                return res
+                    .status(200)
+                    .clearCookie(COOKIE_NAME)
+                    .cookie(COOKIE_NAME,teacherCookie)
+                    .send({
+                        success: true,
+                        message: "Updated Successfully",
+                        data: teacherCookie
+                    })
+            }
+        }
+
+        if (student != null) {
+            if (student.email == email && curr_password == student.password && new_password == cn_password) {
+                let encryptedPassword = String(await encryption.encrypt(new_password))
+                let result = await Student.updateOne({ email: email }, {
+                    $set: { 
+                            password: encryptedPassword,
+                            name: full_name 
+                        }
+                })
+
+                let studentCookie = {
+                    name: student.name,
+                    email: student.email,
+                    roll_number: student.roll_number,
+                    password: encryptedPassword,
+                    userType: "student",
+                    __v: student.__v
+                }
+                // res.clearCookie(COOKIE_NAME);
+                // res.cookie(COOKIE_NAME, studentCookie)
+
+                return res
+                    .status(200)
+                    .clearCookie(COOKIE_NAME)
+                    .cookie(COOKIE_NAME,studentCookie)
+                    .send({
+                        success: true,
+                        message: "Updated Successfully",
+                        data: studentCookie
+                    })
+            }
+        }
+        if (admin != null) {
+            if (admin.email == email && curr_password == admin.password && new_password == cn_password) {
+                let encryptedPassword = String(await encryption.encrypt(new_password))
+                let result = await Admin.updateOne({ email: email }, {
+                    $set: { 
+                            password: encryptedPassword,
+                            name: full_name
+                        }
+                })
+
+                let adminCookie = {
+                    name: full_name,
+                    email: admin.email,
+                    password: encryptedPassword,
+                    userType: "admin",
+                    __v: teacher.__v
+                }
+                // res.clearCookie(COOKIE_NAME);
+                // res.cookie(COOKIE_NAME, teacherCookie)
+
+                return res
+                    .status(200)
+                    .clearCookie(COOKIE_NAME)
+                    .cookie(COOKIE_NAME,adminCookie)
+                    .send({
+                        success: true,
+                        message: "Updated Successfully",
+                        data: adminCookie
+                    })
+            }
+        }
+    }
+    catch(err){
+        console.log("Back update Error")
+        console.log(err)
+
+        return res
+            .status(500)
+            .send({
+                    success: false,
+                    message: "Failed to update"
+                })
+    }
+
+}
+
 module.exports = {
     login,
     register,
-    logout
+    logout,
+    updateUser
 }

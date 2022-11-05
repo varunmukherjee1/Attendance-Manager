@@ -114,70 +114,70 @@ app.listen(PORT, (req, res) => {
 // });
 
 
-app.post('/update', async (req, res) => {
-    const { full_name, email, curr_password, new_password, cn_password } = req.body;
+// app.post('/update', async (req, res) => {
+//     const { full_name, email, curr_password, new_password, cn_password } = req.body;
 
 
-    let teacher = await Teacher.findOne({ email })
-    let student = await Student.findOne({ email })
-    let admin = await Admin.findOne({ email })
-    if (teacher != null) {
-        if (encryption.comparePasswords(teacher.password, curr_password) && new_password == cn_password) {
-            let encryptedPassword = String(await encryption.encrypt(new_password))
-            let result = await Teacher.updateOne({ email: email }, {
-                $set: { password: encryptedPassword }
-            })
-            let teacherCookie = {
-                name: teacher.name,
-                email: teacher.email,
-                password: encryptedPassword,
-                userType: "teacher",
-                __v: teacher.__v
-            }
-            res.clearCookie(COOKIE_NAME);
-            res.cookie(COOKIE_NAME, teacherCookie)
-            return res.redirect('/dashboardTeacher')
-        }
-    }
-    if (student != null) {
-        if (student.email == email && curr_password == student.password && new_password == cn_password) {
-            let encryptedPassword = String(await encryption.encrypt(new_password))
-            let result = await Student.updateOne({ email: email }, {
-                $set: { password: encryptedPassword }
-            })
-            let studentCookie = {
-                name: student.name,
-                email: student.email,
-                roll_number: student.roll_number,
-                password: encryptedPassword,
-                userType: "student",
-                __v: student.__v
-            }
-            res.clearCookie(COOKIE_NAME);
-            res.cookie(COOKIE_NAME, studentCookie)
-            return res.redirect('/dashboardStudent')
-        }
-    }
-    if (admin != null) {
-        if (admin.email == email && curr_password == admin.password && new_password == cn_password) {
-            let encryptedPassword = String(await encryption.encrypt(new_password))
-            let result = await Admin.updateOne({ email: email }, {
-                $set: { password: encryptedPassword }
-            })
-            let teacherCookie = {
-                name: teacher.name,
-                email: teacher.email,
-                password: encryptedPassword,
-                userType: "teacher",
-                __v: teacher.__v
-            }
-            res.clearCookie(COOKIE_NAME);
-            res.cookie(COOKIE_NAME, teacherCookie)
-            return res.redirect('/dashboardAdmin')
-        }
-    }
+//     let teacher = await Teacher.findOne({ email })
+//     let student = await Student.findOne({ email })
+//     let admin = await Admin.findOne({ email })
+//     if (teacher != null) {
+//         if (encryption.comparePasswords(teacher.password, curr_password) && new_password == cn_password) {
+//             let encryptedPassword = String(await encryption.encrypt(new_password))
+//             let result = await Teacher.updateOne({ email: email }, {
+//                 $set: { password: encryptedPassword }
+//             })
+//             let teacherCookie = {
+//                 name: teacher.name,
+//                 email: teacher.email,
+//                 password: encryptedPassword,
+//                 userType: "teacher",
+//                 __v: teacher.__v
+//             }
+//             res.clearCookie(COOKIE_NAME);
+//             res.cookie(COOKIE_NAME, teacherCookie)
+//             return res.redirect('/dashboardTeacher')
+//         }
+//     }
+//     if (student != null) {
+//         if (student.email == email && curr_password == student.password && new_password == cn_password) {
+//             let encryptedPassword = String(await encryption.encrypt(new_password))
+//             let result = await Student.updateOne({ email: email }, {
+//                 $set: { password: encryptedPassword }
+//             })
+//             let studentCookie = {
+//                 name: student.name,
+//                 email: student.email,
+//                 roll_number: student.roll_number,
+//                 password: encryptedPassword,
+//                 userType: "student",
+//                 __v: student.__v
+//             }
+//             res.clearCookie(COOKIE_NAME);
+//             res.cookie(COOKIE_NAME, studentCookie)
+//             return res.redirect('/dashboardStudent')
+//         }
+//     }
+//     if (admin != null) {
+//         if (admin.email == email && curr_password == admin.password && new_password == cn_password) {
+//             let encryptedPassword = String(await encryption.encrypt(new_password))
+//             let result = await Admin.updateOne({ email: email }, {
+//                 $set: { password: encryptedPassword }
+//             })
+//             let teacherCookie = {
+//                 name: teacher.name,
+//                 email: teacher.email,
+//                 password: encryptedPassword,
+//                 userType: "teacher",
+//                 __v: teacher.__v
+//             }
+//             res.clearCookie(COOKIE_NAME);
+//             res.cookie(COOKIE_NAME, teacherCookie)
+//             return res.redirect('/dashboardAdmin')
+//         }
+//     }
 
-})
+// })
 
 
 // app.get('/login', async (req, res) => {
@@ -260,13 +260,13 @@ app.post('/update', async (req, res) => {
 //     }
 // })
 
-app.get('/aboutus', (req, res) => {
-    res.render('aboutus')
-})
+// app.get('/aboutus', (req, res) => {
+//     res.render('aboutus')
+// })
 
-app.get('/info', (req, res) => {
-    res.render('info')
-})
+// app.get('/info', (req, res) => {
+//     res.render('info')
+// })
 
 app.post('/addClass', upload.array("Files", 2), async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
@@ -398,17 +398,17 @@ app.post('/addClass', upload.array("Files", 2), async (req, res) => {
 //     }
 // });
 
-app.get('/dashboardTeacher', async (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        res.redirect('login')
-    } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "admin") {
-        res.redirect('/pageNotFound')
-    } else {
-        const classes = await Class.find()
-        req.cookies[COOKIE_NAME].classes = classes;
-        res.render('dashboardTeacher', req.cookies[COOKIE_NAME])
-    }
-});
+// app.get('/dashboardTeacher', async (req, res) => {
+//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+//         res.redirect('login')
+//     } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "admin") {
+//         res.redirect('/pageNotFound')
+//     } else {
+//         const classes = await Class.find()
+//         req.cookies[COOKIE_NAME].classes = classes;
+//         res.render('dashboardTeacher', req.cookies[COOKIE_NAME])
+//     }
+// });
 
 app.get('/showAttendance/:name/', async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
@@ -421,31 +421,31 @@ app.get('/showAttendance/:name/', async (req, res) => {
     res.render('showAttendance', dataObj)
 });
 
-app.get('/profileDashboard', (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.redirect('login')
-    }
-    if (req.cookies[COOKIE_NAME].userType == 'student') {
-        res.redirect('/dashboardStudent')
-    } else if (req.cookies[COOKIE_NAME].userType == 'teacher') {
-        res.redirect('/dashboardTeacher')
-    } else if (req.cookies[COOKIE_NAME].userType == 'admin') {
-        res.redirect('/admin')
-    } else {
-        res.redirect('/pageNotFound')
-    }
-})
+// app.get('/profileDashboard', (req, res) => {
+//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+//         return res.redirect('login')
+//     }
+//     if (req.cookies[COOKIE_NAME].userType == 'student') {
+//         res.redirect('/dashboardStudent')
+//     } else if (req.cookies[COOKIE_NAME].userType == 'teacher') {
+//         res.redirect('/dashboardTeacher')
+//     } else if (req.cookies[COOKIE_NAME].userType == 'admin') {
+//         res.redirect('/admin')
+//     } else {
+//         res.redirect('/pageNotFound')
+//     }
+// })
 
-app.get('/profile', async (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.redirect('login')
-    }
-    try {
-        res.render('profile', req.cookies[COOKIE_NAME])
-    } catch (error) {
-        console.log(error);
-    }
-})
+// app.get('/profile', async (req, res) => {
+//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+//         return res.redirect('login')
+//     }
+//     try {
+//         res.render('profile', req.cookies[COOKIE_NAME])
+//     } catch (error) {
+//         console.log(error);
+//     }
+// })
 
 app.get('/removeClass/:x', async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
@@ -519,18 +519,18 @@ app.post('/addTeacher/:x', async (req, res) => {
     }
 })
 
-app.get('/admin', async (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        res.redirect('login')
-    } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "teacher") {
-        res.redirect('/pageNotFound')
-    } else {
-        req.cookies[COOKIE_NAME].studentCount = await Student.estimatedDocumentCount();
-        req.cookies[COOKIE_NAME].teacherCount = await Teacher.estimatedDocumentCount();
-        req.cookies[COOKIE_NAME].courseCount = await Class.estimatedDocumentCount();
-        res.render('dashboardAdmin', req.cookies[COOKIE_NAME])
-    }
-})
+// app.get('/admin', async (req, res) => {
+//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+//         res.redirect('login')
+//     } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "teacher") {
+//         res.redirect('/pageNotFound')
+//     } else {
+//         req.cookies[COOKIE_NAME].studentCount = await Student.estimatedDocumentCount();
+//         req.cookies[COOKIE_NAME].teacherCount = await Teacher.estimatedDocumentCount();
+//         req.cookies[COOKIE_NAME].courseCount = await Class.estimatedDocumentCount();
+//         res.render('dashboardAdmin', req.cookies[COOKIE_NAME])
+//     }
+// })
 
 // app.post('/admin/addAdmin', async (req, res) => {
 //     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
