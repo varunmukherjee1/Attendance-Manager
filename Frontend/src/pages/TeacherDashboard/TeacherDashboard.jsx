@@ -1,4 +1,4 @@
-import Dashboard from "../Dashboard/Dashboard";
+import Dashboard from '../../components/Dashboard/Dashboard'
 import Card from "../../components/TeacherCard/TeacherCard";
 import teacher from "./TeacherDashboard.module.css";
 import {teacherClasses} from "../../constants/TeacherClasses"

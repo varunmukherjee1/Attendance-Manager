@@ -1,6 +1,7 @@
 import Footer from "../components/Footer";
 import Homenav from "../components/Homenav";
 import '../css/home.css'
+import Loader from "../components/Loader/Loader";
 
 export default function Home() {
     return (
