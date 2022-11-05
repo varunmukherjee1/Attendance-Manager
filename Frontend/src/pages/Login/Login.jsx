@@ -116,8 +116,8 @@ const Login=()=>{
 
     return (
         <div className={classes.center}>
-            <h1>Login</h1>
             <form onSubmit={submitHandler}>
+            <h1>Login</h1>
                 <div className={classes.txt_field}>  
                     <input ref={email_ref} onChange={checkEmail} value={inpVal.email} className={`${inpValid.email?classes.right:classes.wrong}`} type="text" required/>
                     <label>Email</label>
