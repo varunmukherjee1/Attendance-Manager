@@ -16,6 +16,7 @@ import AboutUs from "./pages/AboutUs/AboutUs"
 import ContactUs from "./pages/Contactus/ContactUs"
 import Loader from "./components/Loader/Loader";
 import NoMatch from "./pages/NoMatch/NoMatch";
+import Profile from "./pages/Profile/Profile";
 
 import {userActions} from "./store/userSlice"
 import {loadingActions} from "./store/loadingSlice"
@@ -127,6 +128,12 @@ function App() {
             path = "/contactus"
             element = {
               <ContactUs/>
+            }
+          />
+          <Route
+            path = "/profile"
+            element = {
+              <Profile/>
             }
           />
           <Route
