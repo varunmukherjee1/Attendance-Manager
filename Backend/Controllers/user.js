@@ -217,7 +217,15 @@ const login = async (req, res) => {
 
 }
 
+const logout =  (req, res) => {
+    return res
+        .status(200)
+        .clearCookie(COOKIE_NAME)
+        .send({success: true, message: "Logged out successfully"})
+}
+
 module.exports = {
     login,
-    register
+    register,
+    logout
 }

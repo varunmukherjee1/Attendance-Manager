@@ -763,11 +763,11 @@ app.post('/markAttendance/:cname', async (req, res) => {
 })
 
 // Clearing cookie on logout
-app.get('/logout', (req, res) => {
-    res.clearCookie(COOKIE_NAME);
-    res.redirect('/');
-})
+// app.get('/logout', (req, res) => {
+//     res.clearCookie(COOKIE_NAME);
+//     res.redirect('/');
+// })
 
-app.get('*', (req, res) => {
-    res.render('404NotFound')
-})
+// app.get('*', (req, res) => {
+//     res.render('404NotFound')
+// })
