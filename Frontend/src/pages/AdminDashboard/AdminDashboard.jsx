@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
+import { useDispatch } from 'react-redux'
 
 import Card from "../../components/Card/Card"
 import Dashboard from '../../components/Dashboard/Dashboard'
 import Tables from "../../components/Tables/Table"
+import { loadingActions } from '../../store/loadingSlice'
 
 import classes from "./AdminDashboard.module.css"
 
 function AdminDashboard() {
+
+    const dispatch = useDispatch();
 
     const [tableData, setTableData] = useState([]);
     const [columns , setColumns] = useState([]);
@@ -21,10 +25,19 @@ function AdminDashboard() {
 
         try{
 
+            dispatch(loadingActions.showLoading())
+
             const crs = await axios.get("api/getClasses")
             const stds = await axios.get("api/getStudents")
             const teach = await axios.get("api/getTeachers")
             const adm = await axios.get("api/getAdmins")
+
+            dispatch(loadingActions.hideLoading())
+
+            console.log(crs.data)
+            console.log(stds.data)
+            console.log(teach.data)
+            console.log(adm.data)
 
             if(stds.data.success){
                 setStudents(stds.data.data);
@@ -43,13 +56,9 @@ function AdminDashboard() {
                 setAdmins(adm.data.data);
             }
 
-            console.log(students)
-            console.log(teachers)
-            console.log(courses)
-            console.log(admins)
-
         }catch(err){
 
+            dispatch(loadingActions.hideLoading())
             console.log(err);
         }
     }

@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Poppins","Roboto",sans-serif;
+  font-family: "Poppins","Roboto",sans-serif !important; 
 }
 
 code {

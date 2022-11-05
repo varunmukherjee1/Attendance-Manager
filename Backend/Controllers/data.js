@@ -11,7 +11,7 @@ const sendClasses = async (req, res) => {
     }
 
     const classes = await Class.find()
-    console.log("classes = " + classes)
+    // console.log("classes = " + classes)
 
     return res
         .status(200)
@@ -19,7 +19,7 @@ const sendClasses = async (req, res) => {
 }
 
 const sendStudents = async (req,res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies['user' == null]){
+    if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null){
         return res
             .status(200)
             .send({success: false})
@@ -33,7 +33,7 @@ const sendStudents = async (req,res) => {
 }
 
 const sendTeachers = async (req,res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies['user' == null]){
+    if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null){
         return res
             .status(200)
             .send({success: false})
@@ -47,7 +47,7 @@ const sendTeachers = async (req,res) => {
 }
 
 const sendAdmins = async (req,res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies['user' == null]){
+    if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null){
         return res
             .status(200)
             .send({success: false})
@@ -60,10 +60,23 @@ const sendAdmins = async (req,res) => {
         .send({success: true,data: admins});
 }
 
+const sendCookieData = (req, res) => {
+    if(req.cookies == undefined || req.cookies == null || req.cookies['user'] == null){
+        return res
+            .status(200)
+            .send({success: false})
+    }
+
+    return res
+        .status(200)
+        .send({success: true , data: req.cookies})
+}
+
 
 module.exports = {
     sendClasses,
     sendStudents,
     sendTeachers,
-    sendAdmins
+    sendAdmins,
+    sendCookieData
 }

@@ -6,6 +6,6 @@ router.get('/getClasses', dataController.sendClasses)
 router.get('/getTeachers',dataController.sendTeachers)
 router.get('/getStudents',dataController.sendStudents)
 router.get('/getAdmins',dataController.sendAdmins)
-router.get('/getCookieDetails', (req, res) => res.send(req.cookies))
+router.get('/getCookieDetails', dataController.sendCookieData)
 
 module.exports = router

@@ -1,11 +1,17 @@
 import React,{useState,useRef} from "react";
 import axios from "axios"
 import toast from "react-hot-toast"
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
+import {useDispatch} from "react-redux"
+
+import {loadingActions} from "../../store/loadingSlice"
+import {userActions} from "../../store/userSlice"
 
 import classes from "./Login.module.css"
 
 const Login=()=>{
+
+    const dispatch = useDispatch();
 
     const email_ref=useRef();
     const pass_ref=useRef();
@@ -73,37 +79,28 @@ const Login=()=>{
             const email = inpVal.email;
             const password = inpVal.pass;
 
+            dispatch(loadingActions.showLoading())
+
             const res = await axios.post("user/login",{
                 email,
                 password,
             });
 
-            
-            
+            dispatch(loadingActions.hideLoading());
             
             if(res.data.success){
                 toast.success(res.data.message)
-
-                const cookie = await axios.get("api/getCookieDetails")
-                console.log(cookie.data);
-
-                console.log(cookie.data.user.userType)
-
-                if(cookie.data.user.userType === "admin"){
-                    navigate("/admin")
-                }
-                else{
-                    navigate("/student")
-                }
-                
-                
+                dispatch(userActions.setUser(res.data.data))
+                navigate("/")
             }
             else{
                 toast.error(res.data.message)
             }
+
         }
         catch(err){
             console.log("Error = " + err)
+            dispatch(loadingActions.hideLoading());
             toast.error("Something went wrong!")
         }        
     }
@@ -133,7 +130,7 @@ const Login=()=>{
                 <div className={classes.pass}>Forgot Password</div>
                 <input type="submit" value="Login" />
                 <div className={classes.signup_link}>
-                   Not a member?<a href="/register"> Register</a>
+                   Not a member?<Link to ="/register"> Register</Link>
                 </div>
 
             </form>

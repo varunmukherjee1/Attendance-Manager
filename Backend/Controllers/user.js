@@ -125,7 +125,8 @@ const login = async (req, res) => {
                     .status(200)
                     .send({
                         success: true,
-                        message: "Login successful"
+                        message: "Login successful",
+                        data: studentCookie
                     })
             } else {
                 return res
@@ -152,7 +153,8 @@ const login = async (req, res) => {
                     .status(200)
                     .send({
                         success: true,
-                        message: "Login successful"
+                        message: "Login successful",
+                        data: teacherCookie
                     })
             } else {
                 
@@ -181,7 +183,8 @@ const login = async (req, res) => {
                     .status(200)
                     .send({
                         success: true,
-                        message: "Login successful"
+                        message: "Login successful",
+                        data: adminCookie
                     })
             } else {               
                 return res

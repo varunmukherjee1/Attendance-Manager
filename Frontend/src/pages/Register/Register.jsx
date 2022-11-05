@@ -280,7 +280,7 @@ const Register=(props)=>{
                 <div className={classes.pass}>Forgot Password</div>
                 <input type="submit" value="Register" />   
                 <div className={classes.signup_link}>
-                Already Registered? <a href="/login">Login</a>
+                Already Registered? <Link to="/login">Login</Link>
                 </div>
             </form>
         </div>

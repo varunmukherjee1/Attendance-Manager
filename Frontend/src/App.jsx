@@ -1,6 +1,9 @@
-import {Routes,Route} from "react-router-dom"
+import {Routes,Route, useNavigate} from "react-router-dom"
 import {Toaster} from "react-hot-toast"
 import { useSelector } from "react-redux";
+import { useEffect , useState} from "react";
+import axios from "axios"
+import { useDispatch } from "react-redux";
 
 import Home from "./pages/Home";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
@@ -12,75 +15,166 @@ import Info from "./pages/AboutUs/Info"
 import AboutUs from "./pages/AboutUs/AboutUs"
 import ContactUs from "./pages/Contactus/ContactUs"
 import Loader from "./components/Loader/Loader";
+import NoMatch from "./pages/NoMatch/NoMatch";
+
+import {userActions} from "./store/userSlice"
+import {loadingActions} from "./store/loadingSlice"
 
 function App() {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const getUserData = async () => {
+    try{
+      
+      dispatch(loadingActions.showLoading())
+      const res = await axios.get("/api/getCookieDetails")
+      dispatch(loadingActions.hideLoading())
+      
+      console.log('App.js')
+      console.log(res.data);
+      
+      if(res.data.success){
+        dispatch(userActions.setUser(res.data.data.user))
+        navigate("/")
+      }
+      else{
+        dispatch(userActions.setUser(null))
+      }
+
+      
+    }catch(err){
+      console.log("App.js Error");
+      console.log(err)
+      dispatch(loadingActions.hideLoading())
+    }
+  }
+   
+  useEffect(() => {
+    getUserData();
+  },[]);
+
+  // getUserData();
+  
   const loading = useSelector(state => state.loading.loading)
+  const user = useSelector(state => state.user.user)
+  // setUser(user)
+
+  // console.log("In App");
+  // console.log(user)
+  // console.log(user?.user.userType);
 
   return (
     <>
       {loading && <Loader/>}
-      {/* <h1>Home</h1> */}
       <Toaster position="top-center"/>
-      <Routes>
-        <Route
-          path = "/"
-          element = {
-            <Home/>
-          }
-        />
-        <Route
-          path = "/student"
-          element = {
-            <StudentDashboard/>
-          }
-        />
-        <Route
-          path = "/teacher"
-          element = {
-            <TeacherDashboard/>
-          }
-        />
-        <Route
-          path = "/admin"
-          element = {
-            <AdminDashboard/>
-          }
-        />
-        <Route
-          path = "/info"
-          element = {
-            <Info/>
-          }
-        />
-
-        <Route
-        
-        path = "/AboutUs"
-        element ={
-          <AboutUs/>
-        }/>
-
-        <Route
-          path = "/login"
-          element = {
-            <Login/>
-          }
-        />
-        <Route
-          path = "/register"
-          element = {
-            <Register/>
-          }
-        />
-
-        <Route
-          path = "/contactus"
-          element = {
-            <ContactUs/>
-          }
-        />
-      </Routes>
+      {(user === null) && (
+          <Routes>
+            <Route
+              path = "/"
+              element = {
+                <Home/>
+              }
+            />
+            <Route
+              path = "/info"
+              element = {
+                <Info/>
+              }
+            /> 
+            <Route
+              path = "/AboutUs"
+              element ={
+                <AboutUs/>
+              }
+            />
+            <Route
+              path = "/login"
+              element = {
+                <Login/>
+              }
+            />
+            <Route
+              path = "/register"
+              element = {
+                <Register/>
+              }
+            />
+            <Route
+              path = "/contactus"
+              element = {
+                <ContactUs/>
+              }
+            />
+            <Route
+              path = "*"
+              element = {
+                <NoMatch/>
+              }
+            />
+        </Routes>
+      )}
+      {(user?.userType === "student") && (
+        <Routes>
+          <Route
+            path = "/"
+            element = {
+              <StudentDashboard/>
+            }
+          />
+          <Route
+            path = "/contactus"
+            element = {
+              <ContactUs/>
+            }
+          />
+          <Route
+            path = "*"
+            element = {
+              <NoMatch/>
+            }
+          />
+        </Routes>
+      )}
+      {(user?.userType === "admin") && (
+        <Routes>
+          <Route
+            path = "/"
+            element = {
+              <AdminDashboard/>
+            }
+          />
+          <Route
+            path = "*"
+            element = {
+              <NoMatch/>
+            }
+          />
+        </Routes>
+      )}
+      {(user?.userType === "teacher") && (
+        <Routes>
+          <Route
+            path = "/"
+            element = {
+              <TeacherDashboard/>
+            }
+          />
+          <Route
+            path = "/contactus"
+            element = {
+              <ContactUs/>
+            }
+          />
+          <Route
+            path = "*"
+            element = {
+              <NoMatch/>
+            }
+          />
+        </Routes>
+      )}
     </>
   );
 }

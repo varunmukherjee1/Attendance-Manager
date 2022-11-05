@@ -1,9 +1,9 @@
-*{
+/* *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  /* font-size: medium; */
+
 }
 body{
   margin: 0;
@@ -11,7 +11,7 @@ body{
   background: white;
   height: 100vh;
   overflow: hidden;
-}
+} */
 .center{
   position: absolute;
   top: 50%;
