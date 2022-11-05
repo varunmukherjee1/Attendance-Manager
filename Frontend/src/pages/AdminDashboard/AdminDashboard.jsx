@@ -34,10 +34,10 @@ function AdminDashboard() {
 
             dispatch(loadingActions.hideLoading())
 
-            console.log(crs.data)
-            console.log(stds.data)
-            console.log(teach.data)
-            console.log(adm.data)
+            // console.log(crs.data)
+            // console.log(stds.data)
+            // console.log(teach.data)
+            // console.log(adm.data)
 
             if(stds.data.success){
                 setStudents(stds.data.data);
@@ -226,15 +226,15 @@ function AdminDashboard() {
                     <div className = {classes.summary}>
                         <div className={classes["card"]}>
                             <p>Number of Students</p>
-                            <p>8</p>
+                            <p>{students.length}</p>
                         </div>
                         <div className={classes["card"]}>
                             <p>Number of Teachers</p>
-                            <p>8</p>
+                            <p>{teachers.length}</p>
                         </div>
                         <div className={classes["card"]}>
                             <p>Number of Courses</p>
-                            <p>8</p>
+                            <p>{courses.length}</p>
                         </div>
                     </div>
 
