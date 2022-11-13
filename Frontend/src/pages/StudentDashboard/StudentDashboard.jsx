@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import axios from "axios"
 import {useSelector , useDispatch } from 'react-redux';
 import {loadingActions} from "../../store/loadingSlice"
-import image from "../../assets/profile_pic.svg"
 
 import Dashboard from '../../components/Dashboard/Dashboard'
 import Card from "../../components/StudentCard/StudentCard";
 import student from "./StudentDashboard.module.css";
-import {studentsClasses} from "../../constants/StudentClasses"
+// import {studentsClasses} from "../../constants/StudentClasses"
 
 
 export default function StudentDashboard() {
@@ -62,7 +61,7 @@ export default function StudentDashboard() {
             <div className={student.classes}>
                 {stdClasses.map(c => {
                     return (
-                        <Card key={c._id} src={image} title={c.name} teacher={c.teachers[0].email}  qrCode={getQrCode} seeAtt={seeAtt}/>
+                        <Card key={c._id} title={c.name} teacher={c.teachers[0].email}  qrCode={getQrCode} seeAtt={seeAtt}/>
                     )
                 })}
             </div>
