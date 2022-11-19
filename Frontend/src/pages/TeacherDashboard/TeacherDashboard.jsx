@@ -6,7 +6,7 @@ import { loadingActions } from "../../store/loadingSlice";
 import Dashboard from '../../components/Dashboard/Dashboard'
 import Card from "../../components/TeacherCard/TeacherCard";
 import teacher from "./TeacherDashboard.module.css";
-import {teacherClasses} from "../../constants/TeacherClasses"
+// import {teacherClasses} from "../../constants/TeacherClasses"
 
 
 export default function TeacherDashboard() {

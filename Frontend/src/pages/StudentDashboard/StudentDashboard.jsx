@@ -6,6 +6,7 @@ import {loadingActions} from "../../store/loadingSlice"
 import Dashboard from '../../components/Dashboard/Dashboard'
 import Card from "../../components/StudentCard/StudentCard";
 import student from "./StudentDashboard.module.css";
+import Modal from '../../components/Modal/Modal';
 // import {studentsClasses} from "../../constants/StudentClasses"
 
 
@@ -59,6 +60,9 @@ export default function StudentDashboard() {
     return (
         <Dashboard>
             <div className={student.classes}>
+                {/* <Modal>
+                    <h1>Hi...</h1>
+                </Modal> */}
                 {stdClasses.map(c => {
                     return (
                         <Card key={c._id} title={c.name} teacher={c.teachers[0].email}  qrCode={getQrCode} seeAtt={seeAtt}/>
