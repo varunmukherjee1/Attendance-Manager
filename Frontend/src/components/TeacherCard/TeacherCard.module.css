@@ -7,69 +7,88 @@
     --black: #000;
 }
 
+
+
 .card {
     border: 2px solid var(--grey);
-    width: 300px;
-    border-radius: 5px;
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 20px;
     /* box-shadow: 0 0 4px black,
                 0 0 9px black; */
+}
+
+.button_div{
+    display: flex;
+    flex-wrap: wrap ;
+    width: 100%;
+    margin-top: 2rem;
 }
 
 input[type="button"] {
     text-align: center;
     font-size: 15px;
     padding: 10px;
-    margin: 10px;
-    width: calc(100% - 20px);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    /* width: calc(100% - 20px); */
+    width: 30%;
     border: none;
     background: var(--orange);
     border-radius: 6px;
     transition: 0.3s ease;
 }
 
+
+
 input[type="button"]:hover {
     cursor: pointer;
     background-color: var(--yellow);
-    transform: scale(1.05);
+    transform: scale(1.01);
     box-shadow: 0 0 2px #999;
 }
 
 .card_container {
     display: flex;
     transition: 0.5s ease;
+    width: 150%;
 }
 
 .card_container:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.01);
+    
 }
 
 .class_name {
     margin: 0;
     padding: 0;
+    /* width: 80%; */
     color: var(--white);
     background: var(--blue);
     padding: 10px;
     padding-top: 20px;
     padding-bottom: 40px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .teacher_name {
     padding-left: 10px;
     margin-top: -25px;
-    color: var(--white);
+    /* color: var(--white); */
 }
 
 .teacher_img {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 70px;
     background: transparent;
     border-radius: 50%;
     float: right;
-    margin-top: -60px;
-    margin-right: 10px;
+    margin-top: -80px;
+    /* margin-right: 10px; */
 }
 
 .teacher_img::before {

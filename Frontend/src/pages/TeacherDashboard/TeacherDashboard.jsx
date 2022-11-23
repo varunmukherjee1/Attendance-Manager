@@ -55,7 +55,7 @@ export default function TeacherDashboard() {
     
     return (
         <Dashboard>
-            <div>
+            <div className={teacher.addclass}>
                 <button>Add New Class</button>
             </div>
             <div className={teacher.classes}>
