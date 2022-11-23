@@ -55,6 +55,9 @@ export default function TeacherDashboard() {
     
     return (
         <Dashboard>
+            <div>
+                <button>Add New Class</button>
+            </div>
             <div className={teacher.classes}>
                 {teachClasses.map(c => {
                     return (
