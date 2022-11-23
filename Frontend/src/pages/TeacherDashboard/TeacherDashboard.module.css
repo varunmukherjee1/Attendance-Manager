@@ -8,6 +8,14 @@
     padding: 0.75rem;
     border-radius: 1.25rem ;
 }
+.addclass button:hover{
+    background-color: #14213D;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 0.75rem;
+    transition: 0.5s;
+    border-radius: 1.25rem ;
+}
 
 .classes {
     width: 100%;
