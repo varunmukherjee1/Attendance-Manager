@@ -30,10 +30,11 @@ input[type="button"] {
     text-align: center;
     font-size: 15px;
     padding: 10px;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
+    margin-left: 1.55%;
+    margin-right: 1.55%;
+    /* margin-bottom: 5%; */
     /* width: calc(100% - 20px); */
+    flex:1 1 1;
     width: 30%;
     border: none;
     background: var(--orange);

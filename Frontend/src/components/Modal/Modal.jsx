@@ -15,7 +15,19 @@ function Modal(props) {
           <div className = {classes.overlay} onClick = {props.closeModel}></div>
           <div className = {classes.content}>
               <div className = {classes.cross} onClick = {props.closeModel}>&#9932;</div>
-              <div></div>
+              <div>
+                <label for="ClassName">Class Name</label>
+                <input type="text" name="ClassName" />
+              </div>
+              <div>
+                <label >Add Students</label>
+                <input type="file" name="Files" accept='.csv'  />
+              </div>
+              <div>
+                <label >Add Teachers</label>
+                <input type="file" name="Files" accept='.csv'  />
+              </div>
+              
               {props.children}
           </div>
       </div>

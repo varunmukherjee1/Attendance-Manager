@@ -6,6 +6,8 @@ import { loadingActions } from "../../store/loadingSlice";
 import Dashboard from '../../components/Dashboard/Dashboard'
 import Card from "../../components/TeacherCard/TeacherCard";
 import teacher from "./TeacherDashboard.module.css";
+import Modal from "../../components/Modal/Modal";
+
 // import {teacherClasses} from "../../constants/TeacherClasses"
 
 
@@ -52,11 +54,17 @@ export default function TeacherDashboard() {
     const seeAtt = () => {
         console.log("temp");
     }
+
+
+function AddModal(){
+    return <Modal/>
+}
+
     
     return (
         <Dashboard>
             <div className={teacher.addclass}>
-                <button>Add New Class</button>
+                <button onClick={AddModal}>Add New Class</button>
             </div>
             <div className={teacher.classes}>
                 {teachClasses.map(c => {
@@ -67,5 +75,6 @@ export default function TeacherDashboard() {
             </div>
             {/* teacherClasses.map(class => ) */}
         </Dashboard>    
+        
     )
 }
