@@ -1,0 +1,30 @@
+.modal{
+    margin:2rem;
+}
+
+.SudentName{
+    /* margin:1.5rem; */
+    margin-top: 2rem;
+}
+.submit{
+    margin: 2rem;
+    width: 100%;
+}
+.submit button{
+    background-color: #14213D;
+    color: white;
+    padding: 0.5rem;
+    width:80%;
+    font-size: larger;
+    border-radius: 0.6rem;
+}
+input{
+    margin-left: 1.7rem;
+    border-color: #14213D;
+    border-radius: 0.4rem;
+}
+
+label{
+    font-size: large;
+    color: #14213D;
+}

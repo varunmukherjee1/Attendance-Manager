@@ -76,15 +76,6 @@ function AddClassModalFunc(){
         )
     }
 }
-function AddStudentModalFunc(){
-    if(stateAddClass.display){
-        return (
-            <Modal closeModal = {closeAddStudentModal}>
-                <AddStudentModal/>
-            </Modal>
-        )
-    }
-}
 
 function modalAddClass(){
     
@@ -109,6 +100,41 @@ function addStudentModal(){
     })
 }
 
+function AddStudentModalFunc(){
+    if(stateAddStudent.display){
+        return (
+            <Modal closeModal = {closeAddStudentModal}>
+                <AddStudentModal/>
+            </Modal>
+        )
+    }
+}
+
+function closeAddTeacherModal(){
+    setstateAddTeacher({
+        ...stateAddTeacher,
+        display:false
+    })
+}
+
+function addTeacherModal(){
+
+    setstateAddTeacher({
+        ...stateAddTeacher,
+        display:true
+    })
+}
+
+function AddTeacherModalFunc(){
+    if(stateAddTeacher.display){
+        return (
+            <Modal closeModal = {closeAddTeacherModal}>
+                <AddTeacherModal/>
+            </Modal>
+        )
+    }
+}
+
 function closeAddStudentModal(){
     setstateAddStudent({
         ...stateAddStudent,
@@ -120,6 +146,7 @@ function closeAddStudentModal(){
         <Dashboard >
             {AddClassModalFunc()}
             {AddStudentModalFunc()}
+            {AddTeacherModalFunc()}
             <div className={teacher.addclass}>
                 <button onClick={modalAddClass}>Add New Class</button>
             </div>
@@ -132,7 +159,8 @@ function closeAddStudentModal(){
                         teacher={c.email}  
                         qrCode={getQrCode} 
                         seeAtt={seeAtt}
-                        addStud={addStudentModal()} 
+                        addStudent={addStudentModal} 
+                        addTeaher={addTeacherModal} 
                          />
                     )
                 })}
