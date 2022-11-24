@@ -9,6 +9,7 @@ import teacher from "./TeacherDashboard.module.css";
 import Modal from "../../components/Modal/Modal";
 import AddClassModal from "../../components/AddClassModal/AddClassModal"
 import AddStudentModal from "../../components/AddStudentModal/AddStudentModal"
+import AddTeacherModal from "../../components/AddTeacherModal/AddTeacherModal"
 
 // import {teacherClasses} from "../../constants/TeacherClasses"
 
@@ -110,15 +111,16 @@ function AddStudentModalFunc(){
     }
 }
 
-function closeAddTeacherModal(){
-    setstateAddTeacher({
-        ...stateAddTeacher,
+function closeAddStudentModal(){
+    setstateAddStudent({
+        ...stateAddStudent,
         display:false
     })
 }
 
-function addTeacherModal(){
 
+function addTeacherModal(){
+    
     setstateAddTeacher({
         ...stateAddTeacher,
         display:true
@@ -134,10 +136,9 @@ function AddTeacherModalFunc(){
         )
     }
 }
-
-function closeAddStudentModal(){
-    setstateAddStudent({
-        ...stateAddStudent,
+function closeAddTeacherModal(){
+    setstateAddTeacher({
+        ...stateAddTeacher,
         display:false
     })
 }
@@ -160,7 +161,7 @@ function closeAddStudentModal(){
                         qrCode={getQrCode} 
                         seeAtt={seeAtt}
                         addStudent={addStudentModal} 
-                        addTeaher={addTeacherModal} 
+                        addTeacher={addTeacherModal} 
                          />
                     )
                 })}
