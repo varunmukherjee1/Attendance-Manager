@@ -1,33 +1,28 @@
 import React from 'react'
+import { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import classes from "./Modal.module.css"
 
 function Modal(props) {
 
-  const closeHandler = () => {
-    console.log("click");
-  }
+  // const [state,setstate]=useState({
+  //   display:true
+  // })
+
+  // const closeMoal = () => {
+  //   // console.log("click");
+  //   setstate({...state,
+  //     display:false
+  //   })
+  // }
 
   return ReactDOM.createPortal(
     <>
       <div className = {classes.modal}>
-          <div className = {classes.overlay} onClick = {props.closeModel}></div>
+          <div className = {classes.overlay} onClick = {props.closeModal}></div>
           <div className = {classes.content}>
-              <div className = {classes.cross} onClick = {props.closeModel}>&#9932;</div>
-              <div>
-                <label for="ClassName">Class Name</label>
-                <input type="text" name="ClassName" />
-              </div>
-              <div>
-                <label >Add Students</label>
-                <input type="file" name="Files" accept='.csv'  />
-              </div>
-              <div>
-                <label >Add Teachers</label>
-                <input type="file" name="Files" accept='.csv'  />
-              </div>
-              
+              <div className = {classes.cross} onClick = {props.closeModal}>&#9932;</div>
               {props.children}
           </div>
       </div>
