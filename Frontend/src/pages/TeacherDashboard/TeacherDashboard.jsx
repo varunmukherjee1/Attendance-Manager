@@ -142,6 +142,10 @@ function closeAddTeacherModal(){
         display:false
     })
 }
+
+function removeCurrClass(){
+    
+}
     
     return (
         <Dashboard >
@@ -161,7 +165,8 @@ function closeAddTeacherModal(){
                         qrCode={getQrCode} 
                         seeAtt={seeAtt}
                         addStudent={addStudentModal} 
-                        addTeacher={addTeacherModal} 
+                        addTeacher={addTeacherModal}
+                        removeClass={removeCurrClass} 
                          />
                     )
                 })}
