@@ -88,7 +88,7 @@ export default function StudentDashboard() {
         <Dashboard>
             <div className={student.classes}>
                 {showQR.show && 
-                    <Modal closeModel = {closeModal}>
+                    <Modal closeModal = {closeModal}>
                         {(showQR.qr) ? <QRCode value = {showQR.qr}/> :
                             <h2>QR Not Found! 😕</h2>
                         }

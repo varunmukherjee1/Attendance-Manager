@@ -18,13 +18,13 @@
     font-size: larger;
     border-radius: 0.6rem;
 }
-input{
+.StudentName input{
     margin-left: 1.7rem;
     border-color: #14213D;
     border-radius: 0.4rem;
 }
 
-label{
+.StudentName label{
     font-size: large;
     color: #14213D;
 }

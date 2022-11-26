@@ -26,7 +26,7 @@
     margin-top: 2rem;
 }
 
-input[type="button"] {
+.button_div input[type="button"] {
     text-align: center;
     font-size: 15px;
     padding: 10px;
@@ -44,7 +44,7 @@ input[type="button"] {
 
 
 
-input[type="button"]:hover {
+.button_div input[type="button"]:hover {
     cursor: pointer;
     background-color: var(--yellow);
     transform: scale(1.01);

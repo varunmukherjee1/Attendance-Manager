@@ -18,18 +18,25 @@
     font-size: larger;
     border-radius: 0.6rem;
 }
-input{
+
+.classname input,
+.AddStudents input,
+.AddTeachers input{
     margin-left: 1.7rem;
     border-color: #14213D;
     border-radius: 0.4rem;
 }
-input[type="file"]{
+.classname input[type="file"],
+.AddStudents input[type="file"],
+.AddTeachers input[type="file"]{
     margin-left: 1rem;
     background-color: #14213D;
     border-radius: 0.4rem;
     color: white;
 }
-label{
+.classname label,
+.AddStudents label,
+.AddTeachers label {
     font-size: large;
     color: #14213D;
 }

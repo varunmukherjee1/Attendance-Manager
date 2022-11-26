@@ -18,13 +18,14 @@
     font-size: larger;
     border-radius: 0.6rem;
 }
-input{
+
+.teachername input{
     margin-left: 1.7rem;
     border-color: #14213D;
     border-radius: 0.4rem;
 }
 
-label{
+.teachername label{
     font-size: large;
     color: #14213D;
 }
