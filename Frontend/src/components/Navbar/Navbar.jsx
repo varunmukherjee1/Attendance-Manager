@@ -43,16 +43,16 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-house"></i>
                         </span>
-                        {/* <span className = {classes.title}>Dashboard</span> */}
+                        <span className = {classes.title}>Dashboard</span>
                     </Link>
                 </li>
 
-                <li>
+                <li>    
                     <Link to = "/profile">
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-user"></i>
                         </span>
-                        {/* <span className = {classes.title}>Profile</span> */}
+                        <span className = {classes.title}>Profile</span>
                     </Link>
                 </li>
                 <li>
@@ -60,7 +60,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-gear"></i>
                         </span>
-                        {/* <span className = {classes.title}>Settings</span> */}
+                        <span className = {classes.title}>Settings</span>
                     </Link>
                 </li>
                 <li>
@@ -68,7 +68,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-question"></i>
                         </span>
-                        {/* <span className = {classes.title}>help</span> */}
+                        <span className = {classes.title}>help</span>
                     </Link>
                 </li>
                 <li>
@@ -76,7 +76,7 @@ function Navbar(props) {
                         <span className = {classes.icon}>
                             <i className="fa-solid fa-circle-info"></i>
                         </span>
-                        {/* <span className = {classes.title}>About us</span> */}
+                        <span className = {classes.title}>About us</span>
                     </Link>
                 </li>
                 <li>
