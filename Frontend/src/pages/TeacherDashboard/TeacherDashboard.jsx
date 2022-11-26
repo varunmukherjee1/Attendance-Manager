@@ -1,6 +1,7 @@
 import {useEffect,useState} from "react"
 import axios from "axios"
 import { useSelector,useDispatch } from "react-redux";
+import QrReader from "react-qr-scanner"
 
 import { loadingActions } from "../../store/loadingSlice";
 import Dashboard from '../../components/Dashboard/Dashboard'
@@ -10,11 +11,16 @@ import Modal from "../../components/Modal/Modal";
 import AddClassModal from "../../components/AddClassModal/AddClassModal"
 import AddStudentModal from "../../components/AddStudentModal/AddStudentModal"
 import AddTeacherModal from "../../components/AddTeacherModal/AddTeacherModal"
+import classes from "./TeacherDashboard.module.css"
 
 // import {teacherClasses} from "../../constants/TeacherClasses"
 
 
 export default function TeacherDashboard() {
+
+    const [showQr,setShowQr] = useState(false);
+    const [qrRes,setQrRes] = useState("");
+    const [scan,setScan] = useState(false)
 
     const user = useSelector(state => state.user.user)
     const [teachClasses,setTeachClasses] = useState([])
@@ -68,87 +74,151 @@ export default function TeacherDashboard() {
     }
 
 
-function AddClassModalFunc(){
-    if(stateAddClass.display){
-        return (
-            <Modal closeModal = {closeAddClassModal}>
-                <AddClassModal/>
-            </Modal>
-        )
+    function AddClassModalFunc(){
+        if(stateAddClass.display){
+            return (
+                <Modal closeModal = {closeAddClassModal}>
+                    <AddClassModal/>
+                </Modal>
+            )
+        }
     }
-}
 
-function modalAddClass(){
-    
-    setstateAddClass({
-        ...stateAddClass,
-        display:true
-    })
-}
-
-function closeAddClassModal(){
-    setstateAddClass({
-        ...stateAddClass,
-        display:false
-    })
-}
-
-function addStudentModal(){
-
-    setstateAddStudent({
-        ...stateAddStudent,
-        display:true
-    })
-}
-
-function AddStudentModalFunc(){
-    if(stateAddStudent.display){
-        return (
-            <Modal closeModal = {closeAddStudentModal}>
-                <AddStudentModal/>
-            </Modal>
-        )
+    function modalAddClass(){
+        
+        setstateAddClass({
+            ...stateAddClass,
+            display:true
+        })
     }
-}
 
-function closeAddStudentModal(){
-    setstateAddStudent({
-        ...stateAddStudent,
-        display:false
-    })
-}
-
-
-function addTeacherModal(){
-    
-    setstateAddTeacher({
-        ...stateAddTeacher,
-        display:true
-    })
-}
-
-function AddTeacherModalFunc(){
-    if(stateAddTeacher.display){
-        return (
-            <Modal closeModal = {closeAddTeacherModal}>
-                <AddTeacherModal/>
-            </Modal>
-        )
+    function closeAddClassModal(){
+        setstateAddClass({
+            ...stateAddClass,
+            display:false
+        })
     }
-}
-function closeAddTeacherModal(){
-    setstateAddTeacher({
-        ...stateAddTeacher,
-        display:false
-    })
-}
 
-function removeCurrClass(){
-    
-}
+    function addStudentModal(){
+
+        setstateAddStudent({
+            ...stateAddStudent,
+            display:true
+        })
+    }
+
+    function AddStudentModalFunc(){
+        if(stateAddStudent.display){
+            return (
+                <Modal closeModal = {closeAddStudentModal}>
+                    <AddStudentModal/>
+                </Modal>
+            )
+        }
+    }
+
+    function closeAddStudentModal(){
+        setstateAddStudent({
+            ...stateAddStudent,
+            display:false
+        })
+    }
+
+
+    function addTeacherModal(){
+        
+        setstateAddTeacher({
+            ...stateAddTeacher,
+            display:true
+        })
+    }
+
+    function AddTeacherModalFunc(){
+        if(stateAddTeacher.display){
+            return (
+                <Modal closeModal = {closeAddTeacherModal}>
+                    <AddTeacherModal/>
+                </Modal>
+            )
+        }
+    }
+
+    function closeAddTeacherModal(){
+        setstateAddTeacher({
+            ...stateAddTeacher,
+            display:false
+        })
+    }
+
+    function removeCurrClass(){
+        
+    }
+
+    const onError = () => {
+        setQrRes( "Error ❌")
+    }
+
+    let prevText = qrRes;
+
+    const onScan = (data) => {
+
+        if(data !== null && prevText !== data.text){
+            prevText = data.text;
+
+            if(data.text.includes("%%")){
+                let rollNo = data.text.split("%%")[0];
+                console.log(rollNo)
+                setQrRes(rollNo + " ✅")
+            }
+            else{
+                setQrRes("Invalid QR 😕")
+            }
+        }
+
+    }
+
+    const closeQr = () => {
+        setShowQr(false);
+        stopScan();
+        setQrRes("");
+    }
+
+    const scanQR = () => {
+        setShowQr(true);
+    }
+
+    const startScan = () => {
+        // console.log("start Scan");
+        setScan(true);
+    }
+
+    const stopScan = () => {
+        setScan(false);
+    }
     
     return (
         <Dashboard >
+
+            {showQr && 
+                <Modal closeModal = {closeQr}> 
+                    {scan && 
+                        <>
+                            <p className = {classes.qrResult}>Result : {qrRes}</p>    
+                            <QrReader
+                            onScan = {onScan}
+                            onError = {onError}
+                            style = {{
+                                height: 400,
+                                width: 550
+                            }}
+                            />
+                        </>
+                    }
+                    {scan && <button className = {classes.qrButton} onClick = {stopScan}>Stop Scan</button>}
+                    {!scan && <button className = {classes.qrButton} onClick = {startScan}>Start Scan</button>}
+                </Modal>
+            }
+
             {AddClassModalFunc()}
             {AddStudentModalFunc()}
             {AddTeacherModalFunc()}
@@ -159,14 +229,14 @@ function removeCurrClass(){
                 {teachClasses.map(c => {
                     return (
                         <Card 
-                        key={c._id}
-                        title={c.name}
-                        teacher={c.email}  
-                        qrCode={getQrCode} 
-                        seeAtt={seeAtt}
-                        addStudent={addStudentModal} 
-                        addTeacher={addTeacherModal}
-                        removeClass={removeCurrClass} 
+                            key={c._id}
+                            title={c.name}
+                            teacher={c.email}  
+                            scanQR ={scanQR} 
+                            seeAtt={seeAtt}
+                            addStudent={addStudentModal} 
+                            addTeacher={addTeacherModal}
+                            removeClass={removeCurrClass} 
                          />
                     )
                 })}
