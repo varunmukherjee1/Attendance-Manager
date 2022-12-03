@@ -90,78 +90,11 @@ const sendClass = async (req, res) => {
   return res.status(200).send({ success: false });
 };
 
-const generateQrCode = async (req, res) => {
-  if (
-    req.cookies == undefined ||
-    req.cookies == null ||
-    req.cookies["user"] == null
-  ) {
-    return res.status(200).send({ success: false });
-  }
-  try {
-    let classObj = await Class.findOne({ _id: req.params.x });
-    let studClass = classObj.students;
-    let d = new Date();
-    let timeStr1 = `${Math.floor(d.getTime() / (1000 * 60))}`;
-    // let timeStr1 = `${Math.floor(d.getTime()/(1000*60*60))}`
-    let timeStr2 = `${Math.floor(d.getTime() / (1000 * 60)) + 5}`;
-    // let timeStr2 = `${Math.floor(d.getTime()/(1000*60*60)) + 1}`
-    let dateStr = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-    let arr = [];
-    // Adding Absent array
-    for (let i = 0; i < studClass.length; i++) {
-      let tempObj = {
-        roll_no: studClass[i].roll_number,
-        status: "A",
-      };
-      arr.push(tempObj);
-    }
-    let timeStampStr = `${dateStr} ${timeStr1} ${timeStr2}`;
-    let matchFound = false;
-    let attObj = {
-      date: timeStampStr,
-      values: arr,
-    };
-    for (let i = 0; i < classObj.attendance.length; i++) {
-      dateVal = classObj.attendance[i].date.split(" ");
-      if (
-        dateVal[0] == dateStr &&
-        parseInt(dateVal[1]) >= parseInt(timeStr1) &&
-        parseInt(dateVal[1]) <= parseInt(timeStr2)
-      ) {
-        console.log("here");
-        matchFound = true;
-      }
-    }
-    if (!matchFound) {
-      // Generating Qr Unique String
-      studClass.forEach((std) => {
-        let roll = std.roll_number;
-        let qrStr = `${roll}%%${req.params.x}%%${dateStr}%%${timeStr1}`;
-
-        std.qrcode_string = qrStr;
-      });
-      classObj.attendance.push(attObj);
-      const co = await classObj.save();
-    }
-
-    return res
-        .status(200)
-        .send({ success: true })
-  } catch (error) {
-    console.log(error);
-    return res
-        .status(200)
-        .send({ success: false })
-  }
-};
-
 module.exports = {
   sendClasses,
   sendStudents,
   sendTeachers,
   sendAdmins,
   sendCookieData,
-  sendClass,
-  generateQrCode
+  sendClass
 };

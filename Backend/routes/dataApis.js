@@ -8,6 +8,5 @@ router.get('/getTeachers',dataController.sendTeachers)
 router.get('/getStudents',dataController.sendStudents)
 router.get('/getAdmins',dataController.sendAdmins)
 router.get('/getCookieDetails', dataController.sendCookieData)
-router.get('/generateQrCode/:x', dataController.generateQrCode)
 
 module.exports = router

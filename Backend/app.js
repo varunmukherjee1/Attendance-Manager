@@ -19,6 +19,7 @@ const encryption = require('./public/scripts/encryption')
 const adminRoutes = require('./routes/admin')
 const dataApisRoutes = require('./routes/dataApis')
 const userRoutes = require("./routes/user")
+const authRoutes = require("./routes/auth")
 
 /**Saket Ranjan */
 const multer = require('multer');
@@ -40,6 +41,7 @@ app.use(express.json())
 app.use('/admin', adminRoutes)
 app.use("/api",dataApisRoutes)
 app.use("/user",userRoutes)
+app.use("/auth",authRoutes)
 
 app.listen(PORT, (req, res) => {
     console.log(`Server started at http://localhost:${PORT}`);
@@ -238,40 +240,40 @@ app.post('/addTeacher/:x', async (req, res) => {
     }
 })
 
-app.post('/markAttendance/:cname', async (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.redirect('login')
-    }
-    let val = req.body.qrCodeArr;
-    const classObj = await Class.findOne({ name: req.params.cname })
-    const stds = classObj.students;
-    const attend = classObj.attendance;
-    let passStr = val.split(";;")
-    for (let i = 0; i < passStr.length; i++) {
-        let tempStr = passStr[i];
+// app.post('/markAttendance/:cname', async (req, res) => {
+//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+//         return res.redirect('login')
+//     }
+//     let val = req.body.qrCodeArr;
+//     const classObj = await Class.findOne({ name: req.params.cname })
+//     const stds = classObj.students;
+//     const attend = classObj.attendance;
+//     let passStr = val.split(";;")
+//     for (let i = 0; i < passStr.length; i++) {
+//         let tempStr = passStr[i];
 
-        for (let j = 0; j < stds.length; j++) {
+//         for (let j = 0; j < stds.length; j++) {
 
-            if (stds[j].qrcode_string == tempStr) {
+//             if (stds[j].qrcode_string == tempStr) {
 
-                let tempRoll = stds[j].roll_number;
-                let tempArr = tempStr.split("%%");
-                let dateStr = tempArr[2];
-                let timeStr = tempArr[3];
+//                 let tempRoll = stds[j].roll_number;
+//                 let tempArr = tempStr.split("%%");
+//                 let dateStr = tempArr[2];
+//                 let timeStr = tempArr[3];
 
-                attend.forEach((att) => {
-                    let attDate = att.date.split(" ");
-                    if ((attDate[0] == dateStr) && (attDate[1] == timeStr)) {
-                        att.values.forEach((stdVal) => {
-                            if (stdVal.roll_no == tempRoll) {
-                                stdVal.status = "P";
-                            }
-                        })
-                    }
-                });
-            }
-        }
-    }
-    const co = await classObj.save();
-    res.redirect("/dashboardTeacher")
-})
+//                 attend.forEach((att) => {
+//                     let attDate = att.date.split(" ");
+//                     if ((attDate[0] == dateStr) && (attDate[1] == timeStr)) {
+//                         att.values.forEach((stdVal) => {
+//                             if (stdVal.roll_no == tempRoll) {
+//                                 stdVal.status = "P";
+//                             }
+//                         })
+//                     }
+//                 });
+//             }
+//         }
+//     }
+//     const co = await classObj.save();
+//     res.redirect("/dashboardTeacher")
+// })

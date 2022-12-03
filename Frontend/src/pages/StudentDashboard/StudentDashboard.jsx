@@ -49,15 +49,19 @@ export default function StudentDashboard() {
             console.log(error)
         }
     }
+
+    // console.log(stdClasses);
     
-    const getQrCode = () => {
+    const getQrCode = (id) => {
         // console.log(user)
 
         let qrString;
+
+        console.log(id)
         
         stdClasses.forEach((cls) => {
             cls.students.forEach((std) => {
-                if(std.roll_number === user.roll_number){
+                if(std.roll_number === user.roll_number && cls._id === id){
                     qrString =  std.qrcode_string;
                 }
             })

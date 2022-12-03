@@ -21,6 +21,7 @@ export default function TeacherDashboard() {
     const [showQr,setShowQr] = useState(false);
     const [qrRes,setQrRes] = useState("");
     const [scan,setScan] = useState(false)
+    const [attendance,setAttendance] = useState()
 
     const user = useSelector(state => state.user.user)
     const [teachClasses,setTeachClasses] = useState([])
@@ -65,13 +66,13 @@ export default function TeacherDashboard() {
         getClasses();
     },[]);
 
-    const getQrCode = () => {
-        console.log("QR Code button clicked");
-    }
+    // const getQrCode = () => {
+    //     console.log("QR Code button clicked");
+    // }
 
-    const seeAtt = () => {
-        console.log("temp");
-    }
+    // const seeAtt = () => {
+    //     console.log("temp");
+    // }
 
 
     function AddClassModalFunc(){
@@ -165,9 +166,18 @@ export default function TeacherDashboard() {
         if(data !== null && prevText !== data.text){
             prevText = data.text;
 
+            // console.log(data);
+            // setQrRes(data.text);
+
             if(data.text.includes("%%")){
                 let rollNo = data.text.split("%%")[0];
                 console.log(rollNo)
+
+                const tempStr = attendance.qrString + data.text + ";;"
+                setAttendance({
+                    ...attendance,
+                    qrString: tempStr,
+                })
                 setQrRes(rollNo + " ✅")
             }
             else{
@@ -177,17 +187,41 @@ export default function TeacherDashboard() {
 
     }
 
-    const closeQr = () => {
-        setShowQr(false);
-        stopScan();
-        setQrRes("");
+    const closeQr = async () => {
+
+        try {
+            
+            const res = await axios.post("/auth/markAttendance/" + attendance.classId,{
+                qrCodeArr: attendance.qrString
+            })
+
+            setShowQr(false);
+            stopScan();
+            setQrRes("");
+            setAttendance();
+
+        } catch (error) {
+            console.log("Mark Attendace error")
+            console.log(error);
+        }
     }
 
-    const scanQR = () => {
+    // const closeQr = () => {
+    //     setShowQr(false);
+    //     stopScan();
+    //     setQrRes("");
+    //     setAttendance();
+    // }
+
+    const scanQR = (id) => {
         setShowQr(true);
+        setAttendance({
+            classId: id,
+            qrString: ""
+        })
     }
 
-    const startScan = () => {
+    const startScan = (id) => {
         // console.log("start Scan");
         setScan(true);
     }

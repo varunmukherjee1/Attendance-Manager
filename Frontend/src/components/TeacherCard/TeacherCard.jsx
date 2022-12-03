@@ -17,10 +17,10 @@ function TeacherCard(props) {
 
   const generateQrCode = async () => {
     console.log("test");
-    const res = await axios.get("/api/generateQrCode/" + props.id)
+    const res = await axios.get("/auth/generateQrCode/" + props.id)
     console.log(res);
-    if(res.status == 200) {
-      if(res.data.success == true) {
+    if(res.status === 200) {
+      if(res.data.success === true) {
         toast.success("QR generated")
       }
       else {
@@ -32,6 +32,10 @@ function TeacherCard(props) {
     }
   }
 
+  const scanQr = () => {
+    props.scanQR(props.id)
+  }
+
   return (
     <div className={classes.card_container}>
       <div className = {classes.card}>
@@ -41,7 +45,7 @@ function TeacherCard(props) {
           <div className={classes.button_div}>
             <input type={"button"} value={"Generate QR Code"}  onClick={generateQrCode}/><br />
             <input type={"button"} value={"See Attendance"} onClick={seeAttendance}/>
-            <input type={"button"} value={"Scan QR code"} onClick={props.scanQR}/>
+            <input type={"button"} value={"Scan QR code"} onClick={scanQr}/>
             <input type={"button"} value={"Add Student"} onClick={props.addStudent}/>
             <input type={"button"} value={"Add Teacher"} onClick={props.addTeacher}/>
             <input type={"button"} value={"Remove Class"} onClick={props.removeClass}/>
