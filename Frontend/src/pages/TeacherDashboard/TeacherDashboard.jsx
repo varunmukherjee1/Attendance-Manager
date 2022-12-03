@@ -198,7 +198,6 @@ export default function TeacherDashboard() {
     
     return (
         <Dashboard >
-
             {showQr && 
                 <Modal closeModal = {closeQr}> 
                     {scan && 
@@ -230,10 +229,10 @@ export default function TeacherDashboard() {
                     return (
                         <Card 
                             key={c._id}
+                            id={c._id}
                             title={c.name}
                             teacher={c.email}  
-                            scanQR ={scanQR} 
-                            seeAtt={seeAtt}
+                            scanQR ={scanQR}
                             addStudent={addStudentModal} 
                             addTeacher={addTeacherModal}
                             removeClass={removeCurrClass} 

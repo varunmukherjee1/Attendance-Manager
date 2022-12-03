@@ -17,6 +17,7 @@ import ContactUs from "./pages/Contactus/ContactUs"
 import Loader from "./components/Loader/Loader";
 import NoMatch from "./pages/NoMatch/NoMatch";
 import Profile from "./pages/Profile/Profile";
+import AttendancePage from "./pages/AttendancePage/AttendancePage"
 
 import {userActions} from "./store/userSlice"
 import {loadingActions} from "./store/loadingSlice"
@@ -109,6 +110,12 @@ function App() {
               }
             />
             <Route
+              path = "/seeAttendance/:cid"
+              element = {
+                <AttendancePage/>
+              }
+            />
+            <Route
               path = "*"
               element = {
                 <NoMatch/>
@@ -136,6 +143,12 @@ function App() {
               <Profile/>
             }
           />
+          <Route
+              path = "/seeAttendance/:cid"
+              element = {
+                <AttendancePage/>
+              }
+            />
           <Route
             path = "*"
             element = {
@@ -174,6 +187,12 @@ function App() {
               <ContactUs/>
             }
           />
+          <Route
+              path = "/seeAttendance/:cid"
+              element = {
+                <AttendancePage/>
+              }
+            />
           <Route
             path = "*"
             element = {

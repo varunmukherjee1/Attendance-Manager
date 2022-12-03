@@ -18,6 +18,7 @@ export default function StudentDashboard() {
         show: false,
         qr: undefined
     })
+    const [currentClass, setCurrentClass] = useState("")
 
     
     const user = useSelector(state => state.user.user)
@@ -96,8 +97,9 @@ export default function StudentDashboard() {
                     </Modal>
                 }
                 {stdClasses.map(c => {
+                    // setCurrentClass(c._id)
                     return (
-                        <Card key={c._id} title={c.name} teacher={c.teachers[0].email}  qrCode={getQrCode} seeAtt={seeAtt}/>
+                        <Card classId={c._id} key={c._id} title={c.name} teacher={c.teachers[0].email}  qrCode={getQrCode} seeAtt={seeAtt}/>
                     )
                 })}
             </div>

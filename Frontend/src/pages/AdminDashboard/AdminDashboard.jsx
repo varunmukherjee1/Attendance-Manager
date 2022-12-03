@@ -204,6 +204,7 @@ function AdminDashboard() {
             // console.log(res.data)
             setColumns(adminColumns)
             setTableData(admins)
+            // console.log(columns, tableData);
             
         } catch (error) {
             console.log(error);

@@ -1,19 +1,20 @@
 import logo from '../assets/logo.png'
 import '../css/Homenav.css'
+import {Link} from "react-router-dom"
 export default function Homenav() {
     return (
         <header>
-            <div class="brand">
-                <div class="brand--logo">
-                    <a href="/">
+            <div className="brand">
+                <div className="brand--logo">
+                    <Link to="/">
                         <img src={logo} alt="Logo here" />
-                    </a>
-                    <a href="/">Group - 27</a>
+                    </Link>
+                    <Link to="/">Group - 27</Link>
                 </div>
             </div>
-            <nav class="main-nav">
-                <a href="/login" id="login">Login</a>
-                <a href="/register" id="register">Register</a>
+            <nav className="main-nav">
+                <Link to="/login" id="login">Login</Link>
+                <Link to="/register" id="register">Register</Link>
             </nav>
         </header>
     )
