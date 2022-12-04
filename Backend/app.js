@@ -157,16 +157,16 @@ app.post('/addClass', upload.array("Files", 2), async (req, res) => {
     res.redirect('/dashboardTeacher')
 })
 
-app.get('/showAttendance/:name/', async (req, res) => {
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.redirect('login')
-    }
-    let className = req.params.name.replace('%20', ' ')
-    let dataObj = {
-        name: className
-    }
-    res.render('showAttendance', dataObj)
-});
+// app.get('/showAttendance/:name/', async (req, res) => {
+//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+//         return res.redirect('login')
+//     }
+//     let className = req.params.name.replace('%20', ' ')
+//     let dataObj = {
+//         name: className
+//     }
+//     res.render('showAttendance', dataObj)
+// });
 
 app.get('/removeClass/:x', async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
@@ -239,41 +239,3 @@ app.post('/addTeacher/:x', async (req, res) => {
         console.log(error);
     }
 })
-
-// app.post('/markAttendance/:cname', async (req, res) => {
-//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-//         return res.redirect('login')
-//     }
-//     let val = req.body.qrCodeArr;
-//     const classObj = await Class.findOne({ name: req.params.cname })
-//     const stds = classObj.students;
-//     const attend = classObj.attendance;
-//     let passStr = val.split(";;")
-//     for (let i = 0; i < passStr.length; i++) {
-//         let tempStr = passStr[i];
-
-//         for (let j = 0; j < stds.length; j++) {
-
-//             if (stds[j].qrcode_string == tempStr) {
-
-//                 let tempRoll = stds[j].roll_number;
-//                 let tempArr = tempStr.split("%%");
-//                 let dateStr = tempArr[2];
-//                 let timeStr = tempArr[3];
-
-//                 attend.forEach((att) => {
-//                     let attDate = att.date.split(" ");
-//                     if ((attDate[0] == dateStr) && (attDate[1] == timeStr)) {
-//                         att.values.forEach((stdVal) => {
-//                             if (stdVal.roll_no == tempRoll) {
-//                                 stdVal.status = "P";
-//                             }
-//                         })
-//                     }
-//                 });
-//             }
-//         }
-//     }
-//     const co = await classObj.save();
-//     res.redirect("/dashboardTeacher")
-// })
