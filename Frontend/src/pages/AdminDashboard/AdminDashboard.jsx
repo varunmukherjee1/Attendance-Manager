@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import { useDispatch } from 'react-redux'
+import toast from "react-hot-toast"
+import { useNavigate } from 'react-router-dom'
 
 import Card from "../../components/Card/Card"
 import Dashboard from '../../components/Dashboard/Dashboard'
@@ -12,6 +14,7 @@ import classes from "./AdminDashboard.module.css"
 function AdminDashboard() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [tableData, setTableData] = useState([]);
     const [columns , setColumns] = useState([]);
@@ -33,11 +36,6 @@ function AdminDashboard() {
             const adm = await axios.get("api/getAdmins")
 
             dispatch(loadingActions.hideLoading())
-
-            // console.log(crs.data)
-            // console.log(stds.data)
-            // console.log(teach.data)
-            // console.log(adm.data)
 
             if(stds.data.success){
                 setStudents(stds.data.data);
@@ -120,8 +118,13 @@ function AdminDashboard() {
         {
             Header: "Actions",
             accessor: "actions",
-            Cell: () => {
-                return(<button>Remove Student</button>);
+            Cell: (cdata) => {
+
+                const caller = () => {
+                    removeStudent(cdata.cell.row.index)
+                }
+                // console.log(cdata.cell.row.index)
+                return(<button onClick = {caller}>Remove Student</button>);
             }
         }
     ]
@@ -161,6 +164,45 @@ function AdminDashboard() {
             }
         }
     ]
+
+    const removeStudent = async (idx) => {
+        try {
+            
+            const std = students[idx];
+
+            const res = await axios.get("/admin/removeStudent/" + std._id)
+
+            if(res.data.success){
+                toast.success("Student removed")
+                navigate(0);
+            }
+            else{
+                toast.error("Deletion Failed")
+            }
+            
+        } catch (error) {
+            console.log("Student delete error")
+            console.log(error);
+
+            toast.error("Something went Wrong")
+        }
+    }
+
+    const removeTeacher = (idx) => {
+
+    }
+
+    const removeCourses = (idx) => {
+
+    }
+
+    const removeAdmin = (idx) => {
+
+    }
+
+    const addAdmin = () => {
+
+    }
 
     const showCoursesHandler = async () => {
         try {
