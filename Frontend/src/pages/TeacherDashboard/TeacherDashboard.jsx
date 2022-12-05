@@ -195,6 +195,8 @@ export default function TeacherDashboard() {
                 qrCodeArr: attendance.qrString
             })
 
+            console.log(res);
+
             setShowQr(false);
             stopScan();
             setQrRes("");
