@@ -6,17 +6,6 @@ import classes from "./Modal.module.css"
 
 function Modal(props) {
 
-  // const [state,setstate]=useState({
-  //   display:true
-  // })
-
-  // const closeMoal = () => {
-  //   // console.log("click");
-  //   setstate({...state,
-  //     display:false
-  //   })
-  // }
-
   return ReactDOM.createPortal(
     <>
       <div className = {classes.modal}>

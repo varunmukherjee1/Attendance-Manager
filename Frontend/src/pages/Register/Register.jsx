@@ -241,7 +241,7 @@ const Register=(props)=>{
 
     return (
         <div className={classes.Form}>
-            <form onSubmit={submitHandler} >
+            <form className = {classes.form} onSubmit={submitHandler} >
             <h1>Register</h1>
                 <div className={classes.text_field}>
                     <label>Full Name</label>

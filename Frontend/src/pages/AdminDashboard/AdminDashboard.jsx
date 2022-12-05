@@ -8,6 +8,7 @@ import Card from "../../components/Card/Card"
 import Dashboard from '../../components/Dashboard/Dashboard'
 import Tables from "../../components/Tables/Table"
 import { loadingActions } from '../../store/loadingSlice'
+import Modal from "../../components/Modal/Modal"
 
 import classes from "./AdminDashboard.module.css"
 
@@ -23,6 +24,7 @@ function AdminDashboard() {
     let [courses,setCourses] = useState([]);
     let [teachers,setTeachers] = useState([]);
     let [admins, setAdmins] = useState([]);
+    let [showModal,setShowModal] = useState(true)
 
     const getData = async () => {
 
@@ -95,8 +97,12 @@ function AdminDashboard() {
         {
             Header: "Actions",
             accessor: "actions",
-            Cell: () => {
-                return (<button>Remove Course</button>);
+            Cell: (cdata) => {
+
+                const caller = () => {
+                    removeCourses(cdata.cell.row.index)
+                }
+                return (<button onClick = {caller} >Remove Course</button>);
             }
         }
 
@@ -141,8 +147,12 @@ function AdminDashboard() {
         {
             Header: "Actions",
             accessor: "actions",
-            Cell: () => {
-                return(<button>Remove Teacher</button>);
+            Cell: (cdata) => {
+
+                const caller = () => {
+                    removeTeacher(cdata.cell.row.index)
+                }
+                return(<button onClick = {caller}>Remove Teacher</button>);
             }
         }
     ]
@@ -159,8 +169,12 @@ function AdminDashboard() {
         {
             Header: "Actions",
             accessor: "actions",
-            Cell: () => {
-                return(<button>Remove Admin</button>);
+            Cell: (cdata) => {
+
+                const caller = () => {
+                    removeAdmin(cdata.cell.row.index)
+                }
+                return(<button onClick = {caller}>Remove Admin</button>);
             }
         }
     ]
@@ -188,16 +202,75 @@ function AdminDashboard() {
         }
     }
 
-    const removeTeacher = (idx) => {
+    const removeTeacher = async (idx) => {
+        try {
+            
+            const teach = teachers[idx];
 
+            const res = await axios.get("/admin/removeTeacher/" + teach.email)
+
+            if(res.data.success){
+                toast.success("Teacher removed")
+                navigate(0);
+            }
+            else{
+                toast.error("Deletion Failed")
+            }
+            
+        } catch (error) {
+            console.log("Student delete error")
+            console.log(error);
+
+            toast.error("Something went Wrong")
+        }
     }
 
-    const removeCourses = (idx) => {
+    const removeCourses = async (idx) => {
+        try {
+            
+            const crs = courses[idx];
 
+            const res = await axios.get("/admin/removeCourse/" + crs._id)
+
+            if(res.data.success){
+                toast.success("Course Removed")
+                navigate(0);
+            }
+            else{
+                toast.error("Deletion Failed")
+            }
+            
+        } catch (error) {
+            console.log("Student delete error")
+            console.log(error);
+
+            toast.error("Something went Wrong")
+        }
     }
 
-    const removeAdmin = (idx) => {
+    const removeAdmin = async (idx) => {
+        try {
+            
+            const adm = admins[idx];
 
+            const res = await axios.post("/admin/remove",{
+                id:adm._id
+            })
+
+            if(res.data.success){
+                toast.success("Admin removed")
+                navigate(0);
+            }
+            else{
+                toast.error("Deletion Failed")
+            }
+            
+        } catch (error) {
+            console.log("Student delete error")
+            console.log(error);
+
+            toast.error("Something went Wrong")
+        }
     }
 
     const addAdmin = () => {
@@ -217,10 +290,6 @@ function AdminDashboard() {
 
     const showStudentsHandler = async () => {
         try {
-
-            // const res = await axios.get('api/getStudents')
-            // console.log(columns)
-            // console.log(res.data);
             setColumns(studentColumns)
             setTableData(students)
             
@@ -231,8 +300,6 @@ function AdminDashboard() {
 
     const showTeachersHandler = async () => {
         try {
-            // const res = await axios.get('api/getTeachers')
-            // console.log(res.data);
             setColumns(teacherColumns)
             setTableData(teachers)
         } catch (error) {
@@ -242,27 +309,53 @@ function AdminDashboard() {
 
     const showAdminsHandler = async () => {
         try {
-            // const res = await axios.get('api/getAdmins')
-            // console.log(res.data)
             setColumns(adminColumns)
             setTableData(admins)
-            // console.log(columns, tableData);
             
         } catch (error) {
             console.log(error);
         }
     }
 
+    const openModal = () => {
+        setShowModal(true)
+    }
+
+    const closeModal = () => {
+        setShowModal(false)
+    }
+
     return (
         <div>
             <Dashboard>
-                {/* <h1>Admin Dashboard</h1> */}
+                {showModal && 
+                    <Modal closeModal = {closeModal}>
+                        <form className = {classes.form}>
+                            <div className = {classes.input}>
+                                <label htmlFor="full_name">Full Name: </label>
+                                <input type="text" id="full_name" />
+                            </div>
+                            <div className = {classes.input}>
+                                <label htmlFor="email">Email: </label>
+                                <input type="text" id="email" />
+                            </div>
+                            <div className = {classes.input}>
+                                <label htmlFor="password">Password: </label>
+                                <input type="text" id="password" />
+                            </div>
+                            <div className = {classes.input}>
+                                <label htmlFor="admin_passowrd">Admin Passowrd: </label>
+                                <input type="text" id="admin_passowrd" />
+                            </div>
 
+                            <button type="submit">Add Admin</button>
+                        </form>
+                    </Modal>
+                }
                 <Card>
                     {/* Buttons */}
                     <div className = {classes.adminActions}>
-                        <button>Add new admin</button>
-                        <button>Remove admin</button>
+                        <button onClick = {openModal}>Add new admin</button>
                     </div>
 
                     {/* Summary */}

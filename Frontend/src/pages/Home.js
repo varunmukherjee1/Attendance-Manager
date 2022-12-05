@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Footer from "../components/Footer";
 import Homenav from "../components/Homenav";
 import '../css/home.css'
@@ -32,8 +34,8 @@ function Section1() {
                     <img src={"../assets/attendance.png"} alt="" />
                 </div>
                 <div className="extra_buttons fade_in">
-                    <a href="/login" id="login">Login</a>
-                    <a href="/register" id="register">Register</a>
+                    <Link to ="/login" id="login">Login</Link>
+                    <Link to ="/register" id="register">Register</Link>
                 </div>
             </section>
         </>

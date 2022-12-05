@@ -93,3 +93,35 @@
     transform: scale(1.1);
     z-index: 99;
 }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form button {
+    border: none;
+    background-color: var(--blue);
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    transition: all 0.5s;
+    font-weight: 600;
+}
+
+.form button:hover {
+    background-color: var(--orange);
+    color: var(--blue);
+    transform: scale(1.1);
+}
