@@ -1,11 +1,11 @@
 
 
 .Form {
-    margin-top: 0.5rem;
-    height: 155vh;
+    /* margin-top: 0.5rem; */
+    /* height: 155vh; */
     width: 100vw;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     /* overflow: auto; */
 }
@@ -115,7 +115,8 @@ button:hover {
 }
 
 .signup_link {
-    padding-left: 18%  ;
+    /* padding-left: 18%  ; */
+    text-align: center;
     font-size: large;
     margin-top: 0.5rem;
 }

@@ -13,11 +13,11 @@ body {
  */
 
 .Form {
-    margin-top: 0.5rem;
-    height: 90vh;
+    /* margin-top: 0.5rem; */
+    /* height: 90vh; */
     width: 100vw;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     /* overflow: auto; */
 }
@@ -175,4 +175,9 @@ body {
     align-items: center;
     justify-content: center;
 }
+}
+
+.submit {
+    color: white !important;
+    background-color: #14213d !important;
 }

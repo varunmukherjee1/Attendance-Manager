@@ -24,7 +24,7 @@ function AdminDashboard() {
     let [courses,setCourses] = useState([]);
     let [teachers,setTeachers] = useState([]);
     let [admins, setAdmins] = useState([]);
-    let [showModal,setShowModal] = useState(true)
+    let [showModal,setShowModal] = useState(false)
 
     const getData = async () => {
 
