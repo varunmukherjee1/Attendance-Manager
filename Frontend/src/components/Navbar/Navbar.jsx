@@ -56,7 +56,7 @@ function Navbar(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link to = "/">
+                    <Link to = "/info">
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-gear"></i>
                         </span>
@@ -64,7 +64,7 @@ function Navbar(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link to = "/info">
+                    <Link to = "/contactus">
                         <span className = {classes.icon}>
                             <i className ="fa-solid fa-question"></i>
                         </span>

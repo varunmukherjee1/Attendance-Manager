@@ -28,12 +28,7 @@ export default function TeacherDashboard() {
     const [stateAddClass,setstateAddClass]=useState({
         display:false
     });
-    const [stateAddTeacher,setstateAddTeacher]=useState({
-        display:false
-    });
-    const [stateAddStudent,setstateAddStudent]=useState({
-        display:false
-    });
+    
     const dispatch = useDispatch();
 
     const getClasses = async () => {
@@ -66,14 +61,6 @@ export default function TeacherDashboard() {
         getClasses();
     },[]);
 
-    // const getQrCode = () => {
-    //     console.log("QR Code button clicked");
-    // }
-
-    // const seeAtt = () => {
-    //     console.log("temp");
-    // }
-
 
     function AddClassModalFunc(){
         if(stateAddClass.display){
@@ -100,57 +87,6 @@ export default function TeacherDashboard() {
         })
     }
 
-    function addStudentModal(){
-
-        setstateAddStudent({
-            ...stateAddStudent,
-            display:true
-        })
-    }
-
-    function AddStudentModalFunc(){
-        if(stateAddStudent.display){
-            return (
-                <Modal closeModal = {closeAddStudentModal}>
-                    <AddStudentModal/>
-                </Modal>
-            )
-        }
-    }
-
-    function closeAddStudentModal(){
-        setstateAddStudent({
-            ...stateAddStudent,
-            display:false
-        })
-    }
-
-
-    function addTeacherModal(){
-        
-        setstateAddTeacher({
-            ...stateAddTeacher,
-            display:true
-        })
-    }
-
-    function AddTeacherModalFunc(){
-        if(stateAddTeacher.display){
-            return (
-                <Modal closeModal = {closeAddTeacherModal}>
-                    <AddTeacherModal/>
-                </Modal>
-            )
-        }
-    }
-
-    function closeAddTeacherModal(){
-        setstateAddTeacher({
-            ...stateAddTeacher,
-            display:false
-        })
-    }
-
     function removeCurrClass(){
         
     }
@@ -165,9 +101,6 @@ export default function TeacherDashboard() {
 
         if(data !== null && prevText !== data.text){
             prevText = data.text;
-
-            // console.log(data);
-            // setQrRes(data.text);
 
             if(data.text.includes("%%")){
                 let rollNo = data.text.split("%%")[0];
@@ -208,13 +141,6 @@ export default function TeacherDashboard() {
         }
     }
 
-    // const closeQr = () => {
-    //     setShowQr(false);
-    //     stopScan();
-    //     setQrRes("");
-    //     setAttendance();
-    // }
-
     const scanQR = (id) => {
         setShowQr(true);
         setAttendance({
@@ -253,13 +179,10 @@ export default function TeacherDashboard() {
                     {!scan && <button className = {classes.qrButton} onClick = {startScan}>Start Scan</button>}
                 </Modal>
             }
-
-            {AddClassModalFunc()}
-            {AddStudentModalFunc()}
-            {AddTeacherModalFunc()}
             <div className={teacher.addclass}>
                 <button onClick={modalAddClass}>Add New Class</button>
             </div>
+            {AddClassModalFunc()}
             <div className={teacher.classes}>
                 {teachClasses.map(c => {
                     return (
@@ -269,8 +192,8 @@ export default function TeacherDashboard() {
                             title={c.name}
                             teacher={c.email}  
                             scanQR ={scanQR}
-                            addStudent={addStudentModal} 
-                            addTeacher={addTeacherModal}
+                            // addStudent={addStudentModal} 
+                            // addTeacher={addTeacherModal}
                             removeClass={removeCurrClass} 
                          />
                     )

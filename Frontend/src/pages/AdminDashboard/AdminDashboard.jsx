@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import axios from "axios"
 import { useDispatch } from 'react-redux'
 import toast from "react-hot-toast"
@@ -13,6 +13,11 @@ import Modal from "../../components/Modal/Modal"
 import classes from "./AdminDashboard.module.css"
 
 function AdminDashboard() {
+
+    const nameRef = useRef();
+    const emailRef = useRef();
+    const passRef = useRef();
+    const admPassRef = useRef();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -273,8 +278,40 @@ function AdminDashboard() {
         }
     }
 
-    const addAdmin = () => {
+    const addAdmin = async (e) => {
+        
+        try {
+            e.preventDefault();
+            const name = nameRef.current.value;
+            const email = emailRef.current.value;
+            const pass = passRef.current.value;
+            const adminPass = admPassRef.current.value;
 
+            const res = await axios.post("/admin/add",{
+                full_name: name,
+                email: email,
+                password: pass,
+                admin_password: adminPass
+            })
+
+            console.log(res)
+
+            if(res.data.success){
+                toast.success("Admin added Successfully")
+                closeModal();
+                navigate(0);
+            }
+            else{
+                toast.error("Operation Failed")
+            }
+
+            closeModal();
+        } catch (error) {
+            console.log("Add admin Error")
+            console.log(error);
+            toast.error("Invalid Credentials")
+            closeModal();
+        }
     }
 
     const showCoursesHandler = async () => {
@@ -330,22 +367,22 @@ function AdminDashboard() {
             <Dashboard>
                 {showModal && 
                     <Modal closeModal = {closeModal}>
-                        <form className = {classes.form}>
+                        <form className = {classes.form} onSubmit = {addAdmin}>
                             <div className = {classes.input}>
                                 <label htmlFor="full_name">Full Name: </label>
-                                <input type="text" id="full_name" />
+                                <input ref = {nameRef} type="text" id="full_name" required/>
                             </div>
                             <div className = {classes.input}>
                                 <label htmlFor="email">Email: </label>
-                                <input type="text" id="email" />
+                                <input ref = {emailRef} type="email" id="email" required/>
                             </div>
                             <div className = {classes.input}>
                                 <label htmlFor="password">Password: </label>
-                                <input type="text" id="password" />
+                                <input ref = {passRef} type="password" id="password" required/>
                             </div>
                             <div className = {classes.input}>
                                 <label htmlFor="admin_passowrd">Admin Passowrd: </label>
-                                <input type="text" id="admin_passowrd" />
+                                <input ref = {admPassRef} type="password" id="admin_passowrd" required/>
                             </div>
 
                             <button type="submit">Add Admin</button>
