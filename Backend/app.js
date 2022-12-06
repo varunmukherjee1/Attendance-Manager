@@ -157,17 +157,6 @@ app.post('/addClass', upload.array("Files", 2), async (req, res) => {
     res.redirect('/dashboardTeacher')
 })
 
-// app.get('/showAttendance/:name/', async (req, res) => {
-//     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-//         return res.redirect('login')
-//     }
-//     let className = req.params.name.replace('%20', ' ')
-//     let dataObj = {
-//         name: className
-//     }
-//     res.render('showAttendance', dataObj)
-// });
-
 app.get('/removeClass/:x', async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
         return res.redirect('login')

@@ -2,15 +2,10 @@ const Class = require("../Models/class");
 const Students = require("../Models/student");
 const Teachers = require("../Models/teacher");
 const Admins = require("../Models/admin");
+const COOKIE_NAME = 'user'
 
 const generateQrCode = async (req, res) => {
-    // if (
-    //   req.cookies == undefined ||
-    //   req.cookies == null ||
-    //   req.cookies["user"] == null
-    // ) {
-    //   return res.status(200).send({ success: false });
-    // }
+
     try {
       let classObj = await Class.findOne({ _id: req.params.x });
       let studClass = classObj.students;
@@ -130,7 +125,121 @@ const markAttendance = async (req, res) => {
   }
 }
 
+const addStudent =  async (req, res) => {
+  if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+    return res
+      .status(400)
+      .send({
+        success:false
+      })
+  }
+  try {
+      let studObj = await Students.findOne({ email: req.body.studentEmail })
+      let classObj = await Class.findOne({ _id: req.params.x })
+      if (studObj == null || classObj == null){
+        return res
+              .status(400)
+              .send({
+                success:false
+              })
+      }
+
+      let i = 0
+      while (i < classObj.students.length) {
+          if (classObj.students[i].roll_number == studObj.roll_number) {
+            return res
+              .status(400)
+              .send({
+                success:false
+              })
+          }
+          i++
+      }
+      let newStudObj = {
+          roll_number: studObj.roll_number,
+          qrcode_string: `${studObj.roll_number}%%${req.params.x}%%06/04/2022`
+      }
+      for (let i = 0; i < classObj.attendance.length; i++) {
+          let newObj = {
+              roll_no: studObj.roll_number,
+              status: "A"
+          }
+          classObj.attendance[i].values.push(newObj);
+      }
+      classObj.students.push(newStudObj)
+      classObj.save();
+
+      return res
+        .status(200)
+        .send({
+          success: true
+        })
+  } catch (error) {
+      console.log(error);
+
+      return res
+        .status(500)
+        .send({
+          success:false
+        })
+  }
+}
+
+const addTeacher =  async (req, res) => {
+  if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+    return res
+      .status(400)
+      .send({
+        success:false
+      })
+  }
+  try {
+      let teacObj = await Teachers.findOne({ email: req.body.teacherEmail })
+      let classObj = await Class.findOne({ _id: req.params.x })
+
+      if (teacObj == null || classObj == null){
+        return res
+          .status(400)
+          .send({
+            success:false
+          })
+      }
+      let i = 0
+      while (i < classObj.teachers.length) {
+          if (classObj.teachers[i].email == teacObj.email) {
+            return res
+              .status(400)
+              .send({
+                success:false
+              })
+          }
+          i++
+      }
+
+      classObj.teachers.push({
+          email: teacObj.email
+      })
+      classObj.save();
+
+      return res
+        .status(200)
+        .send({
+          success: true
+        })
+  } catch (error) {
+      console.log(error);
+
+      return res
+        .status(500)
+        .send({
+          success:false
+        })
+  }
+}
+
 module.exports = {
     generateQrCode,
-    markAttendance
+    markAttendance,
+    addStudent,
+    addTeacher
 }
