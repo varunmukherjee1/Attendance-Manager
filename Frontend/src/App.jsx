@@ -110,12 +110,6 @@ function App() {
               }
             />
             <Route
-              path = "/seeAttendance/:cid"
-              element = {
-                <AttendancePage/>
-              }
-            />
-            <Route
               path = "*"
               element = {
                 <NoMatch/>
@@ -144,6 +138,18 @@ function App() {
             }
           />
           <Route
+              path = "/AboutUs"
+              element ={
+                <AboutUs/>
+              }
+            />
+          <Route
+              path = "/info"
+              element = {
+                <Info/>
+              }
+            /> 
+          <Route
               path = "/seeAttendance/:cid"
               element = {
                 <AttendancePage/>
@@ -166,6 +172,30 @@ function App() {
             }
           />
           <Route
+            path = "/contactus"
+            element = {
+              <ContactUs/>
+            }
+          />
+          <Route
+              path = "/AboutUs"
+              element ={
+                <AboutUs/>
+              }
+            />
+          <Route
+            path = "/profile"
+            element = {
+              <Profile/>
+            }
+          />
+          <Route
+              path = "/info"
+              element = {
+                <Info/>
+              }
+            />
+          <Route
             path = "*"
             element = {
               <NoMatch/>
@@ -187,6 +217,24 @@ function App() {
               <ContactUs/>
             }
           />
+          <Route
+            path = "/profile"
+            element = {
+              <Profile/>
+            }
+          />
+          <Route
+              path = "/AboutUs"
+              element ={
+                <AboutUs/>
+              }
+            />
+          <Route
+              path = "/info"
+              element = {
+                <Info/>
+              }
+            />
           <Route
               path = "/seeAttendance/:cid"
               element = {
