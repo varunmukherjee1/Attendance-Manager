@@ -181,7 +181,7 @@ function Profile() {
     return (
         <Dashboard>
             <div className = {classes.profile}>
-                <form onSubmit = {submitHandler}>
+                <form className = {classes.form} onSubmit = {submitHandler}>
                     <div className={classes.txt_field}>  
                         <input ref={name_ref} onChange={checkName} value={inpVal.name} className={`${inpValid.name?classes.right:classes.wrong}`} type="text" required/>
                         <label>Name</label>
@@ -203,7 +203,7 @@ function Profile() {
                         <label>Re-enter Password</label>
                     </div>
 
-                    <input type="submit" value="Update" />
+                    <input className = {classes.submit} type="submit" value="Update" />
 
                 </form>
             </div>
