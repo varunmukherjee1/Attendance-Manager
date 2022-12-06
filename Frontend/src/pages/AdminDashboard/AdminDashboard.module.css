@@ -1,7 +1,7 @@
 .adminActions button {
-    background-color: #252A34;
+    background-color: #fca311;
     border-radius: 8px;
-    color: #fff;
+    color: #252A34;
     padding: 1rem;
     font-size: 1rem;
     border: none;
@@ -9,6 +9,8 @@
     font-weight: bold;
     cursor: pointer;
     transition: all 0.5s;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .adminActions button:hover {
@@ -76,7 +78,7 @@
 }
 
 .radio_label:hover {
-    background-color: #08D9D6;
+    background-color: #F0D680;
     color: #252A34;
     transform: scale(1.1);
     z-index: 99;
@@ -88,8 +90,40 @@
 }
 
 .radio_input:checked + .radio_label {
-    background-color: #08D9D6;
+    background-color: #F0D680;
     color: #252A34;
     transform: scale(1.1);
     z-index: 99;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form button {
+    border: none;
+    background-color: var(--blue);
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    transition: all 0.5s;
+    font-weight: 600;
+}
+
+.form button:hover {
+    background-color: var(--orange);
+    color: var(--blue);
+    transform: scale(1.1);
 }

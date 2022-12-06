@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux"
 
 import {loadingActions} from "../../store/loadingSlice"
 import {userActions} from "../../store/userSlice"
+import logo from "../../assets/logo.png"
 
 import classes from "./Login.module.css"
 
@@ -115,26 +116,36 @@ const Login=()=>{
     }
 
     return (
-        <div className={classes.center}>
-            <form onSubmit={submitHandler}>
-            <h1>Login</h1>
-                <div className={classes.txt_field}>  
-                    <input ref={email_ref} onChange={checkEmail} value={inpVal.email} className={`${inpValid.email?classes.right:classes.wrong}`} type="text" required/>
-                    <label>Email</label>
-                    {emailErr()}
+        <>
+            <div className="brand" style = {{marginTop:"1rem"}}>
+                <div className="brand--logo">
+                    <Link to="/">
+                        <img src={logo} alt="Logo here" />
+                    </Link>
+                    <Link to="/">Group - 27</Link>
                 </div>
-                <div className={classes.txt_field}>  
-                    <input ref={pass_ref} onChange={checkPass} value={inpVal.pass} className={`${inpValid.pass?classes.right:classes.wrong}`} type="password" required/>
-                    <label>Password</label>
-                </div>
-                <div className={classes.pass}>Forgot Password</div>
-                <input type="submit" value="Login" />
-                <div className={classes.signup_link}>
-                   Not a member?<Link to ="/register"> Register</Link>
-                </div>
+            </div>
+            <div className={classes.center}>
+                <form className = {classes.form} onSubmit={submitHandler}>
+                    <h1>Login</h1>
+                    <div className={classes.txt_field}>  
+                        <input ref={email_ref} onChange={checkEmail} value={inpVal.email} className={`${inpValid.email?classes.right:classes.wrong}`} type="text" required/>
+                        <label>Email</label>
+                        {emailErr()}
+                    </div>
+                    <div className={classes.txt_field}>  
+                        <input ref={pass_ref} onChange={checkPass} value={inpVal.pass} className={`${inpValid.pass?classes.right:classes.wrong}`} type="password" required/>
+                        <label>Password</label>
+                    </div>
+                    <div className={classes.pass}>Forgot Password</div>
+                    <input type="submit" value="Login" />
+                    <div className={classes.signup_link}>
+                    Not a member?<Link to ="/register"> Register</Link>
+                    </div>
 
-            </form>
-        </div>
+                </form>
+            </div>
+        </>
     )
 }
 

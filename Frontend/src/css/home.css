@@ -11,6 +11,7 @@
     background-size: cover;
     /* background-blend-mode: soft-light; */
     background-blend-mode: lighten;
+    overflow: hidden;
 }
 
 .page-1 .content {
@@ -26,10 +27,36 @@
 
 .page-1 .student-image img {
     width: 100%;
+    max-width: 400px;
 }
 
 .extra_buttons {
     display: none;
+    font-size: 2rem;
+}
+
+.extra_buttons a {
+    color: #14213d;
+    text-decoration: none;
+    font-weight: 600;
+    border: 4px solid transparent;
+    transition: all 0.3s;
+}
+
+.extra_buttons #login {
+    /* background-color: #fca311; */
+    border-radius: 8px;
+    padding: 0.1rem 0.5rem;
+}
+
+.extra_buttons #register {
+    background-color: #fca311;
+    padding: 0.1rem 0.5rem;
+    border-radius: 8px;
+}
+
+.extra_buttons a:hover {
+    border: 4px solid #14213d;
 }
 
 /* Page - 2  */
@@ -40,6 +67,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 3rem;
+    overflow:hidden;
 
     background-color: var(--off-black);
     color: #fafafa;
@@ -67,6 +95,7 @@ hr {
     align-items: center;
     justify-content: space-between;
     padding: 3rem 4rem;
+    overflow: hidden;
 
     background: rgba(255, 255, 255, 0.9);
     background-image: url("../assets/bgpic.png");
@@ -99,6 +128,7 @@ hr {
     padding: 1rem;
     cursor: pointer;
     width: 45%;
+    min-width: 350px;
     height: 8rem;
     border: 2px solid var(--off-black);
     
@@ -145,8 +175,68 @@ hr {
     margin: 0 40px 0 0px;
 }
 
+@media(max-width: 1040px){
+    .page-2 .image {
+        display: none;
+    }
 
-/* .fade_in {
+    .page-2 .content{
+        display: block;
+        width: 100% !important;
+    }
+}
+
+
+@media(max-width: 910px){
+
+    .page-3 {
+        justify-content: center;
+    }
+
+    .page-3 .left_img{
+        display: none;
+    }
+
+    .features {
+        width: 100%;
+    }
+}
+
+@media(max-width: 605px){
+    .extra_buttons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .page-1 {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .page-1 .content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .page-1 .student-image{
+        display: none;
+    }
+
+    .features {
+        /* display: block; */
+        display: flex;
+        justify-content: center;
+        align-items: center;        
+    }
+
+    .page-3 {
+        padding: 0;
+    }
+
+}
+
+.fade_in {
     opacity: 0;
     transition: opacity 0.5s ease-in;
 }
@@ -178,4 +268,4 @@ hr {
 .from_right.appear {
     opacity: 1;
     transform: translateX(0);
-} */
+}

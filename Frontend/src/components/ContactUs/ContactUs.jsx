@@ -2,8 +2,10 @@ import React,{useState,useRef} from "react";
 import axios from "axios"
 import toast from "react-hot-toast"
 import emailjs from 'emailjs-com'
+import { Link } from "react-router-dom";
 
 import classes from "./ContactUs.module.css"
+import logo from "../../assets/logo.png"
 
 function ContactUs(){
 
@@ -101,27 +103,37 @@ function ContactUs(){
     }
 
     return (
-        <div className={classes.Form}>
-            <form onSubmit={submitHandler}>
-            <h1>Contact Us</h1>
-                <div className={classes.text_field}>  
-                    <label>Name</label>
-                    <input ref={name_ref} onChange={checkName} value={inpVal.name} name="name" className={`${inpValid.name?classes.right:classes.wrong}`} type="text" required/>
+        <>
+            <div className="brand" style = {{marginTop:"1rem"}}>
+                <div className="brand--logo">
+                    <Link to="/">
+                        <img src={logo} alt="Logo here" />
+                    </Link>
+                    <Link to="/">Group - 27</Link>
                 </div>
-                <div className={classes.text_field}>  
-                    <label>Email</label>
-                    <input ref={email_ref} name="user_email" onChange={checkEmail} value={inpVal.email} className={`${inpValid.email?classes.right:classes.wrong}`} type="text" required/>
-                    {emailErr()}
-                </div>
-                <div className={classes.text_field}>  
-                    <label>Message</label>
-                    <textarea ref={msg_ref} name="message" value={inpVal.pass} className={`${classes.txt_field}`} type="text" rows='2'  required/>
-                </div>
-                
-                <input type="submit" value="Send"/>
-                
-            </form>
-        </div>
+            </div>
+            <div className={classes.Form}>
+                <form onSubmit={submitHandler}>
+                <h1>Contact Us</h1>
+                    <div className={classes.text_field}>  
+                        <label>Name</label>
+                        <input ref={name_ref} onChange={checkName} value={inpVal.name} name="name" className={`${inpValid.name?classes.right:classes.wrong}`} type="text" required/>
+                    </div>
+                    <div className={classes.text_field}>  
+                        <label>Email</label>
+                        <input ref={email_ref} name="user_email" onChange={checkEmail} value={inpVal.email} className={`${inpValid.email?classes.right:classes.wrong}`} type="text" required/>
+                        {emailErr()}
+                    </div>
+                    <div className={classes.text_field}>  
+                        <label>Message</label>
+                        <textarea ref={msg_ref} name="message" value={inpVal.pass} className={`${classes.txt_field}`} type="text" rows='2'  required/>
+                    </div>
+                    
+                    <input className = {classes.submit} type="submit" value="Send"/>
+                    
+                </form>
+            </div>
+        </>
     )
 }
 

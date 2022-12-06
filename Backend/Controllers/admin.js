@@ -2,6 +2,7 @@ const Admin = require('../Models/admin')
 const Student = require('../Models/student')
 const Teacher = require('../Models/teacher')
 const Class = require('../Models/class')
+const encryption = require('../public/scripts/encryption')
 const COOKIE_NAME = 'user'
 
 const addAdmin = async (req, res) => {
@@ -39,6 +40,7 @@ const addAdmin = async (req, res) => {
         password: encryptedPassword
     })
     const registeredAdmin = await registerAdmin.save()
+    console.log(registeredAdmin);
 
     return res
             .status(200)
@@ -61,11 +63,9 @@ const removeAdmin = async (req, res) => {
                 success: false
             })
     }
-    const {
-        email
-    } = req.body
+    const {id} = req.body
 
-    let admin = await Admin.deleteOne({ email: email })
+    let admin = await Admin.deleteOne({ _id: id })
     console.log(admin);
 
     return res
@@ -111,8 +111,6 @@ const removeStudent = async (req, res) => {
             })
     }
     
-    // console.log(student);
-    // res.redirect('/admin')
 }
 
 const removeTeacher = async (req, res) => {
@@ -133,6 +131,7 @@ const removeTeacher = async (req, res) => {
     try {
         const email = req.params.x
         let teacher = await Teacher.deleteOne({ email: email })
+        console.log(teacher);
 
         return res
             .status(200)
@@ -159,13 +158,13 @@ const removeClass = async (req, res) => {
             })
     } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "teacher") {
         return res
-            .status(500)
+            .status(400)
             .send({
                 success: false
             })
     }
-    const name = req.params.x
-    let Course = await Class.deleteOne({ name: name })
+    const id = req.params.x
+    let Course = await Class.deleteOne({ _id: id })
     console.log(Course);
 
     return res

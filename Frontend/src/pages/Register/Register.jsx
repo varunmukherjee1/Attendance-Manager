@@ -3,6 +3,8 @@ import {Link, useNavigate} from 'react-router-dom'
 import axios from "axios"
 import toast from "react-hot-toast"
 
+import logo from "../../assets/logo.png"
+
 import classes from "./Register.module.css"
 
 const Register=(props)=>{
@@ -240,50 +242,60 @@ const Register=(props)=>{
 
 
     return (
-        <div className={classes.Form}>
-            <form onSubmit={submitHandler} >
-            <h1>Register</h1>
-                <div className={classes.text_field}>
-                    <label>Full Name</label>
-                    <input  ref={full_name_ref} onChange={checkName} type="text" className={`${inpValid.name?classes.right:classes.wrong}`} value={inpVal.name} id="full_name" />
-                    {fullnameerr()}
+        <>
+            <div className="brand" style = {{marginTop:"1rem"}}>
+                <div className="brand--logo">
+                    <Link to="/">
+                        <img src={logo} alt="Logo here" />
+                    </Link>
+                    <Link to="/">Group - 27</Link>
                 </div>
-                <div className={classes.text_field}>
-                    <label>Email</label>
-                    <input ref={email_ref} type="text" onChange={checkEmail} className={`${inpValid.email?classes.right:classes.wrong}`} value={inpVal.email} name="email" id="email" />
-                    {emailerr()}
-                </div>
-                <div  className={`${classes.text_field} `}>
-                <label htmlFor="Type">Type : </label>
-                <select ref={type_ref} onChange={checkType} onInput={checkType} value={inpVal.type} className={`${inpValid.type?"text_field":""}`} id="usrType" name="user_type">
-                    <option value="Student" selected> Student</option>
-                    <option value="Teacher"> Teacher</option>
-                </select>
-                </div>
-                {(inpVal.type === "Student") &&
+            </div>
+            <div className={classes.Form}>
+                <form className = {classes.form} onSubmit={submitHandler} >
+                <h1>Register</h1>
                     <div className={classes.text_field}>
-                        <label>Roll Number</label>
-                        <input ref={roll_ref} onChange={checkRoll} value={inpVal.roll} className={`${inpValid.roll?classes.right:classes.wrong}`} type="text" name="roll" id="roll" />
-                        {rollerr()}
+                        <label>Full Name</label>
+                        <input  ref={full_name_ref} onChange={checkName} type="text" className={`${inpValid.name?classes.right:classes.wrong}`} value={inpVal.name} id="full_name" />
+                        {fullnameerr()}
                     </div>
-                }
-                <div className={classes.text_field}>
-                    <label>Password</label>
-                    <input ref={pass_ref} type="password" onChange={checkPass} className={`${inpValid.pass?classes.right:classes.wrong}`}  id="passw" value={inpVal.pass} />
-                    {passerr()}
-                </div>
-                <div className={classes.text_field}>
-                    <label>Confirm Password</label>
-                    <input ref={c_pass_ref} type="password" onChange={checkConfPass}  id="conf_pass" className={`${inpValid.c_pass?classes.right:classes.wrong}`} value={inpVal.c_pass} />
-                    {confpasserr()}
-                </div>
-                <div className={classes.pass}>Forgot Password</div>
-                <input type="submit" value="Register" />   
-                <div className={classes.signup_link}>
-                Already Registered? <Link to="/login">Login</Link>
-                </div>
-            </form>
-        </div>
+                    <div className={classes.text_field}>
+                        <label>Email</label>
+                        <input ref={email_ref} type="text" onChange={checkEmail} className={`${inpValid.email?classes.right:classes.wrong}`} value={inpVal.email} name="email" id="email" />
+                        {emailerr()}
+                    </div>
+                    <div  className={`${classes.text_field} `}>
+                    <label htmlFor="Type">Type : </label>
+                    <select ref={type_ref} onChange={checkType} onInput={checkType} value={inpVal.type} className={`${inpValid.type?"text_field":""}`} id="usrType" name="user_type">
+                        <option value="Student" selected> Student</option>
+                        <option value="Teacher"> Teacher</option>
+                    </select>
+                    </div>
+                    {(inpVal.type === "Student") &&
+                        <div className={classes.text_field}>
+                            <label>Roll Number</label>
+                            <input ref={roll_ref} onChange={checkRoll} value={inpVal.roll} className={`${inpValid.roll?classes.right:classes.wrong}`} type="text" name="roll" id="roll" />
+                            {rollerr()}
+                        </div>
+                    }
+                    <div className={classes.text_field}>
+                        <label>Password</label>
+                        <input ref={pass_ref} type="password" onChange={checkPass} className={`${inpValid.pass?classes.right:classes.wrong}`}  id="passw" value={inpVal.pass} />
+                        {passerr()}
+                    </div>
+                    <div className={classes.text_field}>
+                        <label>Confirm Password</label>
+                        <input ref={c_pass_ref} type="password" onChange={checkConfPass}  id="conf_pass" className={`${inpValid.c_pass?classes.right:classes.wrong}`} value={inpVal.c_pass} />
+                        {confpasserr()}
+                    </div>
+                    <div className={classes.pass}>Forgot Password</div>
+                    <input type="submit" value="Register" />   
+                    <div className={classes.signup_link}>
+                    Already Registered? <Link to="/login">Login</Link>
+                    </div>
+                </form>
+            </div>
+        </>
     )
 }
 

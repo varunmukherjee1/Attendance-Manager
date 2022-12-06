@@ -39,6 +39,14 @@
     padding: 0.3rem 0.6rem;
     color: #fff;
     cursor:pointer;
+    border: none;
+    transition: all 0.7s;
+}
+
+.tbody button:hover {
+    background-color: #fca311;
+    color: #252A34;
+    font-weight: 600;
 }
 
 .navigation {
