@@ -1,5 +1,6 @@
 const csv = require('csv-parser')
 const fs = require('fs')
+require("dotenv").config();
 const express = require('express')
 const path = require('path')
 const app = express()
