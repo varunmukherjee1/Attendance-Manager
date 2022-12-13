@@ -70,21 +70,21 @@ app.post('/addClass', upload.array("Files", 2), async (req, res) => {
 
     let classObject = await Class.findOne({ name: className })
 
-    if (studentEmail != '') {
-        let student = await Student.findOne({ email: studentEmail })
-        const sID = {
-            roll_number: student.roll_number,
-            qrcode_string: `${student.roll_number}%%${className}%%${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-        }
-        classObject.students.push(sID);
-    }
-    if (teacherEmail != '') {
-        let teacher = await Teacher.findOne({ email: teacherEmail })
-        const tID = {
-            email: teacher.email
-        }
-        classObject.teachers.push(tID);
-    }
+    // if (studentEmail != '') {
+    //     let student = await Student.findOne({ email: studentEmail })
+    //     const sID = {
+    //         roll_number: student.roll_number,
+    //         qrcode_string: `${student.roll_number}%%${className}%%${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    //     }
+    //     classObject.students.push(sID);
+    // }
+    // if (teacherEmail != '') {
+    //     let teacher = await Teacher.findOne({ email: teacherEmail })
+    //     const tID = {
+    //         email: teacher.email
+    //     }
+    //     classObject.teachers.push(tID);
+    // }
 
     let results1 = [];
     fs.createReadStream(`public/Files/teachers.csv`)
@@ -155,7 +155,10 @@ app.post('/addClass', upload.array("Files", 2), async (req, res) => {
 
     fs.writeFile(__dirname + '/public/Files/teachers.csv', '', function () { console.log("File 1 cleared"); })
     fs.writeFile(__dirname + '/public/Files/students.csv', '', function () { console.log("File 2 cleared"); })
-    res.redirect('/dashboardTeacher')
+    // res.redirect('/dashboardTeacher')
+    return res
+            .status(200)
+            .send({success: true, message: "Teachers and students added"})
 })
 
 app.get('/removeClass/:x', async (req, res) => {
