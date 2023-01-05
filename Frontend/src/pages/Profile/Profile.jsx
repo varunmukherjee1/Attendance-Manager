@@ -45,7 +45,7 @@ function Profile() {
 
         let currName = name_ref.current.value;
 
-        if(currName == ""){
+        if(currName === ""){
             setInpValid({
                 ...inpValid,
                 name: false
@@ -133,9 +133,6 @@ function Profile() {
                 toast("Please fill the form correctly")
                 return;
             }
-
-            const email = inpVal.email;
-            const password = inpVal.pass;
 
             dispatch(loadingActions.showLoading())
 

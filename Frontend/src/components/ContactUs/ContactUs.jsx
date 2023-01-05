@@ -1,5 +1,4 @@
 import React,{useState,useRef} from "react";
-import axios from "axios"
 import toast from "react-hot-toast"
 import emailjs from 'emailjs-com'
 import { Link } from "react-router-dom";

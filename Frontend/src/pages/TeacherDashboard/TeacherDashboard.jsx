@@ -9,12 +9,7 @@ import Card from "../../components/TeacherCard/TeacherCard";
 import teacher from "./TeacherDashboard.module.css";
 import Modal from "../../components/Modal/Modal";
 import AddClassModal from "../../components/AddClassModal/AddClassModal"
-import AddStudentModal from "../../components/AddStudentModal/AddStudentModal"
-import AddTeacherModal from "../../components/AddTeacherModal/AddTeacherModal"
 import classes from "./TeacherDashboard.module.css"
-
-// import {teacherClasses} from "../../constants/TeacherClasses"
-
 
 export default function TeacherDashboard() {
 
@@ -59,7 +54,7 @@ export default function TeacherDashboard() {
 
     useEffect(() => {
         getClasses();
-    },[]);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     function AddClassModalFunc(){

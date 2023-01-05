@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import classes from "./Modal.module.css"

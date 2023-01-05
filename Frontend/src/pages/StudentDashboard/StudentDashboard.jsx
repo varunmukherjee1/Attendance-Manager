@@ -18,8 +18,6 @@ export default function StudentDashboard() {
         show: false,
         qr: undefined
     })
-    const [currentClass, setCurrentClass] = useState("")
-
     
     const user = useSelector(state => state.user.user)
     const dispatch = useDispatch();
@@ -87,7 +85,7 @@ export default function StudentDashboard() {
 
     useEffect(() => {
         getClasses();
-    },[]);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <Dashboard>

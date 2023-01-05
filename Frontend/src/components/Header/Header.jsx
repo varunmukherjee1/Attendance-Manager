@@ -7,9 +7,9 @@ function Header(props) {
 
   // const [isOpen , setIsOpen] = useState(false);
 
-  const onClickHandler = () => {
-    props.toggle(!props.isActive);
-  }
+  // const onClickHandler = () => {
+  //   props.toggle(!props.isActive);
+  // }
 
   return (
     <div className= {classes.header}>
