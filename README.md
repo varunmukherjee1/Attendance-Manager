@@ -7,11 +7,11 @@ At present, as we can see that in offline classes we use the traditional method 
 - Open git bash in any folder
 - Clone the repo using below command
 ```
-git clone https://github.com/VARUN-K-BANSAL/Attendance-Capturer-Manager.git
+git clone https://github.com/varunmukherjee1/Attendance-Manager.git
 ```
 - Move to the project folder
 ```
-cd attendance-capturer-manager
+cd Attendance-Manager
 ```
 - Now run these commands on the terminal/powershell/git bash
 ```
