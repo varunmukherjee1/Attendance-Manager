@@ -21,22 +21,32 @@ const dataApisRoutes = require('./routes/dataApis')
 const userRoutes = require("./routes/user")
 const authRoutes = require("./routes/auth")
 
-/**Saket Ranjan */
+const morgan = require('morgan')
+const helmet = require('helmet')
+const rfs = require('rotating-file-stream')
+
 const multer = require('multer');
 const fileStorageEngine = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './public/Files')
     },
     filename: (req, file, cb) => {
-
         cb(null, file.originalname)
     }
 })
 const upload = multer({ storage: fileStorageEngine })
 
+let logStream = rfs.createStream('access.log', {
+    interval: '1h',
+    path: path.join(__dirname, 'logs')
+})
+
 app.use(express.static(STATIC_PATH));
 app.use(cookieParser())
 app.use(express.json())
+app.use(morgan('combined', {stream: logStream}))
+app.use(morgan(":method :url :status :response-time ms"))
+app.use(helmet())
 
 app.use('/admin', adminRoutes)
 app.use("/api",dataApisRoutes)
