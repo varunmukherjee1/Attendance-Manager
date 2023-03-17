@@ -184,13 +184,13 @@ const removeClass = async (req, res) => {
 
 const sendStudents = async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.redirect('login')
+        return res.status(500).redirect('login')
     } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "teacher") {
-        return res.redirect('/pageNotFound')
+        return res.status(404).redirect('/pageNotFound')
     }
     try {
         let studObj = await Student.find()
-        res.send(studObj);
+        res.status(200).send(studObj);
     } catch (error) {
         console.log(error);
     }
@@ -198,13 +198,13 @@ const sendStudents = async (req, res) => {
 
 const sendTeachers = async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.redirect('login')
+        return res.status(500).redirect('login')
     } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "teacher") {
-        return res.redirect('/pageNotFound')
+        return res.status(404).redirect('/pageNotFound')
     }
     try {
         let teachObj = await Teacher.find()
-        res.send(teachObj);
+        res.status(200).send(teachObj);
     } catch (error) {
         console.log(error);
     }
@@ -212,13 +212,13 @@ const sendTeachers = async (req, res) => {
 
 const sendClasses = async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.redirect('login')
+        return res.status(500).redirect('login')
     } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "teacher") {
-        return res.redirect('/pageNotFound')
+        return res.status(404).redirect('/pageNotFound')
     }
     try {
         let classObj = await Class.find()
-        res.send(classObj);
+        res.status(200).send(classObj);
     } catch (error) {
         console.log(error);
     }
@@ -226,13 +226,13 @@ const sendClasses = async (req, res) => {
 
 const sendAdmins = async (req, res) => {
     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-        return res.redirect('login')
+        return res.status(500).redirect('login')
     } else if (req.cookies[COOKIE_NAME].userType == "student" || req.cookies[COOKIE_NAME].userType == "teacher") {
-        return res.redirect('/pageNotFound')
+        return res.status(404).redirect('/pageNotFound')
     }
     try {
         let adminObj = await Admin.find()
-        res.send(adminObj);
+        res.status(200).send(adminObj);
     } catch (error) {
         console.log(error);
     }
