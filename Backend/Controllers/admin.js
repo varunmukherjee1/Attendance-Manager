@@ -26,13 +26,13 @@ const addAdmin = async (req, res) => {
         admin_password
     } = req.body
 
-    console.log("here")
-    console.log({
-        full_name,
-        email,
-        password,
-        admin_password
-    })
+    // console.log("here")
+    // console.log({
+    //     full_name,
+    //     email,
+    //     password,
+    //     admin_password
+    // })
 
     let encryptedPassword = String(await encryption.encrypt(password))
     if (!(await encryption.comparePasswords(req.cookies[COOKIE_NAME].password, admin_password))) {
