@@ -70,7 +70,7 @@ function AdminDashboard() {
 
     useEffect(() => {
         getData();
-    },[]);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const courseColumns = [
         {

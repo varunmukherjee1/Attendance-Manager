@@ -7,7 +7,6 @@ import varunmukj from '../../assets/varun_mkh.jpg'
 import saket from '../../assets/saket.jpeg'
 import iogo from '../../assets/logo.png'
 import { Link } from 'react-router-dom'
-import Info from '../AboutUs/Info'
 
 const AboutUs = () => {
     return (

@@ -19,12 +19,12 @@ export default function AttendancePage() {
       let classData = classDataTemp.data.data
       let roll_numbers = [];
       let itr = 0;
-      while (classData.students[itr] != undefined) {
+      while (classData.students[itr] !== undefined) {
         let obj = {
           students: classData.students[itr].roll_number,
         };
         let j = 0;
-        while (classData.attendance[j] != undefined) {
+        while (classData.attendance[j] !== undefined) {
           obj[`${classData.attendance[j].date.split(" ")[0]}`] =
             classData.attendance[j].values[itr].status;
           j++;
@@ -40,7 +40,7 @@ export default function AttendancePage() {
         },
       ];
       let i = 0;
-      while (classData.attendance[i] != undefined) {
+      while (classData.attendance[i] !== undefined) {
         let obj = {
           Header: classData.attendance[i].date.split(" ")[0],
           accessor: classData.attendance[i].date.split(" ")[0],
@@ -58,7 +58,7 @@ export default function AttendancePage() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

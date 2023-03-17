@@ -22,22 +22,66 @@ const dataApisRoutes = require('./routes/dataApis')
 const userRoutes = require("./routes/user")
 const authRoutes = require("./routes/auth")
 
-/**Saket Ranjan */
+const morgan = require('morgan')
+const helmet = require('helmet')
+const rfs = require('rotating-file-stream')
+
+const swaggerUI = require('swagger-ui-express')
+const swaggerJsDoc = require('swagger-jsdoc')
+
+const options = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Attendance Capturer and Manager API",
+            version: "1.0.0",
+            description: "This is the API documentation for our FSD Project"
+        },
+        servers: [
+            {
+                url: "http://localhost:5000"
+            }
+        ],
+        tags: [
+            {
+                name: "admins",
+                description: "API's available to only admins"
+            },
+            {
+                name: "developers",
+                description: "API's available to the developers"
+            }
+        ]
+    },
+    apis: ["./routes/*.js"]
+}
+
+const specs = swaggerJsDoc(options)
+
 const multer = require('multer');
 const fileStorageEngine = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './public/Files')
     },
     filename: (req, file, cb) => {
-
         cb(null, file.originalname)
     }
 })
 const upload = multer({ storage: fileStorageEngine })
 
+let logStream = rfs.createStream('access.log', {
+    interval: '1h',
+    path: path.join(__dirname, 'logs')
+})
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
+
 app.use(express.static(STATIC_PATH));
 app.use(cookieParser())
 app.use(express.json())
+app.use(morgan('combined', {stream: logStream}))
+app.use(morgan(":method :url :status :response-time ms"))
+app.use(helmet())
 
 app.use('/admin', adminRoutes)
 app.use("/api",dataApisRoutes)
