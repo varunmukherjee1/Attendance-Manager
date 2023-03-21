@@ -221,7 +221,86 @@ router.get('/getTeachers',dataController.sendTeachers)
  */
 router.get('/getStudents',dataController.sendStudents)
 
+
+/**
+ * @swagger
+ * /api/getAdmins:
+ *  get:
+ *      tags:
+ *          - developers
+ *      summary: Retrieve admin data from database
+ *      responses:
+ *          200:
+ *              description: Successfully received a response from database
+ *              content:
+ *                 application/json:
+ *                     schema:
+ *                         type: object
+ *                         properties:
+ *                             success:
+ *                                 type: boolean
+ *                             data:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          name:
+ *                                              type: string
+ *                                          email:
+ *                                              type: string
+ *                                          password:
+ *                                              type: string
+ *          500:
+ *              description: User is unauthorized to perform the operation or encountered a server error
+ *              content:
+ *                 application/json:
+ *                     schema:
+ *                         type: object
+ *                         properties:
+ *                             success:
+ *                                 type: boolean
+ */
 router.get('/getAdmins',dataController.sendAdmins)
+
+
+/**
+ * @swagger
+ * /api/getCookieDetails:
+ *  get:
+ *      tags:
+ *          - developers
+ *      summary: Retrieve cookie data from database
+ *      responses:
+ *          200:
+ *              description: Successfully received a response from database
+ *              content:
+ *                 application/json:
+ *                     schema:
+ *                         type: object
+ *                         properties:
+ *                             success:
+ *                                 type: boolean
+ *                             data:
+ *                                  type: object
+ *                                  properties:
+ *                                      name:
+ *                                          type: string
+ *                                      email:
+ *                                          type: string
+ *                                      roll_number:
+ *                                          type: string
+ *                                      password:
+ *                                          type: string
+ *          500:
+ *              description: User is unauthorized to perform the operation or encountered a server error
+ *              content:
+ *                 application/json:
+ *                     schema:
+ *                         type: object
+ *                         properties:
+ *                             success:
+ *                                 type: boolean
+ */
 router.get('/getCookieDetails', dataController.sendCookieData)
 
 module.exports = router
