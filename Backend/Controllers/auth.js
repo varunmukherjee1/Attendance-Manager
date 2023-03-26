@@ -1,3 +1,5 @@
+const fs = require("fs")
+
 const Class = require("../Models/class");
 const Students = require("../Models/student");
 const Teachers = require("../Models/teacher");
@@ -237,9 +239,135 @@ const addTeacher =  async (req, res) => {
   }
 }
 
+const addClass = async (req,res) => {
+
+  if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
+    return res
+    .status(400)
+    .send({
+      success:false
+    })
+  }
+
+  try {
+
+    let { className } = req.body
+    let date = new Date()
+
+    const uID = {
+        email: req.cookies[COOKIE_NAME].email
+    }
+
+    let classObj = new Class({
+        name: className,
+        teachers: [uID],
+        students: [],
+        attendance: []
+    })
+
+    await classObj.save()
+
+    let classObject = await Class.findOne({ name: className })
+
+    // if (studentEmail != '') {
+    //     let student = await Student.findOne({ email: studentEmail })
+    //     const sID = {
+    //         roll_number: student.roll_number,
+    //         qrcode_string: `${student.roll_number}%%${className}%%${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    //     }
+    //     classObject.students.push(sID);
+    // }
+    // if (teacherEmail != '') {
+    //     let teacher = await Teacher.findOne({ email: teacherEmail })
+    //     const tID = {
+    //         email: teacher.email
+    //     }
+    //     classObject.teachers.push(tID);
+    // }
+
+    let results1 = [];
+    fs.createReadStream(`public/Files/teachers.csv`)
+        .pipe(csv({}))
+        .on('data', (data) => results1.push(data))
+        .on('end', async () => {
+            if(results1 != '') {
+                let j = 0;
+                while (j < results1.length) {
+                    try {
+                        let detail = `${results1[j].mail}`;
+                        let teacObj = await Teacher.findOne({ email: detail })
+                        if (teacObj == null || classObject == null) res.redirect('/dashboardTeacher')
+                        let i = 0
+                        while (i < classObject.teachers.length) {
+                            if (classObject.teachers[i].email == teacObj.email) {
+                                return res.redirect('/dashboardTeacher')
+                            }
+                            i++
+                        }
+                        classObject.teachers.push({
+                            email: teacObj.email
+                        })
+                    } catch (error) {
+                        console.log(error);
+                    }
+                    j++;
+                }
+                await classObject.save();
+            }
+        });
+
+    let results = [];
+    fs.createReadStream(`public/Files/students.csv`)
+        .pipe(csv({}))
+        .on('data', (data) => results.push(data))
+        .on('end', async () => {
+            if(results != '') {
+                let j = 0;
+                while (j < results.length) {
+                    try {
+                        let detail = `${results[j].mail}`;
+                        // console.log(detail);
+                        let studObj = await Student.findOne({ email: detail })
+                        if (studObj == null || classObject == null) res.redirect('/dashboardTeacher')
+                        let i = 0
+                        while (i < classObject.students.length) {
+                            if (classObject.students[i].roll_number == studObj.roll_number) {
+                                return res.redirect('/dashboardTeacher')
+                            }
+                            i++
+                        }
+                        let newStudObj = {
+                            roll_number: studObj.roll_number,
+                            qrcode_string: `${studObj.roll_number}%%${className}%%06/04/2022`
+                        }
+                        classObject.students.push(newStudObj)
+                    } catch (error) {
+                        console.log(error);
+                    }
+                    j++;
+                }
+                await classObject.save();
+            }
+        });
+
+    await classObject.save()
+
+    fs.writeFile(__dirname + '/public/Files/teachers.csv', '', function () { console.log("File 1 cleared"); })
+    fs.writeFile(__dirname + '/public/Files/students.csv', '', function () { console.log("File 2 cleared"); })
+    // res.redirect('/dashboardTeacher')
+    return res
+            .status(200)
+            .send({success: true, message: "Teachers and students added"})
+
+  } catch (error) {
+    
+  }
+}
+
 module.exports = {
     generateQrCode,
     markAttendance,
     addStudent,
-    addTeacher
+    addTeacher,
+    addClass
 }
