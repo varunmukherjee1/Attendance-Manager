@@ -175,4 +175,6 @@ router.post("/addStudent/:x",authController.addStudent)
  */
 router.post("/addTeacher/:x",authController.addTeacher)
 
+// router.post("/addClass",authController.addClass)
+
 module.exports = router

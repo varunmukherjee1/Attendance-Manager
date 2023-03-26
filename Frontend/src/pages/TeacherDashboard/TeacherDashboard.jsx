@@ -2,6 +2,7 @@ import {useEffect,useState} from "react"
 import axios from "axios"
 import { useSelector,useDispatch } from "react-redux";
 import QrReader from "react-qr-scanner"
+import toast from "react-hot-toast"
 
 import { loadingActions } from "../../store/loadingSlice";
 import Dashboard from '../../components/Dashboard/Dashboard'
@@ -61,7 +62,7 @@ export default function TeacherDashboard() {
         if(stateAddClass.display){
             return (
                 <Modal closeModal = {closeAddClassModal}>
-                    <AddClassModal/>
+                    <AddClassModal closeModal = {closeAddClassModal}/>
                 </Modal>
             )
         }
@@ -82,8 +83,17 @@ export default function TeacherDashboard() {
         })
     }
 
-    function removeCurrClass(){
-        
+    const removeCurrClass = async (cid) => {
+        const res = await axios.get("/removeClass/" + cid)
+
+        if(res.data.success){
+            toast.success("Class removed successfully")
+            getClasses();
+        }
+        else{
+            toast.error(res.data.message)
+        }
+
     }
 
     const onError = () => {

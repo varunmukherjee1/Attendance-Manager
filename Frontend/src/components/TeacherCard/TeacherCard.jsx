@@ -147,6 +147,10 @@ function TeacherCard(props) {
     }
   }
 
+  const removeHandler = () => {
+    props.removeClass(props.id)
+  }
+
 
   return (
     <div className={classes.card_container}>
@@ -162,7 +166,7 @@ function TeacherCard(props) {
             <input type={"button"} value={"Scan QR code"} onClick={scanQr}/>
             <input type={"button"} value={"Add Student"} onClick={addStudentModal}/>
             <input type={"button"} value={"Add Teacher"} onClick={addTeacherModal}/>
-            <input type={"button"} value={"Remove Class"} onClick={props.removeClass}/>
+            <input type={"button"} value={"Remove Class"} onClick={removeHandler}/>
           </div>
           {/* <QrModal name={props.teacher} roll_number="test"/>
           <QRious value={props.teacher}/> */}
