@@ -340,6 +340,22 @@ app.post('/addClass', cpUpload, async (req, res) => {
     
         await classObj.save()
 
+        console.log(req.body);
+        console.log("Students :-");
+        console.log(req.body.students);
+        console.log("Teacher :-");
+        console.log(req.body.teachers);
+
+        if(req.body.students == undefined && req.body.teachers == undefined){
+            console.log("Here");
+            return res
+                .status(200)
+                .send({
+                    success:true,
+                    message: "Class created successfully"
+                })
+        }
+
         let classObject = await Class.findOne({name: className})
 
         console.log("File parsing :-");
