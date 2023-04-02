@@ -67,7 +67,7 @@ router.post("/login" , userController.login)
  *                             message:
  *                                 type: string
  *          500:
- *              description: In case of any errors or the data not found (Not for the wrong password case, In that case 200 will be given)
+ *              description: In case of any errors
  *              content:
  *                 application/json:
  *                     schema:

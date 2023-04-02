@@ -59,12 +59,14 @@ const options = {
 }
 
 const specs = swaggerJsDoc(options)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
+
+
 let logStream = rfs.createStream('access.log', {
     interval: '1h',
     path: path.join(__dirname, 'logs')
 })
 
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 app.use(express.static(STATIC_PATH));
 app.use(cookieParser())
 app.use(express.json())
@@ -92,12 +94,6 @@ app.listen(PORT, (req, res) => {
 });
 
 const cpUpload = upload.fields([{ name: 'students', maxCount: 1 }, { name: 'teachers', maxCount: 1 }])
-
-app.post("/testApi", (req,res) => {
-    console.log("Test api called");
-    console.log(req.body);
-    console.log(req.files);
-})
 
 // app.post('/addClass', cpUpload, async (req, res) => {
 //     if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
