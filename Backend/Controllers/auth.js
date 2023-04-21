@@ -1,4 +1,6 @@
 const fs = require("fs")
+const csv = require("csv-parse");
+const { parse } = require("csv-parse");
 
 const Class = require("../Models/class");
 const Students = require("../Models/student");
@@ -239,128 +241,226 @@ const addTeacher =  async (req, res) => {
   }
 }
 
-const addClass = async (req,res) => {
-
+const addClass = async (req, res) => {
   if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
-    return res
-    .status(400)
-    .send({
-      success:false
-    })
+      return res
+      .status(400)
+      .send({
+          success:false
+      })
   }
 
+  try{
+
+      let { className} = req.body
+      const uID = {
+          email: req.cookies[COOKIE_NAME].email
+      }
+
+      let classObj = new Class({
+          name: className,
+          teachers: [uID],
+          students: [],
+          attendance: []
+      })
+  
+      await classObj.save()
+
+      if(req.body.students == 'undefined' && req.body.teachers == 'undefined'){
+          console.log("Here");
+          return res
+              .status(200)
+              .send({
+                  success:true,
+                  message: "Class created successfully"
+              })
+      }
+
+      let classObject = await Class.findOne({name: className})
+
+      const addTeachers = () => new Promise((resolve, reject) => {
+          let teachersList = []
+  
+          fs.createReadStream(__dirname + '/../uploads/files/teachers.csv')
+          .pipe(parse({ delimiter: ",", from_line: 2 }))
+          .on("data", function (row) {
+              teachersList.push(row[0])
+          })
+          .on("end", async function () {
+              if(teachersList.length != 0){
+                  let j = 0;
+                  while(j < teachersList.length){
+                      try {
+                          let tMail = teachersList[j];
+                          let teachObj = await Teachers.findOne({email: tMail})
+  
+                          if(teachObj === null){
+                              return res
+                                  .status(400)
+                                  .send({
+                                      success: false,
+                                      message: "teacher is not registered"
+                                  })
+                          }
+  
+                          let add = true;
+                          classObject.teachers.forEach((teach) => {
+                              if(teach.email === tMail){
+                                  add = false;
+                              }
+                          })
+  
+                          if(add){
+                              classObject.teachers.push({
+                                  email: tMail
+                              })
+                          }
+                          await classObject.save();
+                      } catch (error) {
+                          console.log("Teachers List error :-");
+                          console.log(error);
+                          return res
+                              .status(400)
+                              .send({
+                                  success: false,
+                                  message: "Error in teachers list"
+                              })
+                      }
+                      j++;
+                  }
+  
+                  await classObject.save();
+                  resolve();
+              }
+  
+          })
+          .on("error", function (error) {
+              console.log("teach Error");
+              console.log(error.message);
+              reject()
+              return res
+                  .status(400)
+                  .send({
+                      success: false,
+                      message: "Error in teachers list"
+                  })
+          });
+      })
+
+      const addStudents = () => new Promise((resolve, reject) => {
+          let studentsList = []
+          fs.createReadStream(__dirname + '/../uploads/files/students.csv')
+          .pipe(parse({ delimiter: ",", from_line: 2 }))
+          .on("data", function (row) {
+              studentsList.push(row[0])
+          })
+          .on("end", async function () {
+              if(studentsList.length != 0){
+                  let j = 0;
+                  while( j < studentsList.length){
+                      try {
+                          let stdEmail = studentsList[j];
+                          let stdObj = await Students.findOne({email: stdEmail})
+                          if(stdObj === null){
+                              return res
+                                  .status(400)
+                                  .send({
+                                      success: false,
+                                      message: "student is not registered"
+                                  })
+                          }
+  
+                          let add = true;
+                          classObject.students.forEach((stud) => {
+                              if(stud.roll_number === stdObj.roll_number){
+                                  add = false
+                              }
+                          })    
+  
+                          if(add){
+                              classObject.students.push({
+                                  roll_number: stdObj.roll_number,
+                                  qrcode_string: `${stdObj.roll_number}%%${className}%%06/04/2022`
+                              })
+                          }
+                          await classObject.save();
+                      } catch (error) {
+                          console.log("Student List error :-");
+                          console.log(error);
+                          return res
+                              .status(400)
+                              .send({
+                                  success: false,
+                                  message: "Error in students list"
+                              })
+                      }
+                      j++;
+                  }
+                  await classObject.save();
+                  resolve()
+              }
+          })
+          .on("error", function (error) {
+              console.log(error.message);
+              reject()
+          });
+      })
+
+      await addTeachers();
+      await addStudents();
+
+      await classObject.save();
+
+      return res
+          .status(200)
+          .send({
+              success: true,
+              message: "Class Added successfully"
+          })
+  }
+  catch(err){
+      console.log("Add Class Error");
+      console.log(err);
+
+      return res
+      .status(500)
+      .send({
+          success:false
+      })
+  }
+
+}
+
+const removeClass = async (req, res) => {
+  if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+      return res
+          .status(400)
+          .send({
+              success: false,
+              message: "user not autherized"
+          })
+  }
   try {
+      let classObj = await Class.deleteOne({ _id: req.params.x })
+      console.log(classObj);
+      // res.redirect('/dashboardTeacher')
 
-    let { className } = req.body
-    let date = new Date()
+      return res
+          .status(200)
+          .send({
+              success: true,
+              message: "Class deleted successfully"
+          })
 
-    const uID = {
-        email: req.cookies[COOKIE_NAME].email
-    }
-
-    let classObj = new Class({
-        name: className,
-        teachers: [uID],
-        students: [],
-        attendance: []
-    })
-
-    await classObj.save()
-
-    let classObject = await Class.findOne({ name: className })
-
-    // if (studentEmail != '') {
-    //     let student = await Student.findOne({ email: studentEmail })
-    //     const sID = {
-    //         roll_number: student.roll_number,
-    //         qrcode_string: `${student.roll_number}%%${className}%%${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-    //     }
-    //     classObject.students.push(sID);
-    // }
-    // if (teacherEmail != '') {
-    //     let teacher = await Teacher.findOne({ email: teacherEmail })
-    //     const tID = {
-    //         email: teacher.email
-    //     }
-    //     classObject.teachers.push(tID);
-    // }
-
-    let results1 = [];
-    fs.createReadStream(`public/Files/teachers.csv`)
-        .pipe(csv({}))
-        .on('data', (data) => results1.push(data))
-        .on('end', async () => {
-            if(results1 != '') {
-                let j = 0;
-                while (j < results1.length) {
-                    try {
-                        let detail = `${results1[j].mail}`;
-                        let teacObj = await Teacher.findOne({ email: detail })
-                        if (teacObj == null || classObject == null) res.redirect('/dashboardTeacher')
-                        let i = 0
-                        while (i < classObject.teachers.length) {
-                            if (classObject.teachers[i].email == teacObj.email) {
-                                return res.redirect('/dashboardTeacher')
-                            }
-                            i++
-                        }
-                        classObject.teachers.push({
-                            email: teacObj.email
-                        })
-                    } catch (error) {
-                        console.log(error);
-                    }
-                    j++;
-                }
-                await classObject.save();
-            }
-        });
-
-    let results = [];
-    fs.createReadStream(`public/Files/students.csv`)
-        .pipe(csv({}))
-        .on('data', (data) => results.push(data))
-        .on('end', async () => {
-            if(results != '') {
-                let j = 0;
-                while (j < results.length) {
-                    try {
-                        let detail = `${results[j].mail}`;
-                        // console.log(detail);
-                        let studObj = await Student.findOne({ email: detail })
-                        if (studObj == null || classObject == null) res.redirect('/dashboardTeacher')
-                        let i = 0
-                        while (i < classObject.students.length) {
-                            if (classObject.students[i].roll_number == studObj.roll_number) {
-                                return res.redirect('/dashboardTeacher')
-                            }
-                            i++
-                        }
-                        let newStudObj = {
-                            roll_number: studObj.roll_number,
-                            qrcode_string: `${studObj.roll_number}%%${className}%%06/04/2022`
-                        }
-                        classObject.students.push(newStudObj)
-                    } catch (error) {
-                        console.log(error);
-                    }
-                    j++;
-                }
-                await classObject.save();
-            }
-        });
-
-    await classObject.save()
-
-    fs.writeFile(__dirname + '/public/Files/teachers.csv', '', function () { console.log("File 1 cleared"); })
-    fs.writeFile(__dirname + '/public/Files/students.csv', '', function () { console.log("File 2 cleared"); })
-    // res.redirect('/dashboardTeacher')
-    return res
-            .status(200)
-            .send({success: true, message: "Teachers and students added"})
-
+      console.log("remove class");
   } catch (error) {
-    
+      console.log(error);
+      return res
+          .status(500)
+          .send({
+              success: false,
+              message: "Something went wrong"
+          })
   }
 }
 
@@ -369,5 +469,6 @@ module.exports = {
     markAttendance,
     addStudent,
     addTeacher,
-    addClass
+    addClass,
+    removeClass
 }

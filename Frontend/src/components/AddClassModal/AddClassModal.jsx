@@ -1,6 +1,7 @@
 import React,{useRef} from "react"
 import axios from "axios";
 import toast from "react-hot-toast"
+import {useNavigate} from "react-router-dom"
 
 import classes from "./AddClassModal.module.css"
 
@@ -10,6 +11,7 @@ export default function  AddClassModal(props){
     const cnameRef = useRef();
     const stdRef = useRef();
     const teachRef = useRef();
+    const navigate = useNavigate();
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -30,19 +32,24 @@ export default function  AddClassModal(props){
             teach,
         });
 
-        const res = axios.post("/addClass",formData,{
+        const res = await axios.post("/auth/addClass",formData,{
             headers : {
                 "Content-Type": "multipart/form-data",
             }
         })
 
+        console.log("REs :-");
+        console.log(res);
+
         if(res.data.success){
             toast.success(res.data.message)
+            props.closeModal();
         }
         else{
             toast.error(res.data.message)
         }
 
+        navigate("/")
         props.closeModal();
     }
 

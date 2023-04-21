@@ -1,6 +1,21 @@
 const express = require("express")
+const multer = require('multer');
+
 const router = express.Router()
 const authController = require("../Controllers/auth.js")
+
+const fileStorageEngine = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads/files')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+})
+
+const upload = multer({ storage: fileStorageEngine })
+
+const cpUpload = upload.fields([{ name: 'students', maxCount: 1 }, { name: 'teachers', maxCount: 1 }])
 
 
 /**
@@ -175,6 +190,9 @@ router.post("/addStudent/:x",authController.addStudent)
  */
 router.post("/addTeacher/:x",authController.addTeacher)
 
-// router.post("/addClass",authController.addClass)
+router.post("/addClass",cpUpload, authController.addClass)
+
+router.get('/removeClass/:x',authController.removeClass)
+
 
 module.exports = router
