@@ -452,7 +452,6 @@ const removeClass = async (req, res) => {
               message: "Class deleted successfully"
           })
 
-      console.log("remove class");
   } catch (error) {
       console.log(error);
       return res
@@ -466,6 +465,91 @@ const removeClass = async (req, res) => {
 
 const addMultipleStudents = async (req,res) => {
   try {
+
+    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+      return res
+          .status(400)
+          .send({
+              success: false,
+              message: "user not autherized"
+          })
+    }
+
+    const cid = req.params.x;
+
+    const classObj = await Class.findOne({_id: cid})
+
+    let studentsList = [];
+
+    fs.createReadStream(__dirname + "/../uploads/files/students.csv")
+    .pipe(parse({delimiter: ",", from_line:2}))
+    .on("data",function(row) {
+      studentsList.push(row[0])
+    })
+    .on("end", async function() {
+
+      if(studentsList.length !== 0){
+        for(let i = 0 ; i < studentsList.length ; i++){
+          try{
+            let sMail = studentsList[i];
+            let stdObj = await Students.findOne({email: sMail});
+
+            if(stdObj === null){
+              continue;
+            }
+
+            let add = true;
+
+            classObj.students.forEach((std) => {
+              if(std.roll_number === stdObj.roll_number){
+                add = false;
+              }
+            })
+
+            if(add){
+              classObj.students.push({
+                roll_number: stdObj.roll_number,
+                qrcode_string: `${stdObj.roll_number}%%${classObj.name}%%06/04/2022`
+              })
+            }
+
+          }
+          catch(err){
+            console.log("File Error");
+            console.log(err);
+
+            return res
+              .status(400)
+              .send({
+                success: false,
+                message: "Error in students list"
+              })
+          }
+        }
+      }
+
+      await classObj.save();
+    })
+    .on("error", function(error){
+      console.log("Add student error");
+      console.log(error.message);
+
+      return res
+        .status(400)
+        .send({
+          success: false,
+          message: "Adding student failed"
+        })
+    })
+
+    // console.log("Students added");
+
+    return res
+      .status(200)
+      .send({
+        success: true,
+        message: "Students Added Successfully"
+      })
     
   } catch (error) {
     console.log(error);
@@ -480,6 +564,92 @@ const addMultipleStudents = async (req,res) => {
 
 const addMultipleTeachers = async (req,res) => {
   try {
+
+    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+      return res
+          .status(400)
+          .send({
+              success: false,
+              message: "user not autherized"
+          })
+    }
+
+    const cid = req.params.x;
+
+    const classObj = await Class.findOne({_id: cid})
+
+    console.log(classObj);
+
+    let teachersList = [];
+
+    fs.createReadStream(__dirname + "/../uploads/files/teachers.csv")
+    .pipe(parse({delimiter: ",", from_line:2}))
+    .on("data",function(row) {
+      teachersList.push(row[0])
+    })
+    .on("end", async function() {
+
+      if(teachersList.length !== 0){
+        for(let i = 0 ; i < teachersList.length ; i++){
+          try{
+            let sMail = teachersList[i];
+            let teachObj = await Teachers.findOne({email: sMail});
+
+            if(teachObj === null){
+              continue;
+            }
+
+            let add = true;
+
+            classObj.teachers.forEach((teach) => {
+              if(teach.email === sMail){
+                add = false;
+              }
+            })
+
+            if(add){
+              classObj.teachers.push({
+                email: sMail
+              })
+            }
+
+          }
+          catch(err){
+            console.log("File Error");
+            console.log(err);
+
+            return res
+              .status(400)
+              .send({
+                success: false,
+                message: "Error in students list"
+              })
+          }
+        }
+      }
+
+      await classObj.save();
+    })
+    .on("error", function(error){
+      console.log("Add student error");
+      console.log(error.message);
+
+      return res
+        .status(400)
+        .send({
+          success: false,
+          message: "Adding teachers failed"
+        })
+    })
+
+    // console.log("Students added");
+
+    return res
+      .status(200)
+      .send({
+        success: true,
+        message: "Teachers Added Successfully"
+      })
     
   } catch (error) {
     console.log(error);

@@ -17,9 +17,9 @@ const upload = multer({ storage: fileStorageEngine })
 
 const cpUpload = upload.fields([{ name: 'students', maxCount: 1 }, { name: 'teachers', maxCount: 1 }])
 
-const stdUpload = upload.fields([{ name: 'students', maxCount: 1 }, { name: 'teachers', maxCount: 1 }])
+const stdUpload = upload.fields([{ name: 'students', maxCount: 1 }])
 
-const teachUpload = upload.fields([{ name: 'students', maxCount: 1 }, { name: 'teachers', maxCount: 1 }])
+const teachUpload = upload.fields([{ name: 'teachers', maxCount: 1 }])
 
 
 /**
@@ -198,9 +198,9 @@ router.post("/addClass",cpUpload, authController.addClass)
 
 router.get('/removeClass/:x',authController.removeClass)
 
-router.post("/addStudents/:x",authController.addMultipleStudents)
+router.post("/addStudents/:x",stdUpload,authController.addMultipleStudents)
 
-router.post("/addTeachers/:x",authController.addMultipleTeachers)
+router.post("/addTeachers/:x",teachUpload,authController.addMultipleTeachers)
 
 
 module.exports = router

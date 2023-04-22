@@ -1,7 +1,7 @@
 {
     "name": "group27",
     "version": "0.1.0",
-    "proxy": "https://backend-wbd-project.onrender.com",
+    "proxy": "http://localhost:5000",
     "private": true,
     "dependencies": {
         "@reduxjs/toolkit": "^1.8.6",

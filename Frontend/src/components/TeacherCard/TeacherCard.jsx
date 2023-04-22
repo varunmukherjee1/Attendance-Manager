@@ -177,8 +177,26 @@ function TeacherCard(props) {
     try {
       e.preventDefault();
 
-      toast.success("submitted")
+      const teachers = teachRef.current.files[0];
+
+      let formData = new FormData();
+      formData.append("teachers",teachers)
+
+      const res = await axios.post(`/auth/addTeachers/${props.id}`,formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      })
+
+      if(res.data.success){
+        toast.success(res.data.message)
+      }
+      else{
+        toast.error(res.data.message)
+      }
       
+      closeAddTeachersModal();
+
     } catch (error) {
       toast.error("Something went wrong")
       console.log("Error :-");
@@ -196,7 +214,20 @@ function TeacherCard(props) {
 
       formData.append("students",students)
 
-      toast.success("Submitted")
+      const res = await axios.post(`/auth/addStudents/${props.id}`,formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      })
+
+      if(res.data.success){
+        toast.success(res.data.message)
+      }
+      else{
+        toast.error(res.data.message)
+      }
+      
+      closeAddStudentsModal();
       
     } catch (error) {
       toast.error("Something went wrong")
