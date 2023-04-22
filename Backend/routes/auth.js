@@ -202,5 +202,9 @@ router.post("/addStudents/:x",stdUpload,authController.addMultipleStudents)
 
 router.post("/addTeachers/:x",teachUpload,authController.addMultipleTeachers)
 
+router.post("/removeStudent/:x",authController.removeStudent);
+
+router.post("/removeTeacher/:x",authController.removeTeacher)
+
 
 module.exports = router

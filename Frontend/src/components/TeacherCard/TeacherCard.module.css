@@ -124,3 +124,33 @@
     transform: scale(1.02);
     background-color: #0d1628;
 }
+
+.remFormDiv form > div {
+    margin-bottom: 1rem;
+}
+
+.remFormDiv form > p {
+    font-size: 1rem;
+    margin: 0.3rem 0;
+}
+
+.remFormDiv input {
+    outline: none;
+    border-radius: 5px;
+    padding: 3px 7px;
+}
+
+.remFormDiv button {
+    border: none;
+    outline: none;
+    color: white;
+    background-color:#14213D;
+    border-radius: 5px;
+    padding: 5px 17px;
+    font-size: 1rem;
+}
+
+.remFormDiv button:hover {
+    background-color: #0c1427;
+    transform: scale(1.05);
+}

@@ -642,8 +642,6 @@ const addMultipleTeachers = async (req,res) => {
         })
     })
 
-    // console.log("Students added");
-
     return res
       .status(200)
       .send({
@@ -662,6 +660,106 @@ const addMultipleTeachers = async (req,res) => {
   }
 }
 
+const removeStudent = async (req,res) => {
+  try {
+
+    const sid = req.body.email;
+    // const rollNo = req.body.rollNo;
+    const cid = req.params.x;
+
+    const classObj = await Class.findOne({_id: cid})
+
+    if(sid !== undefined){
+
+      const stdObj = await Students.findOne({email: sid})
+
+      if(stdObj === null){
+        return res
+          .status(200)
+          .send({
+            success: false,
+            message: "Student doesn't exist"
+          })
+      }
+      else{
+        classObj.students = classObj.students.filter((val) => val.roll_number !== stdObj.roll_number)
+
+        classObj.attendance = classObj.attendance.map(val => {
+          return {
+            date: val.date,
+            values: val.values.filter(t => t.roll_no !== stdObj.roll_number),
+            _id: val._id
+          }
+        })
+
+        await classObj.save();
+
+        return res
+          .status(200)
+          .send({
+            success: true,
+            message: "Student removed Successfully"
+          })
+
+      }
+    }
+    
+  } catch (error) {
+    
+    console.log(error);
+
+    return res
+      .status(400)
+      .send({
+        success: false,
+        message: "Something went wrong"
+      })
+  }
+}
+
+const removeTeacher = async (req,res) => {
+  try {
+
+    const cid = req.params.x;
+    const tid = req.body.email;
+
+    const classObj = await Class.findOne({_id: cid})
+
+    const teachObj = await Teachers.findOne({email:tid})
+
+    if(teachObj === null){
+      return res
+        .status(200)
+        .send({
+          success: false,
+          message: "Teacher doesn't exist"
+        })
+    }
+
+    classObj.teachers = classObj.teachers.filter(val => val.email !== tid)
+
+    await classObj.save();
+
+    return res
+      .status(200)
+      .send({
+        success: true,
+        message: "Teacher removed successfully"
+      })
+    
+  } catch (error) {
+    
+    console.log(error);
+
+    return res
+      .status(400)
+      .send({
+        success: false,
+        message: "Something went wrong"
+      })
+  }
+}
+
 module.exports = {
     generateQrCode,
     markAttendance,
@@ -670,5 +768,7 @@ module.exports = {
     addClass,
     removeClass,
     addMultipleStudents,
-    addMultipleTeachers
+    addMultipleTeachers,
+    removeStudent,
+    removeTeacher,
 }
