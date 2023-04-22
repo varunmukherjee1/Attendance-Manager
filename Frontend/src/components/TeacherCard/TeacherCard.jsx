@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useRef, useState} from 'react'
 import classes from "./TeacherCard.module.css"
 import profile_pic from "../../assets/profile_pic.svg"
 import { useNavigate } from "react-router-dom"
@@ -18,6 +18,12 @@ function TeacherCard(props) {
   const [stateAddStudent,setstateAddStudent]=useState({
       display:false
   });
+
+  const [addStudentsModal,setAddStudentsModal] = useState(false);
+  const [addTeachersModal,setAddTeachersModal] = useState(false);
+
+  const stdsRef = useRef();
+  const teachRef = useRef();
 
   const seeAttendance = () => {
     const url = "/seeAttendance/" + props.id
@@ -151,6 +157,53 @@ function TeacherCard(props) {
     props.removeClass(props.id)
   }
 
+  const openAddStudentsModal = () => {
+    setAddStudentsModal(true)
+  }
+
+  const openAddTeachersModal = () => {
+    setAddTeachersModal(true)
+  }
+  
+  const closeAddStudentsModal = () => {
+    setAddStudentsModal(false)
+  }
+
+  const closeAddTeachersModal = () => {
+    setAddTeachersModal(false)
+  }
+
+  const addTeachersHandler = async (e) => {
+    try {
+      e.preventDefault();
+
+      toast.success("submitted")
+      
+    } catch (error) {
+      toast.error("Something went wrong")
+      console.log("Error :-");
+      console.log(error);
+    }
+  }
+
+  const addStudentsHandler = async (e) => {
+    try {
+      e.preventDefault();
+
+      const students = stdsRef.current.files[0];
+
+      let formData = new FormData();
+
+      formData.append("students",students)
+
+      toast.success("Submitted")
+      
+    } catch (error) {
+      toast.error("Something went wrong")
+      console.log("Error :-");
+      console.log(error);
+    }
+  }
 
   return (
     <div className={classes.card_container}>
@@ -165,12 +218,36 @@ function TeacherCard(props) {
             <input type={"button"} value={"See Attendance"} onClick={seeAttendance}/>
             <input type={"button"} value={"Scan QR code"} onClick={scanQr}/>
             <input type={"button"} value={"Add Student"} onClick={addStudentModal}/>
+            <input type={"button"} value={"Add Students"} onClick={openAddStudentsModal}/>
             <input type={"button"} value={"Add Teacher"} onClick={addTeacherModal}/>
+            <input type={"button"} value={"Add Teachers"} onClick={openAddTeachersModal}/>
             <input type={"button"} value={"Remove Class"} onClick={removeHandler}/>
           </div>
           {/* <QrModal name={props.teacher} roll_number="test"/>
           <QRious value={props.teacher}/> */}
       </div>
+      {addStudentsModal && 
+        <Modal closeModal = {closeAddStudentsModal}>
+            <div className = {classes.formDiv}>
+              <form onSubmit = {addStudentsHandler}>
+                <label htmlFor="stds">Students</label>
+                <input ref = {stdsRef} type="file" name="students" id="stds" />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+        </Modal>
+      }
+      {addTeachersModal && 
+        <Modal closeModal = {closeAddTeachersModal}>
+            <div className = {classes.formDiv}>
+              <form onSubmit = {addTeachersHandler}>
+                <label htmlFor="profs">Teachers</label>
+                <input ref = {teachRef} type="file" name="teachers" id="profs" />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+        </Modal>
+      }
     </div>
   )
 }

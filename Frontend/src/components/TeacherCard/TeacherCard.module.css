@@ -95,3 +95,32 @@
     position: absolute;
     background-image: url("../../assets/profile_pic.svg");
 }
+
+.formDiv label{
+    font-size: 1.2rem;
+}
+
+.formDiv input {
+    background-color: var(--blue);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.formDiv button {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    background-color: #14213D;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.formDiv button:hover {
+    transform: scale(1.02);
+    background-color: #0d1628;
+}

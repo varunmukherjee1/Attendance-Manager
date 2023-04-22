@@ -464,11 +464,41 @@ const removeClass = async (req, res) => {
   }
 }
 
+const addMultipleStudents = async (req,res) => {
+  try {
+    
+  } catch (error) {
+    console.log(error);
+      return res
+          .status(500)
+          .send({
+              success: false,
+              message: "Something went wrong"
+          })
+  }
+}
+
+const addMultipleTeachers = async (req,res) => {
+  try {
+    
+  } catch (error) {
+    console.log(error);
+      return res
+          .status(500)
+          .send({
+              success: false,
+              message: "Something went wrong"
+          })
+  }
+}
+
 module.exports = {
     generateQrCode,
     markAttendance,
     addStudent,
     addTeacher,
     addClass,
-    removeClass
+    removeClass,
+    addMultipleStudents,
+    addMultipleTeachers
 }
