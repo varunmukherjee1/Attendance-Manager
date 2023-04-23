@@ -59,12 +59,12 @@ const options = {
 }
 
 const specs = swaggerJsDoc(options)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 let logStream = rfs.createStream('access.log', {
     interval: '1h',
     path: path.join(__dirname, 'logs')
 })
 
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 app.use(express.static(STATIC_PATH));
 app.use(cookieParser())
 app.use(express.json())
