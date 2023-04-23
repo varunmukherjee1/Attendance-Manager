@@ -764,9 +764,23 @@
 ::ffff:127.0.0.1 - - [23/Apr/2023:10:14:00 +0000] "GET /api/getTeachers HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [23/Apr/2023:10:14:00 +0000] "GET /api/getAdmins HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [23/Apr/2023:10:14:00 +0000] "GET /api/getAdmins HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+<<<<<<< HEAD
 ::ffff:127.0.0.1 - - [23/Apr/2023:12:37:46 +0000] "GET /api/getClasses HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [23/Apr/2023:12:37:47 +0000] "GET /api/getStudents HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [23/Apr/2023:12:37:47 +0000] "GET /api/getTeachers HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [23/Apr/2023:12:37:47 +0000] "GET /api/getAdmins HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [23/Apr/2023:12:37:47 +0000] "GET /api/getCookieDetails HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [23/Apr/2023:12:37:47 +0000] "GET /api/getCookieDetails HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+=======
+::ffff:127.0.0.1 - - [23/Apr/2023:15:11:59 +0000] "GET /api/getClasses HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:11:59 +0000] "GET /api/getStudents HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:11:59 +0000] "GET /api/getTeachers HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:11:59 +0000] "GET /api/getAdmins HTTP/1.1" 200 17 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:11:59 +0000] "GET /api/getCookieDetails HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:11:59 +0000] "GET /api/getCookieDetails HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:12:33 +0000] "GET /api/getAdmins HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:12:41 +0000] "GET /api/getAdmins HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:13:10 +0000] "GET /api/getClasses HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:13:17 +0000] "GET /api/getStudents HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [23/Apr/2023:15:13:23 +0000] "GET /api/getTeachers HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+>>>>>>> ad3d64e6e7e7ee09c2ee3ca6d972d916c35af2aa

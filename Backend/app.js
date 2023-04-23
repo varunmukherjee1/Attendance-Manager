@@ -13,7 +13,6 @@ const swaggerJsDoc = require('swagger-jsdoc')
 const PORT = 5000
 const STATIC_PATH = path.join(__dirname + '/public')
 
-
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const encryption = require('./public/scripts/encryption')
@@ -21,6 +20,12 @@ const adminRoutes = require('./routes/admin')
 const dataApisRoutes = require('./routes/dataApis')
 const userRoutes = require("./routes/user")
 const authRoutes = require("./routes/auth")
+
+const cors = require('cors')
+app.use(cors({
+    origin: "https://group-27.netlify.app/"
+}))
+
 
 const options = {
     definition: {
