@@ -14,7 +14,9 @@ const createInstance = async () => {
 
         const res = await axios.get("api/getTeachers")
 
-        await insertMultiple(db,res.data.data)
+        const ins = await insertMultiple(db,res.data.data)
+
+        console.log(ins);
 
         return db;
 
