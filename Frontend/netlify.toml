@@ -1,6 +1,6 @@
 [[redirects]]
-  from = "/*"
+  from = "/api/*"
   to = "https://backend-wbd-project.onrender.com"
   status = 200
-  force = false
+  force = true
   headers = {X-From = "Netlify"}
