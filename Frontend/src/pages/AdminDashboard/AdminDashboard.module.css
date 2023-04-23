@@ -127,3 +127,22 @@
     color: var(--blue);
     transform: scale(1.1);
 }
+
+.searchBar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 7px 0;
+}
+
+.searchBar i {
+    font-size: 1.5rem;
+}
+
+.searchBar input {
+    width: 70%;
+    padding: 6px 10px;
+    border-radius: 6px;
+}

@@ -84,7 +84,7 @@ export default function TeacherDashboard() {
     }
 
     const removeCurrClass = async (cid) => {
-        const res = await axios.get("/removeClass/" + cid)
+        const res = await axios.get("/auth/removeClass/" + cid)
 
         if(res.data.success){
             toast.success("Class removed successfully")

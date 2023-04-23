@@ -3,12 +3,19 @@ import axios from "axios"
 import { useDispatch } from 'react-redux'
 import toast from "react-hot-toast"
 import { useNavigate } from 'react-router-dom'
+import { search } from '@orama/orama';
 
 import Card from "../../components/Card/Card"
 import Dashboard from '../../components/Dashboard/Dashboard'
 import Tables from "../../components/Tables/Table"
 import { loadingActions } from '../../store/loadingSlice'
 import Modal from "../../components/Modal/Modal"
+
+import {courseDb} from "../../search/courses"
+import {studentDb} from "../../search/students"
+import {teachersDb} from "../../search/teachers"
+import {adminDb} from "../../search/admins"
+
 
 import classes from "./AdminDashboard.module.css"
 
@@ -18,11 +25,15 @@ function AdminDashboard() {
     const emailRef = useRef();
     const passRef = useRef();
     const admPassRef = useRef();
+    const searchRef = useRef();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [tableData, setTableData] = useState([]);
+    const [tableData, setTableData] = useState({
+        field: "none",
+        data: []
+    });
     const [columns , setColumns] = useState([]);
 
     let [students,setStudents] = useState([]);
@@ -316,10 +327,14 @@ function AdminDashboard() {
 
     const showCoursesHandler = async () => {
         try {
-            // const res = await axios.get("api/getClasses")
+            
             setColumns(courseColumns);
-            setTableData(courses);
-
+            setTableData({
+                field: "courses",
+                data: courses
+            });
+            
+            // searchRef.current.value = "";
         } catch (error) {
             console.log("Error = " + error);
         }
@@ -327,9 +342,14 @@ function AdminDashboard() {
 
     const showStudentsHandler = async () => {
         try {
-            setColumns(studentColumns)
-            setTableData(students)
             
+            setColumns(studentColumns)
+            setTableData({
+                field: "students",
+                data: students
+            })
+            
+            // searchRef.current.value = "";
         } catch (error) {
             console.log(error)
         }
@@ -337,8 +357,13 @@ function AdminDashboard() {
 
     const showTeachersHandler = async () => {
         try {
+            
             setColumns(teacherColumns)
-            setTableData(teachers)
+            setTableData({
+                field: "teachers",
+                data: teachers
+            })
+            // searchRef.current.value = "";
         } catch (error) {
             console.log(error)
         }
@@ -346,9 +371,14 @@ function AdminDashboard() {
 
     const showAdminsHandler = async () => {
         try {
-            setColumns(adminColumns)
-            setTableData(admins)
             
+            setColumns(adminColumns)
+            setTableData({
+                field: "admins",
+                data: admins
+            })
+            
+            // searchRef.current.value = ""
         } catch (error) {
             console.log(error);
         }
@@ -360,6 +390,125 @@ function AdminDashboard() {
 
     const closeModal = () => {
         setShowModal(false)
+    }
+
+    // Search
+
+    const searchStd = async (val) => {
+        
+        const sdb = await studentDb;
+        
+        const res = await search(sdb,{
+            term: `${val}`,
+            properties: ["name","email","roll_number"]
+        })
+
+        setTableData({
+            ...tableData,
+            data: res.hits.map((hit) => hit.document)
+        })
+    }
+
+    const searchTeach = async (val) => {
+        
+        const db = await teachersDb;
+
+        const res = await search(db,{
+            term: `${val}`,
+            properties: ["name","email"]
+        })
+
+        // console.log("Search Res = ");
+        // console.log(res.hits)
+
+        setTableData({
+            ...tableData,
+            data: res.hits.map((hit) => hit.document)
+        })
+    }
+
+    const searchAdmin = async (val) => {
+        
+        const db = await adminDb;
+
+        const res = await search(db,{
+            term: `${val}`,
+            properties: ["name","email"]
+        })
+
+        // console.log("Search Res = ");
+        // console.log(res.hits)
+
+        setTableData({
+            ...tableData,
+            data: res.hits.map((hit) => hit.document)
+        })
+    }
+
+    const searchCrs = async (val) => {
+        
+        const db = await courseDb;
+
+        const res = await search(db,{
+            term: `${val}`,
+            properties: ["name"]
+        })
+
+        // console.log("Search Res = ");
+        // console.log(res.hits);
+
+        setTableData({
+            ...tableData,
+            data: res.hits.map((hit) => hit.document)
+        })
+    }
+
+    const searchChangeHandler = () => {
+
+        const searchVal = searchRef.current.value;
+
+        // console.log(searchVal);
+
+        if(searchVal.trim().length > 0){
+            if(tableData.field === "courses"){
+                searchCrs(searchVal.trim());                
+            }
+            if(tableData.field === "students"){
+                searchStd(searchVal.trim())
+            }
+            if(tableData.field === "teachers"){
+                searchTeach(searchVal.trim())
+            }
+            if(tableData.field === "admins"){
+                searchAdmin(searchVal.trim())
+            }
+        }
+        else{
+            if(tableData.field === "courses"){
+                setTableData({
+                    ...tableData,
+                    data: courses
+                })
+            }
+            if(tableData.field === "students"){
+                setTableData({
+                    ...tableData,
+                    data: students
+                })
+            }
+            if(tableData.field === "teachers"){
+                setTableData({
+                    ...tableData,
+                    data: teachers
+                })
+            }
+            if(tableData.field === "admins"){
+                setTableData({
+                    ...tableData,
+                    data: admins
+                })
+            }
+        }
     }
 
     return (
@@ -427,8 +576,12 @@ function AdminDashboard() {
                             <input className = {classes["radio_input"]} type="radio" name="radio" id="admins" />
                             <label className = {classes["radio_label"]} htmlFor="admins" onClick = {showAdminsHandler}>Admins</label>
                         </div>
+                        {(columns.length !== 0) && <div className = {classes.searchBar}>
+                            <i className ="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" ref = {searchRef} onChange = {searchChangeHandler}/>
+                        </div>}
                         <div className={classes["content"]}>
-                            {(columns !== [])? <Tables data = {tableData} columns = {columns}/>: <h2>Loading...</h2>}
+                            {(columns !== [])? <Tables data = {tableData.data} columns = {columns}/>: <h2>Loading...</h2>}
                         </div>
                     </div>
                 </Card>

@@ -5,12 +5,16 @@ import { loadingActions } from "../../store/loadingSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { CSVLink} from "react-csv";
+
+import classes from "./AttendancePage.module.css"
 
 export default function AttendancePage() {
   const dispatch = useDispatch();
   const { cid } = useParams();
   const [tableData, setTableData] = useState([]);
   const [columns, setColumns] = useState([]);
+  const [csvData,setCSVData] = useState([]);
 
   const getData = async () => {
     try {
@@ -32,6 +36,7 @@ export default function AttendancePage() {
         roll_numbers.push(obj);
         itr++;
       }
+
       setTableData(roll_numbers);
       let column = [
         {
@@ -39,6 +44,7 @@ export default function AttendancePage() {
           accessor: "students",
         },
       ];
+
       let i = 0;
       while (classData.attendance[i] !== undefined) {
         let obj = {
@@ -49,6 +55,23 @@ export default function AttendancePage() {
         i++;
       }
       setColumns(column);
+
+      const cData = [[...column.map((c) => c.Header)]]
+
+      const helper = [...column.map((c) => c.accessor)]
+
+      roll_numbers.forEach((rl) => {
+        let tArr = []
+
+        helper.forEach((d) => {
+          tArr.push(rl[d])
+        })
+
+        cData.push(tArr)
+      })
+
+      setCSVData(cData)
+
       dispatch(loadingActions.hideLoading());
     } catch (err) {
       dispatch(loadingActions.hideLoading());
@@ -60,9 +83,14 @@ export default function AttendancePage() {
     getData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // console.log(columns);
+  // console.log(tableData);
+  // console.log(csvData);
+
   return (
     <>
       <Dashboard>
+        <CSVLink data = {csvData} className = {classes.link}>Download CSV</CSVLink>
         <Tables data={tableData} columns={columns} />
       </Dashboard>
     </>
