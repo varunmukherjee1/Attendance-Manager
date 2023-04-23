@@ -21,7 +21,7 @@ const dataApisRoutes = require('./routes/dataApis')
 const userRoutes = require("./routes/user")
 const authRoutes = require("./routes/auth")
 
-const cors = requires('cors')
+const cors = require('cors')
 app.use(cors({
     origin: "https://group-27.netlify.app/"
 }))
