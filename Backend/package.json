@@ -16,6 +16,7 @@
     "chai": "^4.3.7",
     "chai-http": "^4.3.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "csv-parse": "^5.3.6",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.0.3",

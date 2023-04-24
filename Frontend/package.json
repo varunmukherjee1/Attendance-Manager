@@ -1,7 +1,7 @@
 {
     "name": "group27",
     "version": "0.1.0",
-    "proxy": "http://localhost:5000",
+    "proxy": "https://backend-wbd-project.onrender.com",
     "private": true,
     "dependencies": {
         "@orama/orama": "^1.0.0-beta.10",

@@ -17,6 +17,8 @@ const createInstance = async () => {
 
         const ins = await insertMultiple(db,res.data.data)
 
+        console.log(ins);
+
         return db;
 
     } catch (error) {
