@@ -73,3 +73,5 @@ app.use("/auth",authRoutes)
 app.listen(PORT, (req, res) => {
     console.log(`Server started at http://localhost:${PORT}`);
 });
+
+module.exports = app
