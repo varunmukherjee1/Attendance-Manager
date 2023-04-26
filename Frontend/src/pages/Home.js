@@ -6,6 +6,13 @@ import Homenav from "../components/Homenav";
 import '../css/home.css'
 // import Loader from "../components/Loader/Loader";
 
+import pic1 from "../assets/attendance.png"
+import fet1 from "../assets/undraw_teaching.svg"
+import fet2 from "../assets/undraw_Happy_news.png"
+import fet3 from "../assets/icon8.png"
+import fet4 from "../assets/QR_Code_pic.png"
+import endimg from "../assets/productivity_pic.png"
+
 export default function Home() {
     return (
         <>
@@ -37,7 +44,7 @@ function Section1() {
                     <p>New Way of Taking and Managing Attendance</p>
                 </div>
                 <div ref = {ref2} className={`student-image from_right slide_in ${view2? "appear":""}`}>
-                    <img src={"../assets/attendance.png"} alt="" />
+                    <img src={pic1} alt="" />
                 </div>
                 <div ref = {ref3} className={`extra_buttons fade_in ${view3? "appear":""}`}>
                     <Link to ="/login" id="login">Login</Link>
@@ -56,7 +63,7 @@ function Section2() {
         <>
             <section className="page-2">
                 <div ref = {ref1} className={`image from_left slide_in ${view1? "appear":""}`}>
-                    <img src={"../assets/undraw_teaching.svg"} alt="" />
+                    <img src={fet1} alt="" />
                 </div>
                 <div ref = {ref2} className={`content from_right slide_in slow ${view2? "appear":""}`}>
                     <p>
@@ -81,20 +88,20 @@ function Section3() {
             <section className="page-3">
                 <div className="features">
                     <div ref = {ref1} className={`feature from_right slide_in ${view1? "appear":""}`} id="feature-3">
-                        <img src={"../assets/icon8.png"} alt="" />
+                        <img src={fet3} alt="" />
                         <p>Completely Automated Attendance</p>
                     </div>
                     <div ref = {ref2} className={`feature from_left slide_in ${view2? "appear":""}`} id="feature-2">
-                        <img src={"../assets/undraw_Happy_news.png"} alt="" />
+                        <img src={fet2} alt="" />
                         <p>Easy to use</p>
                     </div>
                     <div ref = {ref3} className={`feature from_right slide_in ${view3? "appear":""}`} id="feature-1">
-                        <img src={"../assets/QR_Code_pic.png"} alt="" />
+                        <img src={fet4} alt="" />
                         <p>QR code authentification</p>
                     </div>
                 </div>
                 <div ref = {ref4} className={`left_img from_right slide_in ${view4? "appear":""}`}>
-                    <img src={"../assets/productivity_pic.png"} alt="" />
+                    <img src={endimg} alt="" />
                 </div>
             </section>
         </>
