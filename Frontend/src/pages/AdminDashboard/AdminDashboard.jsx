@@ -49,10 +49,10 @@ function AdminDashboard() {
 
             dispatch(loadingActions.showLoading())
 
-            const crs = await axios.get(URL + "api/getClasses")
-            const stds = await axios.get(URL + "api/getStudents")
-            const teach = await axios.get(URL + "api/getTeachers")
-            const adm = await axios.get(URL + "api/getAdmins")
+            const crs = await axios.get(URL + "/api/getClasses")
+            const stds = await axios.get(URL + "/api/getStudents")
+            const teach = await axios.get(URL + "/api/getTeachers")
+            const adm = await axios.get(URL + "/api/getAdmins")
 
             dispatch(loadingActions.hideLoading())
 

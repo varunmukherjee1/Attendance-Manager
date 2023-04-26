@@ -177,7 +177,7 @@ const Register=(props)=>{
             const password = inpVal.pass;
             const user_type = inpVal.type;
 
-            const res = await axios.post(URL + "user/register",{
+            const res = await axios.post(URL + "/user/register",{
                 full_name,
                 roll_number,
                 email,

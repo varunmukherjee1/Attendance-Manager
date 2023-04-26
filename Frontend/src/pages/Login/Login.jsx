@@ -83,7 +83,7 @@ const Login=()=>{
 
             dispatch(loadingActions.showLoading())
 
-            const res = await axios.post(URL + "user/login",{
+            const res = await axios.post(URL + "/user/login",{
                 email,
                 password,
             });
