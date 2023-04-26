@@ -5,7 +5,7 @@ import { loadingActions } from '../../store/loadingSlice'
 import { userActions } from '../../store/userSlice'
 import toast from "react-hot-toast"
 import axios from "axios"
-
+import {URL} from "../../constants/backend"
 
 import Dashboard from '../../components/Dashboard/Dashboard'
 
@@ -144,7 +144,7 @@ function Profile() {
                 cn_password: inpVal.rpass,
             }
 
-            const res = await axios.post("user/update",userObj);
+            const res = await axios.post(URL + "user/update",userObj);
 
             dispatch(loadingActions.hideLoading());
             
