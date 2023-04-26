@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios"
 import { useDispatch } from "react-redux";
+import {URL} from "../../constants/backend"
 
 import Home from "./pages/Home";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
@@ -31,7 +32,7 @@ function App() {
     try{
       
       dispatch(loadingActions.showLoading())
-      const res = await axios.get("/api/getCookieDetails")
+      const res = await axios.get(URL + "/api/getCookieDetails")
       dispatch(loadingActions.hideLoading())
       
       // console.log('App.js')
