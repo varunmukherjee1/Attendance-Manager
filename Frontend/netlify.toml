@@ -1,16 +1,64 @@
 [[redirects]]
-  from = "/api/*"
-  to = "https://backend-wbd-project.onrender.com"
+  from = "/admin/add"
+  to = "https://backend-wbd-project.onrender.com/admin/add"
+  status = 200
+[[redirects]]
+  from = "/admin/remove"
+  to = "https://backend-wbd-project.onrender.com/admin/remove"
+  status = 200
+[[redirects]]
+  from = "/admin/getStudents"
+  to = "https://backend-wbd-project.onrender.com/admin/getStudents"
+  status = 200
+[[redirects]]
+  from = "/admin/getTeachers"
+  to = "https://backend-wbd-project.onrender.com/admin/getTeachers"
+  status = 200
+[[redirects]]
+  from = "/admin/getCourses"
+  to = "https://backend-wbd-project.onrender.com/admin/getCourses"
+  status = 200
+[[redirects]]
+  from = "/admin/getAdmins"
+  to = "https://backend-wbd-project.onrender.com/admin/getAdmins"
   status = 200
 
 [[redirects]]
-  from = "/user/*"
-  to = "https://backend-wbd-project.onrender.com"
+  from = "/api/getClasses"
+  to = "https://backend-wbd-project.onrender.com/api/getClasses"
+  status = 200
+[[redirects]]
+  from = "/api/getTeachers"
+  to = "https://backend-wbd-project.onrender.com/api/getTeachers"
+  status = 200
+[[redirects]]
+  from = "/api/getStudents"
+  to = "https://backend-wbd-project.onrender.com/api/getStudents"
+  status = 200
+[[redirects]]
+  from = "/api/getAdmins"
+  to = "https://backend-wbd-project.onrender.com/api/getAdmins"
+  status = 200
+[[redirects]]
+  from = "/api/getCookieDetails"
+  to = "https://backend-wbd-project.onrender.com/api/getCookieDetails"
   status = 200
 
 [[redirects]]
-  from = "/admin/*"
-  to = "https://backend-wbd-project.onrender.com"
+  from = "/user/login"
+  to = "https://backend-wbd-project.onrender.com/user/login"
+  status = 200
+[[redirects]]
+  from = "/user/register"
+  to = "https://backend-wbd-project.onrender.com/user/register"
+  status = 200
+[[redirects]]
+  from = "/user/logout"
+  to = "https://backend-wbd-project.onrender.com/user/logout"
+  status = 200
+[[redirects]]
+  from = "/user/update"
+  to = "https://backend-wbd-project.onrender.com/user/update"
   status = 200
   
 [[redirects]]

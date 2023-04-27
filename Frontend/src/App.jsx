@@ -32,7 +32,7 @@ function App() {
     try{
       
       dispatch(loadingActions.showLoading())
-      const res = await axios.get(URL + "/api/getCookieDetails")
+      const res = await axios.get("/api/getCookieDetails")
       dispatch(loadingActions.hideLoading())
       
       // console.log('App.js')
