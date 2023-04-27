@@ -2,7 +2,7 @@ import React,{useRef} from "react"
 import axios from "axios";
 import toast from "react-hot-toast"
 import {useNavigate} from "react-router-dom"
-import {URL} from "../../constants/backend"
+// import {URL} from "../../constants/backend"
 
 import classes from "./AddClassModal.module.css"
 
@@ -33,10 +33,11 @@ export default function  AddClassModal(props){
             teach,
         });
 
-        const res = await axios.post(URL + "/auth/addClass",formData,{
+        const res = await axios.post("/auth/addClass",formData,{
             headers : {
                 "Content-Type": "multipart/form-data",
-            }
+            },
+            withCredentials: true
         })
 
         console.log("REs :-");

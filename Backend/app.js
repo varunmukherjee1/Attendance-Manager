@@ -24,7 +24,10 @@ const authRoutes = require("./routes/auth");
 // const cors = require("cors");
 // app.use(
 //   cors({
-//     origin: ["https://group-27.netlify.app/", "http://localhost:3000/", "http://localhost:5000"]
+//     origin: ["https://group-27.netlify.app/", "http://localhost:3000/", "http://localhost:5000"],
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type'],
+//     credentials: true
 //   })
 // );
 
@@ -49,7 +52,10 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000",
+        url: "https://group-27.netlify.app/"
+      },
+      {
+        url: "http://localhost:5000"
       },
     ],
     tags: [

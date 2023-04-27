@@ -1,24 +1,123 @@
 [[redirects]]
-  from = "/api/*"
-  to = "https://backend-wbd-project.onrender.com"
+  from = "/admin/add"
+  to = "https://backend-wbd-project.onrender.com/admin/add"
+  status = 200
+[[redirects]]
+  from = "/admin/remove"
+  to = "https://backend-wbd-project.onrender.com/admin/remove"
+  status = 200
+[[redirects]]
+  from = "/admin/getStudents"
+  to = "https://backend-wbd-project.onrender.com/admin/getStudents"
+  status = 200
+[[redirects]]
+  from = "/admin/getTeachers"
+  to = "https://backend-wbd-project.onrender.com/admin/getTeachers"
+  status = 200
+[[redirects]]
+  from = "/admin/getCourses"
+  to = "https://backend-wbd-project.onrender.com/admin/getCourses"
+  status = 200
+[[redirects]]
+  from = "/admin/getAdmins"
+  to = "https://backend-wbd-project.onrender.com/admin/getAdmins"
+  status = 200
+[[redirects]]
+  from = "/admin/removeStudent/:id"
+  to = "https://backend-wbd-project.onrender.com/admin/removeStudent/:id"
+  status = 200
+[[redirects]]
+  from = "/admin/removeTeacher/:id"
+  to = "https://backend-wbd-project.onrender.com/admin/removeTeacher/:id"
+  status = 200
+[[redirects]]
+  from = "/admin/removeCourse/:id"
+  to = "https://backend-wbd-project.onrender.com/admin/removeCourse/:id"
   status = 200
 
 [[redirects]]
-  from = "/user/*"
-  to = "https://backend-wbd-project.onrender.com"
+  from = "/auth/generateQrCode/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/generateQrCode/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/markAttendance/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/markAttendance/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/addStudent/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/addStudent/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/addTeacher/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/addTeacher/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/removeStudent/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/removeStudent/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/removeTeacher/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/removeTeacher/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/removeClass/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/removeClass/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/addClass"
+  to = "https://backend-wbd-project.onrender.com/auth/addClass"
+  status = 200
+[[redirects]]
+  from = "/auth/addTeachers/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/addTeachers/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/addStudents/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/addStudents/:id"
   status = 200
 
 [[redirects]]
-  from = "/admin/*"
-  to = "https://backend-wbd-project.onrender.com"
+  from = "/api/getClasses"
+  to = "https://backend-wbd-project.onrender.com/api/getClasses"
   status = 200
-  
 [[redirects]]
-  from = "/auth/*"
-  to = "https://backend-wbd-project.onrender.com"
+  from = "/api/getClass/:cid"
+  to = "https://backend-wbd-project.onrender.com/api/getClass/:cid"
+  status = 200
+[[redirects]]
+  from = "/api/getTeachers"
+  to = "https://backend-wbd-project.onrender.com/api/getTeachers"
+  status = 200
+[[redirects]]
+  from = "/api/getStudents"
+  to = "https://backend-wbd-project.onrender.com/api/getStudents"
+  status = 200
+[[redirects]]
+  from = "/api/getAdmins"
+  to = "https://backend-wbd-project.onrender.com/api/getAdmins"
+  status = 200
+[[redirects]]
+  from = "/api/getCookieDetails"
+  to = "https://backend-wbd-project.onrender.com/api/getCookieDetails"
   status = 200
 
 [[redirects]]
-  from = "*"
-  to = "https://backend-wbd-project.onrender.com"
+  from = "/user/login"
+  to = "https://backend-wbd-project.onrender.com/user/login"
+  status = 200
+[[redirects]]
+  from = "/user/register"
+  to = "https://backend-wbd-project.onrender.com/user/register"
+  status = 200
+[[redirects]]
+  from = "/user/logout"
+  to = "https://backend-wbd-project.onrender.com/user/logout"
+  status = 200
+[[redirects]]
+  from = "/user/update"
+  to = "https://backend-wbd-project.onrender.com/user/update"
+  status = 200
+[[redirects]]
+  from = "/api-docs"
+  to = "https://backend-wbd-project.onrender.com/api-docs"
   status = 200

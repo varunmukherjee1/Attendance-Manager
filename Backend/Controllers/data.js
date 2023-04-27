@@ -69,6 +69,8 @@ const sendCookieData = (req, res) => {
     return res.status(200).send({ success: false });
   }
 
+  console.log(req.cookies);
+
   return res.status(200).send({ success: true, data: req.cookies });
 };
 
