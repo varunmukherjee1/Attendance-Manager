@@ -22,10 +22,67 @@
   from = "/admin/getAdmins"
   to = "https://backend-wbd-project.onrender.com/admin/getAdmins"
   status = 200
+[[redirects]]
+  from = "/admin/removeStudent/:id"
+  to = "https://backend-wbd-project.onrender.com/admin/removeStudent/:id"
+  status = 200
+[[redirects]]
+  from = "/admin/removeTeacher/:id"
+  to = "https://backend-wbd-project.onrender.com/admin/removeTeacher/:id"
+  status = 200
+[[redirects]]
+  from = "/admin/removeCourse/:id"
+  to = "https://backend-wbd-project.onrender.com/admin/removeCourse/:id"
+  status = 200
+
+[[redirects]]
+  from = "/auth/generateQrCode/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/generateQrCode/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/markAttendance/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/markAttendance/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/addStudent/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/addStudent/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/addTeacher/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/addTeacher/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/removeStudent/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/removeStudent/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/removeTeacher/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/removeTeacher/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/removeClass/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/removeClass/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/addClass"
+  to = "https://backend-wbd-project.onrender.com/auth/addClass"
+  status = 200
+[[redirects]]
+  from = "/auth/addTeachers/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/addTeachers/:id"
+  status = 200
+[[redirects]]
+  from = "/auth/addStudents/:id"
+  to = "https://backend-wbd-project.onrender.com/auth/addStudents/:id"
+  status = 200
 
 [[redirects]]
   from = "/api/getClasses"
   to = "https://backend-wbd-project.onrender.com/api/getClasses"
+  status = 200
+[[redirects]]
+  from = "/api/getClasses/:cid"
+  to = "https://backend-wbd-project.onrender.com/api/getClasses/:cid"
   status = 200
 [[redirects]]
   from = "/api/getTeachers"
@@ -59,14 +116,4 @@
 [[redirects]]
   from = "/user/update"
   to = "https://backend-wbd-project.onrender.com/user/update"
-  status = 200
-  
-[[redirects]]
-  from = "/auth/*"
-  to = "https://backend-wbd-project.onrender.com"
-  status = 200
-
-[[redirects]]
-  from = "*"
-  to = "https://backend-wbd-project.onrender.com"
   status = 200
