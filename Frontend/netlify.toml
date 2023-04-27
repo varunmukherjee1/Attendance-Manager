@@ -81,8 +81,8 @@
   to = "https://backend-wbd-project.onrender.com/api/getClasses"
   status = 200
 [[redirects]]
-  from = "/api/getClasses/:cid"
-  to = "https://backend-wbd-project.onrender.com/api/getClasses/:cid"
+  from = "/api/getClass/:cid"
+  to = "https://backend-wbd-project.onrender.com/api/getClass/:cid"
   status = 200
 [[redirects]]
   from = "/api/getTeachers"
