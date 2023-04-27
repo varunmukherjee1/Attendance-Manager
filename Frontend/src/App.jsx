@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios"
 import { useDispatch } from "react-redux";
-import {URL} from "./constants/backend"
+// import {URL} from "./constants/backend"
 
 import Home from "./pages/Home";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
