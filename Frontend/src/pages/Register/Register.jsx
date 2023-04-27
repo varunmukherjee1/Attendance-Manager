@@ -2,7 +2,7 @@ import React,{useRef,useState} from "react";
 import {Link, useNavigate} from 'react-router-dom'
 import axios from "axios"
 import toast from "react-hot-toast"
-import {URL} from "../../constants/backend"
+// import {URL} from "../../constants/backend"
 
 import logo from "../../assets/logo.png"
 
@@ -177,7 +177,7 @@ const Register=(props)=>{
             const password = inpVal.pass;
             const user_type = inpVal.type;
 
-            const res = await axios.post(URL + "/user/register",{
+            const res = await axios.post("/user/register",{
                 full_name,
                 roll_number,
                 email,

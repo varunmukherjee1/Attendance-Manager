@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { userActions } from '../../store/userSlice'
 import axios from "axios"
 import toast from 'react-hot-toast'
-import {URL} from "../../constants/backend"
+// import {URL} from "../../constants/backend"
 
 import classes from "./Navbar.module.css"
 
@@ -16,7 +16,7 @@ function Navbar(props) {
     const logoutHandler = async () => {
 
         try{
-            const res = await axios.get(URL + "/user/logout", {
+            const res = await axios.get("/user/logout", {
                 withCredentials: true
             })
             toast.success(res.data.message)

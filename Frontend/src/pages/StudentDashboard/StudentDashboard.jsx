@@ -3,7 +3,7 @@ import axios from "axios"
 import {useSelector , useDispatch } from 'react-redux';
 import {loadingActions} from "../../store/loadingSlice"
 import QRCode from "react-qr-code";
-import {URL} from "../../constants/backend"
+// import {URL} from "../../constants/backend"
 
 import Dashboard from '../../components/Dashboard/Dashboard'
 import Card from "../../components/StudentCard/StudentCard";
@@ -26,7 +26,7 @@ export default function StudentDashboard() {
     const getClasses = async () => {
         try {
             dispatch(loadingActions.showLoading())
-            const res = await axios.get(URL + "/api/getClasses", {
+            const res = await axios.get("/api/getClasses", {
                 withCredentials: true
             })
             dispatch(loadingActions.hideLoading());
