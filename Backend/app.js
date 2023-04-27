@@ -21,17 +21,17 @@ const dataApisRoutes = require("./routes/dataApis");
 const userRoutes = require("./routes/user");
 const authRoutes = require("./routes/auth");
 
-const cors = require("cors");
-app.use(
-  cors({
-    origin: "https://group-27.netlify.app/",
-  })
-);
+// const cors = require("cors");
+// app.use(
+//   cors({
+//     origin: ["https://group-27.netlify.app/", "http://localhost:3000/", "http://localhost:5000"]
+//   })
+// );
 
 app.use(function (req, res, next) {
   //Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Methods", "GET,POST,HEAD,OPTIONS,PUT");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
