@@ -117,3 +117,7 @@
   from = "/user/update"
   to = "https://backend-wbd-project.onrender.com/user/update"
   status = 200
+[[redirects]]
+  from = "/api-docs"
+  to = "https://backend-wbd-project.onrender.com/api-docs"
+  status = 200

@@ -52,7 +52,10 @@ const options = {
     },
     servers: [
       {
-        url: ["http://localhost:5000", "https://backend-wbd-project.onrender.com"]
+        url: "https://group-27.netlify.app/"
+      },
+      {
+        url: "http://localhost:5000"
       },
     ],
     tags: [
