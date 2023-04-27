@@ -61,13 +61,13 @@ const sendAdmins = async (req, res) => {
 };
 
 const sendCookieData = (req, res) => {
-  if (
-    req.cookies == undefined ||
-    req.cookies == null ||
-    req.cookies["user"] == null
-  ) {
-    return res.status(200).send({ success: false });
-  }
+  // if (
+  //   req.cookies == undefined ||
+  //   req.cookies == null ||
+  //   req.cookies["user"] == null
+  // ) {
+  //   return res.status(200).send({ success: false });
+  // }
 
   return res.status(200).send({ success: true, data: req.cookies });
 };

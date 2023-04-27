@@ -37,7 +37,9 @@ function TeacherCard(props) {
 
   const generateQrCode = async () => {
     console.log("test");
-    const res = await axios.get(URL + "/auth/generateQrCode/" + props.id)
+    const res = await axios.get(URL + "/auth/generateQrCode/" + props.id, {
+      withCredentials: true
+    })
     console.log(res);
     if(res.status === 200) {
       if(res.data.success === true) {
@@ -88,7 +90,8 @@ function TeacherCard(props) {
     try {
       
       const res = await axios.post(URL + "/auth/addStudent/" + props.id,{
-        studentEmail:email
+        studentEmail:email,
+        withCredentials: true
       })
       
       if(res.data.success){

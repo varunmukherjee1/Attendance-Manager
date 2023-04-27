@@ -16,7 +16,9 @@ function Navbar(props) {
     const logoutHandler = async () => {
 
         try{
-            const res = await axios.get(URL + "/user/logout")
+            const res = await axios.get(URL + "/user/logout", {
+                withCredentials: true
+            })
             toast.success(res.data.message)
             dispatch(userActions.setUser(null))
             navigate("/")

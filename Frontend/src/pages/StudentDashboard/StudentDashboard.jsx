@@ -26,7 +26,9 @@ export default function StudentDashboard() {
     const getClasses = async () => {
         try {
             dispatch(loadingActions.showLoading())
-            const res = await axios.get(URL + "/api/getClasses")
+            const res = await axios.get(URL + "/api/getClasses", {
+                withCredentials: true
+            })
             dispatch(loadingActions.hideLoading());
             
             // console.log(res.data);

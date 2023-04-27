@@ -36,7 +36,8 @@ export default function  AddClassModal(props){
         const res = await axios.post(URL + "/auth/addClass",formData,{
             headers : {
                 "Content-Type": "multipart/form-data",
-            }
+            },
+            withCredentials: true
         })
 
         console.log("REs :-");
