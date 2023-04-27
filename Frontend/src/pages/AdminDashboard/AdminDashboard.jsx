@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import toast from "react-hot-toast"
 import { useNavigate } from 'react-router-dom'
 import { search } from '@orama/orama';
+import {URL} from "../../constants/backend"
 
 import Card from "../../components/Card/Card"
 import Dashboard from '../../components/Dashboard/Dashboard'
@@ -48,10 +49,10 @@ function AdminDashboard() {
 
             dispatch(loadingActions.showLoading())
 
-            const crs = await axios.get("api/getClasses")
-            const stds = await axios.get("api/getStudents")
-            const teach = await axios.get("api/getTeachers")
-            const adm = await axios.get("api/getAdmins")
+            const crs = await axios.get(URL + "/api/getClasses")
+            const stds = await axios.get(URL + "/api/getStudents")
+            const teach = await axios.get(URL + "/api/getTeachers")
+            const adm = await axios.get(URL + "/api/getAdmins")
 
             dispatch(loadingActions.hideLoading())
 
@@ -200,7 +201,7 @@ function AdminDashboard() {
             
             const std = students[idx];
 
-            const res = await axios.get("/admin/removeStudent/" + std._id)
+            const res = await axios.get(URL + "/admin/removeStudent/" + std._id)
 
             if(res.data.success){
                 toast.success("Student removed")
@@ -223,7 +224,7 @@ function AdminDashboard() {
             
             const teach = teachers[idx];
 
-            const res = await axios.get("/admin/removeTeacher/" + teach.email)
+            const res = await axios.get(URL + "/admin/removeTeacher/" + teach.email)
 
             if(res.data.success){
                 toast.success("Teacher removed")
@@ -246,7 +247,7 @@ function AdminDashboard() {
             
             const crs = courses[idx];
 
-            const res = await axios.get("/admin/removeCourse/" + crs._id)
+            const res = await axios.get(URL + "/admin/removeCourse/" + crs._id)
 
             if(res.data.success){
                 toast.success("Course Removed")
@@ -269,7 +270,7 @@ function AdminDashboard() {
             
             const adm = admins[idx];
 
-            const res = await axios.post("/admin/remove",{
+            const res = await axios.post(URL + "/admin/remove",{
                 id:adm._id
             })
 
@@ -298,7 +299,7 @@ function AdminDashboard() {
             const pass = passRef.current.value;
             const adminPass = admPassRef.current.value;
 
-            const res = await axios.post("/admin/add",{
+            const res = await axios.post(URL + "/admin/add",{
                 full_name: name,
                 email: email,
                 password: pass,

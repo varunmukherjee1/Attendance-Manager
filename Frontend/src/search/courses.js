@@ -1,5 +1,6 @@
 import axios from "axios";
 import { create, insertMultiple} from '@orama/orama'
+import {URL} from "../constants/backend"
 
 const createInstance = async () => {
 
@@ -11,7 +12,7 @@ const createInstance = async () => {
             }
         })  
 
-        const res = await axios.get("api/getClasses")
+        const res = await axios.get(URL + "/api/getClasses")
 
         const ins = await insertMultiple(db,res.data.data)
 

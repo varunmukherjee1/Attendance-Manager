@@ -6,6 +6,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CSVLink} from "react-csv";
+import {URL} from "../../constants/backend"
 
 import classes from "./AttendancePage.module.css"
 
@@ -19,7 +20,7 @@ export default function AttendancePage() {
   const getData = async () => {
     try {
       dispatch(loadingActions.showLoading());
-      const classDataTemp = await axios.get("/api/getClass/" + cid);
+      const classDataTemp = await axios.get(URL + "/api/getClass/" + cid);
       let classData = classDataTemp.data.data
       let roll_numbers = [];
       let itr = 0;
